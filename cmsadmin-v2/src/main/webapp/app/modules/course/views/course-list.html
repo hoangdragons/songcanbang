@@ -1,0 +1,66 @@
+<div class="animated fadeInUpBig">
+<div>	
+	<div class="" style="text-align:left;vertical-alignt: middle; margin-right: 5px;">
+		<div style="vertical-align:middle;margin-bottom: 10px;">
+			<a class="btn btn-green btn-radius bg" ng-if="checkPrivilege('CAT_FUNC_000')" 
+             	ng-click="backToCategoryList()" style="color:#ffffff">
+           		<i class="ion-android-arrow-back"></i>
+            </a>
+			<button ng-click="create()" class="btn btn-green btn-radius" 
+				ng-if="checkPrivilege('COURSE_FUNC_001')" style="float:letf">
+				<i class="ion-plus"></i>
+			</button>
+			
+	       <!-- NOTICE: for child scope, the data-ng-model should bind to sub element -->
+	        <!--<select class="name_search form-control" -->
+	        <select class="form-control"
+				data-ng-model="choices.category" 
+				ng-if="checkPrivilege('CAT_FUNC_000')"
+				data-ng-options="category.categoryName for category in categories track by category.categoryId"
+			 	ng-change="searchBySelectedCat()"
+			 	style="display: -webkit-inline-box;width:auto;height: 36px;">
+			 	<option value="">-- {{'course.CHOOSE_CATEGORY'|translate}} --</option>
+			</select>			
+            
+            
+		</div>
+	</div>
+</div>
+<div>	
+	<div ng-repeat="c in courses track by $index" class="col-md-3 col-xs-12 col-sm-6" 
+	style="margin-top: 2px; margin-right: 0px; margin-bottom: 5px; margin-left: 0px;">
+		<div class="info-category-bg-out">		    
+			 <div class="info-control">
+	    	 	<span>
+                    <a ng-if="checkPrivilege('COURSE_FUNC_004')" href="javascript:void(0)" 
+                    	ng-click="previewVideo(c)" class="ion-videocamera" style="color:blue;text-decoration: none;">
+                    </a>
+                    <a ng-if="checkPrivilege('COURSE_FUNC_002')" href="javascript:void(0)" 
+                    	ng-click="edit(c)" class="ion-ios-compose-outline" style="color:blue;text-decoration: none;"></a>
+                    <a ng-if="checkPrivilege('COURSE_FUNC_003')" href="javascript:void(0)" 
+                    	ng-click="deleteCourse(c)" class="ion-ios-trash-outline" style="color:red;text-decoration: none;"></a>
+	        	</span>
+	    	</div>
+			<div class="info-category primarybg-info" >
+		        <div class="logo"  ng-if="c.imageUrl == null">
+		        	<i class="ion-ios-list-outline"></i>
+		    	</div>
+		    	<p style="float:top" ng-if="c.imageUrl != null">
+	        		<img name="courseImage" id="courseImage" ng-src="{{c.imageUrl}}" 
+	        		class="category-image"/>
+	        	</p>
+		        {{c.title}}
+		        <p ng-if="checkPrivilege('COURSE_FUNC_002')">
+		        	<a href="javascript:void(0)" ng-click="edit(c)">
+		        	<!-- {{c.content}} -->
+		        	</a>
+		        </p>
+		        <p ng-if="!checkPrivilege('COURSE_FUNC_002')">
+		        	<!-- {{c.content}} -->
+		        </p>
+		    </div>
+		   
+		</div>
+	</div>
+</div>
+</div>

@@ -1,0 +1,15 @@
+- Sửa step 1 của flơ thành cập nhật thông tin khách hàng
+- Bổ sung thêm các hình thức thanh toán trong step 2
+  + Visa/Master card trên 1 dòng
+  + JCB thanh toán theo JCB nhật
+  - Step 3: xác nhận thiếu
+  + Đồng ý điều khoản sử dụng
+  + Hiển thị đầy đủ các thông tin đã nhập ở bước trước
+  + Thông tin về hóa đơn
+  
+1. Chuyển CSDL sang PG  
+2. Các link của ứng dụng chuẩn hóa lại (Chiến lược khi triển khai theo tên miền)
+3. Cần nghiên cứu phương ppháp để URL Link hỗ trợ SEO
+4. Giao diện của admin cms làm đẹp hơn.
+ - Thuê làm mock Base trên wordpress admin (HungLT)
+ 

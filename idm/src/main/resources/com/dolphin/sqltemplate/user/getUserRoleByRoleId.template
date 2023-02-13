@@ -1,0 +1,1 @@
+SELECT t FROM UserRole t WHERE t.roleId = :roleId AND deleteFlg <> 1

@@ -1,0 +1,108 @@
+/* -------------------- Portfolio Section ----------------------- */
+.portfolio .portio-tags {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.portfolio .portio-tags li {
+  background-color: #FFFFFF;
+  padding: 5px;
+  border: 1px solid #CCC;
+  margin-right: 15px;
+}
+.portfolio .portio-tags li > a {
+  color: #777777;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 14px;
+}
+.portfolio .portio-tags li:hover {
+  background: #FFFFFF;
+  border: 1px solid #78cd13;
+}
+.portfolio .portio-tags li:hover a {
+  color: #78cd13;
+}
+.portfolio .portio-tags li:active {
+  background: #78cd13;
+  border: 1px solid #5d9e0f;
+}
+.portfolio .portio-tags li:active a {
+  color: #FFFFFF;
+}
+.portfolio ul li .portio-item {
+  margin-bottom: 15px;
+  background-color:#FFFFFF;
+  /* box-shadow: 0 1px 1px rgba(0,0,0,.15); */
+}
+.portfolio ul li .portio-item .portio-picture {
+  /* background-color: #78cd13; */
+  background-color: #555757;
+  position: relative;
+}
+.portfolio ul li .portio-item .portio-picture .portio-image {
+  width: 100%;
+  height: auto;
+}
+.portfolio ul li:hover .portio-item .portio-picture .bounding-box {
+  opacity: 0.5;
+}
+.portfolio ul li .portio-item .portio-picture .bounding-box {
+  opacity: 1;
+}
+.portfolio ul li .portio-item .portio-content {
+  border: 1px solid #E4E8E8;
+  border-bottom: 4px solid #E4E8E8;
+  padding: 5px 3px;
+}
+.portfolio ul li .portio-item .portio-content .title {
+  font-size: 18px;
+  color: #545555;
+  padding-bottom: 5px;
+}
+.portfolio ul li .portio-item .portio-content .sub-title {
+  font-weight: 100;
+  padding-bottom: 15px;
+}
+.portfolio ul li .portio-item .portio-content .description {
+  font-weight: 300;
+}
+.portfolio ul li .portio-item .links {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 15px;  
+  padding-left:10px;
+  padding-top: 10px;
+  text-align:left;
+  color:#fff;
+  font-weight: 700;
+  width: auto;
+}
+.portfolio ul li .portio-item .links ul .icon {
+  background-color: #FFFFFF;
+  color: #78cd13;
+  border-radius: 20px;
+  padding: 8px 13px 8px 13px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.portfolio ul li .portio-item .links ul .icon i {
+  font-size: 20px;
+}
+.portfolio ul li .portio-item .links ul .icon:hover {
+  background-color: #EEEEEE;
+}
+.portfolio ul li .portio-item .links ul .icon-expand,
+.portfolio ul li .portio-item .links ul .icon-link {
+  padding: 8px 15px 8px 15px;
+}
+.portfolio ul li:hover .portio-image {
+  opacity: 0.8;
+}
+.portfolio ul li:hover .portio-content {
+  border: 1px solid #78cd13;
+  border-bottom: 4px solid #78cd13;
+}
+.portfolio ul li:hover .links {
+  display: block;
+}

@@ -1,0 +1,42 @@
+ACCOUNTS SYS
+1. Quyền truy cập màn hình được định nghĩa theo danh sách sau dựa theo state id của
+cấu hình ui.router.
+1.1. Danh sách các màn hình trong cấu hình ACCOUNTS
+- login	
+- logout
+- user
+- user-list
+- user-detail
+  + USER_CHANGE_PASSWORD
+  + USER_CREATE
+  + USER_UPDATE
+  + USER_DELETE
+  + USER_LIST  
+  + USER_SEARCH
+  + ASSIGN_ROLE
+  + REVOKE_ROLE
+  + ASSIGN_FUNC
+  + REVOKE_FUNC  
+- user-create
+- role-list
+  + ROLE_LIST
+  + ROLE_UPDATE
+  + ROLE_CREATE
+  + ROLE_DELETE
+  + ROLE_SEARCH  
+- role-detail
+- role-create
+- function-list
+  + FUNC_LIST
+  + FUNC_UPDATE
+  + FUNC_CREATE
+  + FUNC_DELETE
+  + FUNC_SEARCH  
+- function-detail
+- function-create
+1.2. Cách thực hiện
+Lấy state id của từng màn hình làm thành tính năng của màn hình 
+Kiểm tra quyền truy cập màn hình trong app.run 
+Nếu người dùng không có quyền truy cập màn hình thì trả về trang chủ.
+
+

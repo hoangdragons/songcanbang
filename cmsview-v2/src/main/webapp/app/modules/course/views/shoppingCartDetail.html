@@ -1,0 +1,17 @@
+<div id="category-header">
+	<div class="container" style="padding: 0px 15px;width:auto">
+		<h4 style="padding-left: 15px;"><i class="ion-ios-cart-outline" style="margin-right:5px"></i>{{'common.SHOPPING_CART_TITLE'|translate}}</h4>
+	</div>
+</div>
+<ng-include src="contextPath.cmsview + '/app/modules/course/views/shoppingCartDetailInclude.html'" onload="" autoscroll=""></ng-include>
+<!-- Shopping cart statistic -->
+<div class="container">
+	<a class="btn btn-primary" style="position:relative;float:right" ng-click="checkout()" >Checkout</a>
+	<div style="position:relative;float:right;margin-right:5px;display:table;border: 1px solid #eee">
+		<input ng-model="couponCodeTxt" type="text" style="width:300px;height:33px;padding-left:10px;display:table-cell;border:none" placeholder="{{'common.APPLY_COUPON_CODE'|translate}}">
+		<button ng-click="couponCodeTxt != null && applyCoupon()" type="button" class="btn btn-green" style="display:table-cell;position:relative;float:right">{{'common.APPLY'|translate}}</button>
+	</div>
+	<span style="font-size:12pt;font-weight: 600">Total: {{totalAmount}} VND</span>
+	<span style="font-size:11pt;color:#17aa1c;text-decoration: line-through;" 
+		ng-if="totalAmount != totalOriginAmount">{{totalOriginAmount}} VND</span>
+</div>

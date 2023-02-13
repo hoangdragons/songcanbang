@@ -1,0 +1,145 @@
+<div class="animated fadeInUpBig" style="padding: 5px;background-color: #fff;border-radius: 5px;">
+	<form name="publicationForm" ng-submit="insertOrUpdate()"  class="form-require-dirty-check">
+		<div style="margin-top:10px;padding-bottom: 5px">
+		    <div class="left">
+		        <div class="right" style="float:right">
+		            <button type="submit" class="btn btn-primary btn-radius">
+		                <span class="glyphicon glyphicon-floppy-disk"></span>   
+		                {{'common.BTN_SAVE'|translate}}
+		            </button>  
+		            <button type="reset" class="btn btn-orange btn-radius">
+		                <span class="glyphicon glyphicon-fire"></span>
+		                {{'common.BTN_RESET'|translate}}
+		            </button> 
+		            <button type="button" ng-click="cancel()" class="btn btn-red btn-radius">
+		                <span class="glyphicon glyphicon-trash"></span>
+		                {{'common.BTN_CANCEL'|translate}}
+		            </button>
+		        </div>
+		        <label  ng-if="teacher.teacherId == null" style="font-size:20pt">
+		             <h4><i class="ion-document" style="margin-right:5px"/>
+		             {{'publication.ADD'|translate}}</h4>
+		        </label>
+		         <label  ng-if="teacher.teacherId != null"  style="font-size:20pt">
+		             <h4><i class="ion-document-text"  style="font-size:15pt;margin-right:5px"/>
+		            {{'publication.EDIT'|translate}}: {{publication.title}}</h4>
+		        </label> 
+		    </div>
+		</div>   	
+		<!-- CONTENT-->
+		<!-- category -->
+		<!--ID -->
+		<input type="hidden" ng-model="magazineId"/>
+		<!-- TITLE -->
+		<div class="form-group row-div" ng-class="{'has-error' : publicationForm.title.$invalid && publicationForm.title.$dirty}" style="padding-left:10px">
+	        <div style="width: 100px; display: inline-table;">
+	        <label style="width:100px !important" for="title">{{'course.TITLE'|translate}}</label>
+	        </div>
+	        <input id="title" name="title" type="text" class="form-control form-text" maxlength="255"
+	            ng-model="publication.title" placeholder="{{'course.TITLE'|translate}}"
+	            required ng-minlength="1" ng-maxlength="2048"/>
+	    </div>
+	    <div>
+	    	<!-- puslish by -->
+	    	<div class="col-sm-5" style="padding-left:10px;margin-top:10px; margin-bottom:10px">   
+	    		<div class="col-sm-6" style="padding-left: 0px;"> 		
+		    		<label style="width:180px !important" for="title">{{'publication.PUBLISH_BY'|translate}}</label>
+		    	</div>
+	    		<div class="col-sm-4" style="padding-left: 0px;">
+	    			<input class="special-text" placeholder="{{'course.teacher.FULL_NAME'|translate}}" type="text" 
+		            		ng-model="publication.publishBy" readonly="readonly"/>
+		        </div>
+	    	</div> 
+	    	<!-- puslish date -->
+	    	<div class="col-sm-5" style="text-align: left;padding: 0px; margin-left:10px;margin-top:10px; margin-bottom:10px">  		
+	            <div class="form-group row-div" ng-class="{'has-error' : publicationForm.publishDate.$invalid && publicationForm.publishDate.$dirty}" style="width: auto !important" ng-if="checkPrivilege('PUBLICATION_FUNC_004')">
+	            	<div class="col-sm-5" style="padding-left: 0px;">
+	                    <label style="width:auto" for="publishDate">                        
+	                    	{{'course.PUBLISH_DATE'|translate}}(<span style="margin-right:3px;color:red">*</span>)
+	                    </label>
+	                </div>
+                    <div class="col-sm-5" style="padding-left: 0px;">
+	                    <input type="text" class="special-text" id="publishDate" name="publishDate" 
+	                    ng-model="publication.publishDate" 
+	                    data-provide="datepicker" data-date-format="dd/mm/yyyy">
+	                </div>
+	            </div>
+	    	</div>  
+	    </div>      
+	     <div class="info-stats" style="box-shadow: none; -webkit-box-shadow: none; padding-left:0px !important;background-color: transparent;">	        
+		        <div class="col-sm-2" style="text-align:center">                                
+		            <span class="avatar-holder">
+		                <img ng-src="{{publication.image}}" alt="" 
+		                	style="width:80px;height:80px;border-radius:5px" 
+		                	ng-if="publication.image != null">
+		                <span class="ion-image" 
+		                	ng-if="publication.image == null" 
+		                	style="width:80px;height:80px;border-radius:5px;font-size:80pt" >
+		                </span>
+		                <input type="file" id="pubHeaderImageFile" 
+		                    ng-model="pubHeaderImageFile" 
+		                    onchange="angular.element(this).scope().changeUpload(this)"
+		                    style="display:none" accept="image/*"/>
+		            </span>
+		            <div>
+		                <label for="pubHeaderImageFile" 
+		                style="cursor: pointer;cursor: pointer;color: black;font-size: 10pt;font-weight: 100;text-decoration: underline;">
+		                    {{'publication.SUMMARY_IMAGE_UPLOAD'|translate}}
+		                </label>
+		            </div>
+		        </div>
+		        <div class="right col-sm-10" style="padding: 0px;right:0px">    
+	        		<textarea 
+		                rows="5" cols="1" id="summaryContent" name="summaryContent" class="form-control form-text-area"
+		                maxlength="2048" 
+		                ng-model="publication.summaryContent"
+		                placeholder="{{'publication.CONTENT_SUMMARY'|translate}}"
+		                ng-minlength="1" ng-maxlength="2048">
+		             </textarea> 
+		        </div>
+		    </div>
+		    <!-- content -->
+		    <div><label>{{'common.CONTENT'|translate}}</label>
+		    <div style="border-top: 1px solid #eee;">
+		        <div class="form-group row-div">
+		            <textarea ui-tinymce="pubContentOptions" 
+		                rows="5" cols="1" id="content" name="content" class="form-control form-text-area"
+		                maxlength="2048" 
+		                ng-model="contentModel"
+		                ng-minlength="1" ng-maxlength="2048">
+		             </textarea> 
+		        </div>
+		    </div>
+		    <div class="form-group row-div" ng-class="{'has-error' : publicationForm.author.$invalid && publicationForm.author.$dirty}">
+		        <div style="width: 100px; display: inline-table;">
+		        <label style="width:100px !important" for="author">{{'publication.AUTHOR'|translate}}</label>
+		        </div>
+		        <input id="author" name="author" type="text" class="form-control form-text" maxlength="255"
+		            ng-model="publication.author" placeholder="{{'publication.AUTHOR'|translate}}"
+		            required ng-minlength="1" ng-maxlength="2048"/>
+		    </div>
+			
+			<div class="form-group row-div" ng-class="{'has-error' : publicationForm.cameraMan.$invalid && publicationForm.cameraMan.$dirty}">
+		        <div style="width: 100px; display: inline-table;">
+		        <label style="width:100px !important" for="cameraMan">{{'publication.CAMERA_MAN'|translate}}</label>
+		        </div>
+		        <input id="cameraMan" name="cameraMan" type="text" class="form-control form-text" maxlength="255"
+		            ng-model="publication.cameraMan" placeholder="{{'publication.CAMERA_MAN'|translate}}"
+		            required ng-minlength="1" ng-maxlength="2048"/>
+		    </div>
+		<div style="text-align:right;margin-top:10px;bottom:0;padding-top: 5px" class="right">
+		    <button type="submit" class="btn btn-primary btn-radius">
+		        <span class="glyphicon glyphicon-floppy-disk"></span>   
+		        {{'common.BTN_SAVE'|translate}}
+		    </button>  
+		    <button type="reset" class="btn btn-orange btn-radius">
+		        <span class="glyphicon glyphicon-fire"></span>
+		        {{'common.BTN_RESET'|translate}}
+		    </button> 
+		    <button type="button" ng-click="cancel()" class="btn btn-red btn-radius">
+		        <span class="glyphicon glyphicon-trash"></span>
+		        {{'common.BTN_CANCEL'|translate}}
+		    </button>
+		</div>
+	</form>
+</div>

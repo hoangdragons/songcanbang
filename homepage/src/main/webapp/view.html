@@ -1,0 +1,686 @@
+<!-- ******************* Top Nav Bar Section ******************* -->
+<!--**********Menu-Mobile ************-->
+
+<header id="header">
+    <div class="menu_mb butt_mobile visible-xs visible-sm clearfix">
+        <button class="nav-toggle">
+            <div class="icon-menu ">
+                <span class="line line-1"></span>
+                <span class="line line-2"></span>
+                <span class="line line-3"></span>
+            </div>
+        </button>
+        <div class="text-center ">
+            <a href="http://www.songcanbang.org"><img class="img_logo_mb" src="images/scb-logo.png"/></a>
+        </div>
+        <div class="header_right">
+           <ul class="nav navbar-nav navbar-right">                         
+            <li style="cursor: pointer;" ><a  ng-click="scrollToElement('#menu7',500)">{{'common.CONTACT_US'|translate}}</a></li>
+
+            <li style="cursor: pointer;" ><a  ng-click="login()">{{'common.LOGIN'|translate}}</a></li>
+            <li style="width:25px">
+                <a  ng-click="setLang('jp_JP')" style="border:none !important">
+                    <img src="images/jp.png"
+                    style="cursor: pointer;" alt="{{common.LANGUAGE_JP|translate}}"/>
+                </a>
+            </li>
+            <li style="width:25px">
+                <a  ng-click="setLang('en_US')" style="border:none !important">
+                    <img src="images/en.png"
+                    style="cursor: pointer;" alt="{{common.LANGUAGE_EN|translate}}"/>
+                </a>
+            </li>
+            <li style="width:25px">
+                <a  ng-click="setLang('vn_VI')" style="border:none !important">
+                    <img src="images/vn.png"
+                    style="cursor: pointer;" alt="{{common.LANGUAGE_VN|translate}}"/>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div><!-- /menu_mb -->
+
+<section class="sc_menu_moblie visible-sm visible-xs">
+    <div class="menu_main">
+        <nav class="nav is-fixed" role="navigation">
+            <div class="wrapper wrapper-flush">
+                <div class="nav-container">
+                    <ul class="nav-menu menu clearfix">
+                        <li class="menu-item"><a href="http://www.songcanbang.org" class="menu-link">Trang chủ</a></li>
+                        <li class="menu-item" ng-repeat="cat in categories">
+                            <a ng-click="openCategory(cat)" href="javascript:void(0)" class="menu-link">{{cat.categoryName}}</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</section>
+
+<div class="clearfix clearfix-60 visible-sm visible-xs "></div>
+<section class="sc_header_top">
+
+
+</section>
+
+<div class="clearfix"></div>
+
+<!--**********Menu-Desktop ************-->
+<section class="sc_header_main sticky-header">
+    <div class="container">
+        <div class="row_pc">
+
+            <div class="col-lg-175 col-md-3 hidden-sm hidden-xs">
+                <div class="row">
+                    <h1 class="logo_pc">
+                        <a href="http://www.songcanbang.org"><img src="images/scb-logo.png"/></a>
+                    </h1>
+                </div>
+            </div>
+            <div class="col-lg-630 col-md-5 col-xs-12">
+                <div class="row">
+
+                    <div class="segment_mega_menu clearfix hidden-sm hidden-xs">
+                        <div class="butt_segment_mega_menu "><i class="fa fa-th" aria-hidden="true"></i> CÁC KHÓA HỌC</div>
+                        <div class="drop_segment_mega_menu">
+                            <ul class="ul_lv1_segment">
+                              <li class="item_lv1_segment" ng-repeat="cat in categories">
+                                <div class="bd_link_segment clearfix">
+                                    <a ng-click="openCategory(cat)" href="javascript:void(0)" class="link_segment">
+                                        <div class="thumbnail_segment"><i class="fa fa-newspaper-o" aria-hidden="true"></i></div> 
+                                        <div class="tit_segment">{{cat.categoryName}}</div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <form class="form_search">
+                    <div class="input-group">
+                        <input type="text" class=" from-sr form-control" placeholder="Tìm kiếm khóa học...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                    </div><!-- /input-group -->
+                </form>
+
+            </div>
+        </div>
+        <div class="col-lg-195 col-md-4 hidden-sm hidden-xs">
+            <div class="row">
+                <div class="header_right">
+                 <ul class="nav navbar-nav navbar-right">                         
+                    <li style="cursor: pointer;" ><a ng-click="scrollToElement('#menu7',500)">{{'common.CONTACT_US'|translate}}</a></li>
+
+                    <li style="cursor: pointer;" ><a ng-click="login()">{{'common.LOGIN'|translate}}</a></li>
+                    <li  class="lang flag" style="width:25px">
+                        <a  ng-click="setLang('jp_JP')" style="border:none !important">
+                            <img src="images/jp.png"
+                            style="cursor: pointer;" alt="{{common.LANGUAGE_JP|translate}}"/>
+                        </a>
+                    </li>
+                    <li class="lang" style="width:25px">
+                        <a  ng-click="setLang('en_US')" style="border:none !important">
+                            <img src="images/en.png"
+                            style="cursor: pointer;" alt="{{common.LANGUAGE_EN|translate}}"/>
+                        </a>
+                    </li>
+                    <li class="lang" style="width:25px">
+                        <a  ng-click="setLang('vn_VI')" style="border:none !important">
+                            <img src="images/vn.png"
+                            style="cursor: pointer;" alt="{{common.LANGUAGE_VN|translate}}"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</div>
+</section>
+</header>
+<!-- ******************* Banner Section ******************* -->
+<!-- <div class="cover-head" id="menu1">
+    <video width="100%" height="450px" controls preload autoplay="autoplay">
+        <source src="{{introVideoUrl}}" type="video/mp4">
+            Your browser doesnt support HTML5 video tag.
+        </video>
+        <div>
+          *** Default Carousel ***
+          <div id="carousel-one" class="carousel slide piluku-carousel" data-ride="carousel" style="max-height:450px">
+              Indicators
+              <ol class="carousel-indicators">
+                  <li data-target="#carousel-one" data-slide-to="0" class="active"></li>
+              </ol>
+              Wrapper for slides
+                 <div class="carousel-inner" role="listbox">
+                     <div class="item active">
+                   poster="assets/videos/new_intro.mov.jpg"
+                           <img src="assets/videos/yoga.jpg" style="height:450px;width:100%;margin-left:auto;margin-right:auto"/>
+                           
+                            <div class="carousel-caption">
+                              ...
+                            </div>
+
+                     </div>
+
+                 </div>
+
+          Controls
+          <a class="left carousel-control" href="#carousel-one" role="button" data-slide="prev" style="margin-left:10px">
+              <span class="ion-ios-arrow-back" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#carousel-one" role="button" data-slide="next" style="margin-right:10px">
+              <span class="ion-ios-arrow-forward" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+          </a>
+      </div>
+  </div>
+</div> -->
+<div class="cover-head" id="menu1">
+    <section class="sc_slider_main fadeInDown wow">
+        <div class="owl-carousel owl-theme slider_main" style="">
+            <div class="item">
+                <a href=""><img  style="height: 460px" class="w_100" src="assets/videos/yoga.jpg" alt=""/></a>
+            </div>
+            <div class="item">
+                <a href=""><img style="height: 460px" class="w_100" src="assets/videos/yoga2.jpg" alt=""/></a>
+            </div>
+            <div class="item">
+                <a href=""><img style="height: 460px" class="w_100" src="assets/videos/yoga3.jpg" alt=""/></a>
+            </div>
+            <div class="item">
+                <a href=""><img style="height: 460px" class="w_100" src="assets/videos/yoga4.jpg" alt=""/></a>
+            </div>
+            <div class="item">
+                <a href=""><img style="height: 460px" class="w_100" src="assets/videos/yoga5.jpg" alt=""/></a>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- ******************* Courses Section ******************* -->
+<div class="portfolio section section-dark" id="menu21">
+  <div class="container">
+   <div class="section-heading" style="cursor:pointer" ng-click="goServices()">
+    <h3 class="section-heading">{{'common.SERVICES_UPPER'|translate}}</h3>
+    <span>&nbsp;</span>
+</div>
+<div class="row">
+    <!-- ORIGIN -->
+    <!-- Course holder -->
+    <ul id="container" class="list-unstyled" style="margin-top: 10px;">
+     <li class="element col-lg-200 col-md-2 col-md-3 col-sm-4 col-xs-6 col-480-12 websites logo" ng-repeat="course in topTenCourse">
+        <div class="portio-item">
+            <div class="portio-picture" style="height:122px">
+                <a  href="javascript:void(0)" ng-click="openCourse(course.courseId)">
+                    <div class='bounding-box' style="background-image: url({{course.imageUrl}})">
+                    </div>
+
+                </div>
+          <!--       <div class="links text-center" style="height:20px;">
+              <a  href="javascript:void(0)" 
+              ng-click="openCourse(course.courseId)">
+              <ul class="list-unstyled list-inline">                             
+                 <span ng-click="showCourseDetail(course.courseId)" ng-repeat="teacher in course.teachers">
+                     <img class="portio-image" ng-src="{{teacher.teacherImage}}"
+                     style="margin: 1px;max-width: 40px;max-height:40px; border: 2px solid #FFFFFF"/>
+                 </span>
+                 
+                 <span>
+                     <a ng-click="previewVideo(course)" class="icon-video btn btn-primary btn-radius"
+                     style="color: #2196f3;background-color:#fff;text-decoration: none;width: 24px;height: 24px;border-radius: 12px;font-size: 10pt;font-weight: 600;cursor: pointer;padding: 3px;">
+                     <i class="ion-videocamera"></i> 
+                 </a>
+             </span>
+                         </ul> 
+                     </a>
+                 </div>  --> 
+  </a>
+  <a  href="javascript:void(0)"
+  ng-click="openCourse(course.courseId)">
+  <div class="portio-content" style="height:160px">
+    <div class="course-contents">
+        <div class="auto_ellipsis course-title" style="color:#29303b">{{course.title}}</div>
+        <div style="height:30%;font-size:12px;color: #686f7a;margin-top: 11px; margin-left: -7px;">
+            <span ng-repeat="teacher in course.teachers">
+                {{teacher.teacherName}}
+            </span>
+            <span>, &nbsp;</span>
+        </div>                                  
+        <span class="ico_star">
+            <span class="ico_star_value" style="width: {{(course.rating/5)*100}}%"></span>
+        </span>
+        <span ng-if="course.rating > 0">{{course.rating}} ({{course.totalRating}})</span>
+
+        <div class="course-price" ng-if="course.price<=0">{{'common.PRICE_FREE'|translate}}</div>
+        <div class="course-price" ng-if="course.price>0">
+            <span>{{course.discountPrice}} {{course.currency}}</span>
+            <span style="font-size:9pt;color:#17aa1c;text-decoration: line-through;"
+            ng-if="course.price != course.discountPrice">{{course.price}} {{course.currency}}</span>
+        </div>
+
+    </div>
+
+</div>
+</a>
+</div>
+
+</li>
+<!-- /.featured-item -->
+</ul>       
+</div>
+<!-- /.row -->
+</div>
+<!-- /.container -->
+</div>
+<!-- ./features -->
+
+<!-- <div class="portfolio section section" id="menu3">
+    <div class="container">
+        <div class="section-heading" style="cursor:pointer" ng-click="goMagazine()">
+            <h3 class="section-heading">{{'common.MAGAZINES_UPPER'|translate}}</h3>
+            <span>&nbsp;</span>
+        </div>
+        <div class="row">
+            Portfolio items holder
+            <ul id="container" class="list-unstyled">
+                <li class="element col-md-3 websites logo" ng-repeat="magazine in topTenMagazine">
+                    <div class="portio-item">
+                        Portfolio Image
+                        <div class="portio-picture" style="height:122px">
+                            <a data-toggle="modal" data-target="#lightbox">
+                                <div class='bounding-box' style="background-image: url({{magazine.image}})">
+                                </div>
+                            </a>
+                        </div>
+                        Image Hover Links
+                        <div class="links text-center">
+                            <ul class="list-unstyled list-inline">
+                                <li class="icon icon-link">
+                                    <a target="_blank" href="http://songcanbang.org/magazine/#/app/publicationDetail/{{magazine.magazineId}}">
+                                        <i class="ion-arrow-right-c"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        Portfolio Description
+                        <div class="portio-content"  style="height:300px">
+                            <div class="title">{{magazine.title}}</div>
+                            <div class="description">
+                                {{magazine.summaryContent}}
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>        
+        </div>
+        
+    </div>
+    
+</div>  -->
+<!-- 
+<div class="testimonials section-dark" id="menu4">
+    <div class="container">
+        <div class="section-heading">
+            <h3 class="section-heading">{{'common.CLIENTS_UPPER'|translate}}</h3>
+            <span>&nbsp;</span>
+        </div>
+
+        <div class="clients">
+            <ul class="list-unstyled list-inline">
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/hsbc.png" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/Logo_ACEInsuarance.png" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/logo_Daiichilife.png" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/logo_DatXanhDongA.png" alt="" class="client-logo"></a>
+                </li>
+                
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/logo_IDT.png" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/logo_intel.png" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/logo_NguyenHue.png" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/LogoVG.jpg" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/mbland.jpg" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/OCB.png" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/VCB_Logo_slogan_EN-2.jpg" alt="" class="client-logo"></a>
+                </li>
+                <li class="client-thumb">
+                    <a href="#"><img src="images/clients/364.jpg" alt="" class="client-logo"></a>
+                </li>
+            </ul>
+        </div>
+        /.clients
+    </div>
+</div>
+<div class="fun-facts section section-dark" id="menu6">
+    <div class="container">
+        <div class="section-heading">
+            <h3 class="section-heading">{{'common.SOCIAL_UPPER'|translate}}</h3>
+            <span>&nbsp;</span>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="outer-circle fb-out">
+                    <div class="inner-circle fb-in">
+                        <a href="#"><i class="ion-social-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="social-title">facebook</div>
+                <div class="social-number fb">6558</div>
+            </div>
+            /col-md-3
+
+            <div class="col-md-3">
+                <div class="outer-circle dr-out">
+                    <div class="inner-circle dr-in">
+                        <a href="#"><i class="ion-social-dribbble-outline"></i></a>
+                    </div>
+                </div>
+                <div class="social-title">dribbble</div>
+                <div class="social-number dr">360+</div>
+            </div>
+            /col-md-3
+
+            <div class="col-md-3">
+                <div class="outer-circle tw-out">
+                    <div class="inner-circle tw-in">
+                        <a href="#"><i class="ion-social-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="social-title">twitter</div>
+                <div class="social-number tw">3654</div>
+            </div>
+            /col-md-3
+
+            <div class="col-md-3">
+                <div class="outer-circle gp-out">
+                    <div class="inner-circle gp-in">
+                        <a href="#"><i class="ion-social-googleplus"></i></a>
+                    </div>
+                </div>
+                <div class="social-title">google plus</div>
+                <div class="social-number gp margin-left50">23k</div>
+            </div>
+            /col-md-3
+        </div>
+        /row
+    </div>
+</div> -->
+
+
+<!-- ******************* Widgets Footer Section ******************* -->
+<div class="widgets-footer section" id="menu7">
+    <div class="container">
+        <div class="row">
+            <div class="fter col-md-3">
+                <div class="aboutus widget" >
+                    <div class="widget-title">
+                        {{'common.ABOUT_US'|translate}}
+                    </div>
+                    <p>
+                        {{'common.ABOUT_US_DESC'|translate}}
+                    </p>
+                </div>            
+            </div>        
+            <div class="fter col-md-3">
+                <div class="tags widget">
+                    <div class="widget-title">
+                        featured tags
+                    </div>
+                    <ul class="list-unstyled list-inline">                    
+                        <li>
+                            <a href="#" class="tag-item">Tên tag </a>
+                        </li> 
+                        <li>
+                            <a href="#" class="tag-item">Tên tag</a>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+            <div class="fter col-md-3">
+                <div class="aboutus widget" >
+                    <div class="widget-title">
+                        {{'common.SOCIAL_CONNECT'|translate}}
+                    </div>
+                    <div>
+                        <button class="f-ft btn btn-radius btn-primary social-icon"><i class="ion-social-facebook" style="color: #2a70b8;"></i></button>
+                        <button class="f-ft btn btn-radius btn-primary social-icon"><i class="ion-social-googleplus" style="color: #db4437;"></i></button>
+                    </div>
+                    <p>
+                        <b>{{'common.COMPANY_NAME'|translate}}</b>                        
+                    </p>
+                    <p>
+                        Nội dung thông tin kết nối
+                    </p>
+                </div>
+            </div>
+            <div class="fter col-md-3">
+                <div class="aboutus widget" >                
+                    <div class="widget-title" style="color:#007791;">
+                        {{'common.KEEP_IN_TOUCH'|translate}}
+                    </div>        
+                    <div>
+                        <form action="" class="form">
+                            <input type="text" class="form-control contact-form-control" placeholder="{{'common.NAME'|translate}} *" name="name">
+                            <input type="text" class="form-control contact-form-control" placeholder="{{'common.EMAIL'|translate}} *" name="email">
+                            <textarea name="" id="" cols="30" rows="5" class="form-control contact-form-control" placeholder="{{'common.YOUR_WORD'|translate}} *"></textarea>
+                            <button type="submit" class="btn-sm btn btn-block btn-form">{{'common.SEND_MESAGE'|translate}}</button>
+                        </form>
+                    </div>
+                    
+                </div>            
+            </div>        
+        </div>
+        
+    </div>
+    
+</div>
+
+
+<!-- ******************* Footer Section ******************* -->
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="f_fter col-md-3">
+                ©Copyright by <a href="http://www.songcanbang.org" target="_blank">Sống cân bằng.</a>
+            </div>
+            <div class="mn-ft col-md-9">
+                <div class="footer-menu">
+                    <ul class="nav-ft nav navbar-nav navbar-right" style="color:#007791 !important">                            
+                        <li><a ng-click="scrollToElement('#menu2',500)">{{'common.PRODUCTS_AND_SERVICES'|translate}}</a></li>
+                        <li><a ng-click="scrollToElement('#menu21',500)">{{'common.COURSES'|translate}}</a></li>
+                        <li><a ng-click="scrollToElement('#menu3',500)">{{'common.MAGAZINE'|translate}}</a></li>
+                        <li><a ng-click="scrollToElement('#menu4',500)">{{'common.TESTIMONIALS'|translate}}</a></li>
+                        <li><a ng-click="scrollToElement('#menu5',500)">{{'common.INSTRUCTOR'|translate}}</a></li>
+                        <li><a ng-click="scrollToElement('#menu6',500)">{{'common.SOCIAL'|translate}}</a></li>
+                        <li><a ng-click="scrollToElement('#menu7',500)">{{'common.CONTACT_US'|translate}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script >
+ $(function() {
+    var html = $('html, body'),
+    navContainer = $('.nav-container'),
+    navToggle = $('.nav-toggle'),
+    navDropdownToggle = $('.has-dropdown');
+
+
+    // Nav toggle
+    navToggle.on('click', function(e) {
+        var $this = $(this);
+        e.preventDefault();
+        $this.toggleClass('is-active');
+        navContainer.toggleClass('is-visible');
+        html.toggleClass('nav-open');
+    });
+
+    // Nav dropdown toggle
+    navDropdownToggle.on('click', function() {
+        var $this = $(this);
+        $this.toggleClass('is-active').children('ul').toggleClass('is-visible');
+    });
+
+    // Prevent click events from firing on children of navDropdownToggle
+    navDropdownToggle.on('click', '*', function(e) {
+        e.stopPropagation();
+    });
+
+
+});
+</script>
+<script>
+    $(document).ready(function() {
+        var owl = $('.slider_main');
+        owl.owlCarousel({
+            items: 1,
+            loop: true,
+            margin: 10,
+            nav:true,
+            autoplay: true,
+            lazyLoad:true,
+            autoplayTimeout: 3500,
+            autoplayHoverPause: false,
+            responsive:{
+                1199:{
+                    items:1
+                },
+                979:{
+                    items:1
+                },
+                768:{
+                    items:1
+                },
+                479:{
+                    items:1
+                }
+            }
+        });
+    })
+
+    $(document).ready(function() {
+        var owl = $('.slider_productlist');
+        owl.owlCarousel({
+            items: 4,
+            loop: true,
+            margin: 20,
+            nav:true,
+            autoplay: true,
+            lazyLoad:true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: false,
+            responsive:{
+                1199:{
+                    items:4
+                },
+                979:{
+                    items:3
+                },
+                768:{
+                    items:2
+                },
+                479:{
+                    items:2
+                },
+                100:{
+                    items:1
+                }
+            }
+        });
+    })
+
+
+    $(document).ready(function() {
+        var owl = $('.slider_partner');
+        owl.owlCarousel({
+            items: 4,
+            loop: true,
+            margin: 25,
+            nav:true,
+            autoplay: false,
+            lazyLoad:true,
+            autoplayTimeout: 3500,
+            autoplayHoverPause: false,
+            responsive:{
+                1199:{
+                    items:4
+                },
+                979:{
+                    items:3
+                },
+                768:{
+                    items:2
+                },
+                479:{
+                    items:2
+                },
+                100:{
+                    items:1
+                }
+            }
+        });
+    })
+</script>
+<script type="text/javascript">
+    $("a[href='#top']").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+    });
+    $(window).scroll(function () {
+        if ($(window).scrollTop() >=200) {
+            $('#go_top').show();
+        }
+        else {
+            $('#go_top').hide();
+        }
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items: 4,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 1000,
+            autoplayHoverPause: true
+        });
+        $('.play').on('click', function() {
+            owl.trigger('play.owl.autoplay', [1000])
+        })
+        $('.stop').on('click', function() {
+            owl.trigger('stop.owl.autoplay')
+        })
+    })
+</script>

@@ -1,0 +1,124 @@
+<div class="top-bar" style="height:auto">
+	<nav class="navbar navbar-default top-bar"  style="height:auto !important">
+		<div>
+			<div ng-if="showLogo" class="hidden-xs">
+				<a ng-href="{{contextPath}}" style="margin-right:5px;margin-top:5px" class="navbar-left top-elements">
+					<img src="assets/images/yoga-logo.png">
+				</a>	
+			</div>
+			<div class="search navbar-left">
+				<span ng-click="searchCourse(searchText)">
+					<i class="fa fa-search"></i>
+				</span>
+				<input ng-model="searchText" type="text" placeholder=" Search" style="display:table-cell;"
+					ng-keyup="$event.keyCode == 13 && searchCourse(searchText)">
+			</div>
+			<ul class="nav navbar-nav navbar-right top-elements list-unstyled hidden-xs">
+				<li class="piluku-dropdown dropdown" ng-if="signedInUser.aud != null">
+					<a class="dropdown-toggle avatar_width" data-toggle="dropdown" role="button" aria-expanded="false">
+						<span class="avatar-holder">
+							<img ng-src="{{signedInUser.avataUrl}}" style="width:24px;height:24px;border-radius:12px" alt="">
+						</span>
+						<span class="drop-icon" style="padding-left:0px !important"><i class="ion ion-chevron-down"></i></span>
+					</a>
+					<ul class="dropdown-menu dropdown-piluku-menu piluku-right animated fadeInUp wow avatar_drop neat_drop" data-wow-duration="1500ms" role="menu">
+						<li>
+							<a href="{{idmContextPath}}/"> 
+								<i class="ion-android-settings"></i>
+								{{'header.MY_PROFILE_LINK'|translate}} ({{signedInUser.aud}})
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)" ui-sref="teaching.home"> 
+							<i class="ion-compose"></i>{{'header.MY_INSTRUCTION_COURSE_LINK'|translate}}</a>
+						</li>
+						<li>
+							<a  href="javascript:void(0)" ng-click="openMyCourse()">
+								<i class="ion-university"></i>{{'header.MY_STUDY_COURSE_LINK'|translate}}
+							</a>
+						</li>
+						<li>
+		                    <a href="#" data-toggle="modal" data-target="#changePassword">
+		                    <i class="fa fa-lock"></i>{{'common.CHANGE_PASSWORD'|translate}}</a>
+		                </li>			               
+						<li>
+							<a ng-click="logout()" class="logout_button"><i class="ion-power"></i>Logout</a>
+						</li>   
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right top-elements list-unstyled hidden-xs">
+				<li ng-if="signedInUser.aud == null">
+					<a ng-click="fowardToLoginPage()" class="login-button" translate  style="padding:3px"><i class="ion-log-in"></i>header.LOGIN_LINK</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right top-elements list-unstyled hidden-xs">
+				<li ng-if="signedInUser.aud == null">
+					<a ng-click="registerNewUser()" href="http://accounts.songcanbang.org/#/user-register" target="_BLANK" class="login-button"  style="padding:3px">
+						<i class="ion-log-in"></i>
+						{{'header.REGISTER_LINK'|translate}}
+					</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right top-elements list-unstyled language-button hidden-xs" style="border-left:1px solid #eee;border-right:1px solid #eee">
+				<li class="piluku-dropdown dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<img class="flag_img" id="selectedLangImg" src="assets/images/flags/vn.png" alt="">
+						<span class="drop-icon"><i class="ion ion-chevron-down"></i></span>
+					</a>
+					<ul class="dropdown-menu dropdown-piluku-menu piluku-right animated fadeInUp wow language-drop neat_drop" data-wow-duration="1500ms" role="menu">
+		              <li>
+		                <a href="#" ng-click="setLang('vn_VI')"><img class="flag_img" src="assets/images/flags/vn.png" alt="flags"> Tiếng việt</a>
+		              </li>
+		             <!--  <li>
+		                <a href="#" ng-click="setLang('en_US')"><img class="flag_img" src="assets/images/flags/en.png" alt="flags"> English</a>
+		              </li>
+		              <li>
+		                <a href="#" ng-click="setLang('jp_JP')"><img class="flag_img" src="assets/images/flags/jp.png" alt="flags"> Japanese</a>
+		              </li> -->
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+<div class="modal fade in" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+<div class="modal-backdrop fade in" style="height: auto;"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="postClose()">
+        <span aria-hidden="true" class="ti-close"></span></button>
+        <h4 class="modal-title" id="myModalLabel">{{'common.CHANGE_PASSWORD'|translate}}</h4>
+      </div>
+       <div class="modal-body">
+        <form name="form" ng-submit="form.new_password.$error.passwordMatch && changePass(user)" method="POST" novalidate >
+          <div class="piluku-login">              
+            <div class="form-section">              
+              <div class="input-group" ng-class="{'has-error' : form.password.$invalid && form.password.$dirty}">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.OLD'|translate}}</span>
+                <input id="password" type="password" class="form-control" placeholder="{{'loginPage.OLD_PASSWORD'|translate}}" ng-model="user.password"/>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.NEW'|translate}}</span>
+                <input type="password" id="new_password" name="new_password" password-match="user.confirm_password" class="form-control" placeholder="{{'loginPage.NEW_PASSWORD'|translate}}" ng-model="new_password"/>
+              </div>
+              <div class="input-group" ng-class="{'has-error' : (form.confirm_password.$invalid && form.confirm_password.$dirty) || !form.new_password.$error.passwordMatch}">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.CONFIRM'|translate}}</span>
+                <input type="password" id="confirm_password" class="form-control" placeholder="{{'loginPage.CONFIRM_NEW_PASSWORD'|translate}}" ng-model="user.confirm_password"/>
+              </div>     
+              <div class="input-group" style="color:red">
+                <p class="help-block error-msg" ng-show="!form.new_password.$error.passwordMatch">{{'common.PASSWORD_DOES_NOT_MATCH'|translate}}</p>
+                <p class="help-block error-msg" ng-show="errorMsg != '' ">{{errorMsg}}</p>                
+              </div>            
+              <button type="submit" class="btn btn-success btn-block"><strong>{{'common.BTN_CHANGE' | translate}}</strong></button>    
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button  ng-click="postClose()" type="button" class="btn btn-default" data-dismiss="modal">{{'common.BTN_CLOSE'|translate}}</button>       
+      </div>
+    </div>
+  </div>
+</div>

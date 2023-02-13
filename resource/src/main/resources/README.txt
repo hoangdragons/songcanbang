@@ -1,0 +1,1 @@
+Use ValidationMessages_*.properties for all resources

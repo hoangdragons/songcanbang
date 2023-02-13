@@ -1,0 +1,280 @@
+<!doctype html>
+<!-- Our PilukuApp module defined here -->
+<html lang="en" ng-app="admin">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+    <!-- using twitter bootstrap, but of course -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <!-- styles for ng-animate are located here -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/loading-bar.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/material.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/flat-rounded-checkbox.css">
+  
+    <!-- Include Jquery file -->
+    <script src="assets/js/jquery.js"></script>
+     <script type="text/javascript" src="assets/js/materialize.min.js"></script>
+    <script type="text/javascript">
+    appHelper   = {
+          
+          componentsDir: 'app/modules',
+          assetsDir: 'assets',
+
+          componentView: function(componentName,viewName)
+          {
+            return this.componentsDir + '/' + componentName + '/views/' + viewName +'.html' ;
+          },
+          componentJs: function(componentName,jsName)
+          {
+            return this.componentsDir + '/' + componentName + '/js/' + jsName +'.js' ;
+          },
+          componentData: function(componentName,dataName)
+          {
+            return this.componentsDir + '/' + componentName + '/data/' + dataName +'.json' ;
+          },
+
+          assetPath: function(file_path)
+          {
+            return this.assetsDir + '/' + file_path;
+          }
+        };
+
+        var ASSETS = {
+          'core' : 
+          {
+            'core' : 'assets/js/core.js',
+            'liveTile' : 'assets/js/MetroJs.lt.js',
+          },
+          'bootstrap': {
+            'css': 'js/bootstrap.min.js', // Some plugins which do not support angular needs this
+
+            'js': appHelper.assetPath('js/bootstrap.js'),
+          },
+          'materialize' : appHelper.assetPath('js/materialize.js'),
+          get : function(fileName)
+          {
+              return appHelper.assetPath(fileName);
+          },
+          js : function(moduleName,fileName)
+          {
+              return appHelper.componentsDir + '/' + moduleName + '/js/' + fileName + '.js';
+          },
+          css : function(moduleName,fileName)
+          {
+              return appHelper.componentsDir + '/' + moduleName + '/css/' + fileName + '.css';
+          }
+        };
+
+        </script>
+
+      
+    <!-- could easily use a custom property of the state here instead of 'name' -->
+    <title>{{'common.HEADER'|translate}}</title>
+
+
+  </head>
+  <body ng-controller="CommonController" style="background-color: #ddeaf7">
+   
+  <div class="wrapper" ng-class="{'mini-bar': $storage.miniSidebar}" style="background-color:#fff">
+  
+  <ui-view></ui-view>  
+  </div>
+   <!-- /.container -->
+  <div class="container widgets-footer" style="padding-top:15px">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="aboutus widget" >
+          <div class="widget-title">
+            {{'common.ABOUT_US'|translate}}
+          </div>
+          <p>
+            {{'common.ABOUT_US_DESC'|translate}}
+          </p>
+        </div>      
+      </div>
+      <div class="col-md-4">
+        <div class="aboutus widget" >
+          <div class="widget-title">
+            {{'common.SOCIAL_CONNECT'|translate}}
+          </div>
+          <div>
+            <button class="btn btn-radius btn-primary social-icon"><i class="ion-social-facebook"></i></button>
+            <button class="btn btn-radius btn-primary social-icon"><i class="ion-social-googleplus"></i></button>
+          </div>
+          <p>
+            <b>{{'common.COMPANY_NAME'|translate}}</b>            
+          </p>
+          <p>
+            Văn phòng: 74/13/1 Trương Quốc Dung, Phường 10, Quận Phú Nhuận, Tp. Hồ Chí Minh
+          <p>
+            Cơ sở 2: 465 Nơ Trang Long kéo dài (đường Bình Lợi mới), Quận Bình Thạnh, TP. Hồ Chí Minh.
+            <br>Hotline :0932 009 920
+          </p>
+          <p>
+            Chi nhánh Hà Nội: Tầng 5, tháp A, tòa nhà Hà Thành, 102 Thái Thịnh, Đống Đa, Hà Nội
+          </p>
+          <p>
+            Trung tâm huấn luyện: Tầng 1, tòa nhà VAS, khu đô thị Mỹ Đình, Nam Từ Liêm, Hà Nội
+          </p>
+          <p>
+            Hotline: 0909 624 689 Hà nội
+          </p>
+          <p>
+            {{'common.CALL_CENTER'|translate}}: 19007167          
+          </p>
+          <p>
+            Email: Info@ghs.vn
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="aboutus widget" >       
+          <div class="widget-title">
+            {{'common.KEEP_IN_TOUCH'|translate}}
+          </div>    
+          <div>
+            <form action="" class="form">
+              <input type="text" class="form-control contact-form-control" placeholder="{{'common.NAME'|translate}} *" name="name">
+              <input type="text" class="form-control contact-form-control" placeholder="{{'common.EMAIL'|translate}} *" name="email">
+              <textarea name="" id="" cols="30" rows="5" class="form-control contact-form-control" placeholder="{{'common.YOUR_WORD'|translate}} *"></textarea>
+              <button type="submit" class="btn btn-block btn-form btn-green" style="color:#fff">{{'common.SEND_MESAGE'|translate}}</button>
+            </form>
+          </div>
+          
+        </div>      
+      </div>    
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+  <!-- wrapper -->
+
+    <!-- ////// NEW //////-->
+    <script src="assets/js/angular-1.5.8.js"></script>    
+    <script src="assets/js/angular-animate-1.5.8.js"></script>
+    <script src="assets/js/angular-resource-1.5.8.js"></script>
+    <script src="assets/js/angular-ui-router.js"></script>    
+    <script src="app/angular-drag-drop.min.js"></script>
+    <!-- ////// END-NEW //////-->
+
+    <!-- Include angular.js, angular-animate.js and angular-ui-router.js-->
+    <!--script src="assets/libs/angular/angular.min.js"></script>
+    <script src="assets/libs/angular/angular-animate.min.js"></script-->
+
+    <!-- ////// NEW //////-->
+    <script src="assets/js/ngStorage.js"></script>
+    <!-- ////// END-NEW //////-->
+
+    <!--script src="assets/libs/angular-ui.js"></script-->
+    <script src="assets/libs/ocLazyLoad.js"></script>
+    <script src="assets/js/loading-bar.js"></script>
+    
+    <script src="app/modules/maps/js/lodash.js"></script>
+    <script src="app/modules/maps/js/angular-google-maps.js"></script>
+
+    <!-- ////// NEW //////-->
+    <script src="assets/js/jwplayer.js"></script>
+    <script src="assets/js/jwplayer.module.js"></script>
+    <script src="assets/js/jwplayer.service.js"></script>
+    <script src="assets/js/jwplayer.directive.js"></script>
+
+    <!--link rel="stylesheet" href="http://localhost:8080/cmsadmin/css/ui-grid.css" /-->
+    <!--script type="text/javascript" src="assets/js/ui-grid.js"></script-->
+    <!--link data-require="bootstrap-css@3.x" data-semver="3.1.1" rel="stylesheet" href="http://localhost:8080/cmsadmin/css/bootstrap.min.css" /-->
+    <script data-require="ui-bootstrap@0.10.0" data-semver="0.11.0" src="assets/js/ui-bootstrap-tpls-0.10.0.js">
+    </script>
+
+    <!-- Angular-jwt -->
+    <script type="text/javascript" src="assets/js/angular-jwt.js"></script>
+    <!-- ////// END-NEW  //////-->
+
+
+    <!-- app.js declares the PilukuApp module and adds items to $rootScope, and defines
+         the "home" and "about" states
+    -->
+    <!--////// NEW //////-->
+    <!-- BODY -->
+    <script src="assets/js/tinymce/tinymce.js"></script>
+    <script src="assets/js/tinymce/tinymce.min.js"></script>
+    <script src="app/common.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/controllers.js"></script>
+    <script src="app/services.js"></script>
+    <script src="app/directives.js"></script>
+    <script src="app/filters.js"></script>
+    <script src="app/modules/category/js/category-list.js"></script>
+    <script src="app/modules/category/js/category-detail.js"></script>
+    
+   <!--  <script src="app/modules/course/js/course-list.js"></script>
+    <script src="app/modules/course/js/course-detail.js"></script> -->
+    
+    <script src="app/modules/teaching/js/course-list.js"></script>
+    <script src="app/modules/teaching/js/course-detail.js"></script>
+
+    <script src="app/modules/teacher/js/teacher-list.js"></script>
+    <script src="app/modules/teacher/js/teacher-detail.js"></script>
+
+    <script src="app/modules/publication/js/publication-list.js"></script>
+    <script src="app/modules/publication/js/publication-detail.js"></script>
+    
+    <!--
+    Load js/angular-translate 
+     -->
+    <script src="assets/js/angular-translate/translate.js"></script>
+    <script src="assets/js/angular-translate/service/default-interpolation.js"></script>
+    <script src="assets/js/angular-translate/service/sanitization.js"></script>
+    <script src="assets/js/angular-translate/service/handler-log.js"></script>
+    <script src="assets/js/angular-translate/service/loader-static-files.js"></script>
+
+    <script src="assets/js/angular-translate/service/storage-key.js"></script>
+    <script src="assets/js/angular-translate/service/storage-local.js"></script>
+    <script src="assets/js/angular-translate/service/storage-cookie.js"></script>
+    <script src="assets/js/angular-translate/service/translate.js"></script>
+    <script src="assets/js/angular-translate/directive/translate.js"></script>
+    <script src="assets/js/angular-translate/filter/translate.js"></script>
+
+    <script type="text/javascript">
+      jwplayer.key="4zVZTycAaug4SaE7dKIq3pKm3GPn0aGNoOgbjA==";
+    </script>
+    
+    <!-- ////// END-NEW //////-->
+    <!--script src="app/app.routes.js"></script>
+    <script src="app/app.controllers.js"></script-->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.accordion.js"></script>
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.loadmask.min.js"></script>
+    <!--script type="text/javascript" src="assets/js/ngStorage.min.js"></script-->
+    <script type="text/javascript" src="assets/js/jquery.countTo.js"></script>
+
+  
+    <script src="assets/js/dirty-check.js"></script>
+    <script src="app/modules/forms/js/form-elements/bootstrap-datepicker.js"></script>    
+
+    <script src="assets/js/file-upload/ng-file-upload-shim.js"></script>
+    <script src="assets/js/file-upload/ng-file-upload.js"></script>
+    <script type="text/javascript">
+      FileAPI = {
+        debug: true,
+        //forceLoad: true, html5: false //to debug flash in HTML5 browsers
+        //wrapInsideDiv: true, //experimental for fixing css issues
+        //only one of jsPath or jsUrl.
+        //jsPath: '/js/FileAPI.min.js/folder/',
+        //jsUrl: 'yourcdn.com/js/FileAPI.min.js',
+
+        //only one of staticPath or flashUrl.
+        //staticPath: '/flash/FileAPI.flash.swf/folder/'
+        //flashUrl: 'yourcdn.com/js/FileAPI.flash.swf'
+      };
+    </script>
+    <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.css"> -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/htmlembedded/htmlembedded.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/xml/xml.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/javascript/javascript.min.js"></script>      
+  </body>
+</html>

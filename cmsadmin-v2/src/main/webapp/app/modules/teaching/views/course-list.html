@@ -1,0 +1,160 @@
+<div class="category-header">
+	<div class="container" style="width:auto">
+		<h2 style="padding-left: 15px;">{{'header.MY_INSTRUCTION_COURSE_LINK'|translate}}</h2>
+	</div>
+</div>
+<div class="container animated fadeInUpBig" style="padding-top: 10px">
+<div>	
+	<div class="row" style="text-align:left;vertical-align: middle; margin-right: 5px;margin-left:5px">
+		<div class="col-lg-2" style="vertical-align:middle;margin-top: 10px;padding-left:0px; margin-left:0px">
+			<ul class="top-elements list-unstyled">
+				<li class="piluku-dropdown dropdown" ng-if="signedInUser.aud != null">
+					<a class="dropdown-toggle avatar_width btn btn-green btn-radius" data-toggle="dropdown" role="button" 
+						aria-expanded="false" style="color:#fff">
+						<i class="ion-plus"></i>
+						<span class="avatar-holder">
+							{{'common.BTN_ADD'|translate}}
+						</span>
+						<span class="drop-icon" style="padding-left:0px !important"><i class="ion ion-chevron-down"></i></span>
+					</a>
+					<ul class="dropdown-menu dropdown-piluku-menu piluku-left animated fadeInUp wow avatar_drop neat_drop" data-wow-duration="1500ms" role="menu">
+						<li>
+							<a href="javascript:void(0)" ui-sref="teaching.courseCreation">
+								<i class="ion-plus" style="color:#2196f3"></i>{{'common.BTN_ADD_COURSE'|translate}}
+							</a>
+						</li>
+						<li>
+							<a href="javascript:void(0)"> 
+								<i class="ion-speakerphone" style="color:#2196f3"></i>
+								{{'common.BTN_ADD_ANNOUNCEMENT'|translate}}
+							</a>
+						</li>							  
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="search-container col-lg-6">
+           <input id="searchText" name="searchText" type="text" class="form-control search-text" maxlength="255"
+               ng-model="searchText" placeholder="{{'teaching.SEARCH_TEXT'|translate}}"
+               required ng-minlength="1" ng-maxlength="2048"
+               ng-keypress="$event.keyCode == 13 && doSearch()"/>                   
+           <span class="search-btn">
+               <span class="ion-search" ng-click="doSearch()"></span>
+           </span>  
+        </div>
+	</div>
+</div>
+<div style="overflow: hidden;margin-bottom:10px" class="portfolio" ng-if="courses.length > 0">
+	<div class="row" style="padding:5px">
+		<ul class="list-unstyled">	
+			<li style="width:auto; height: auto" class="element" ng-repeat="course in courses">
+				<div class="portio-item row" style="height:auto;margin:15px;padding:15px;border: 1px solid #eee;box-shadow:none !important">
+					<!-- Course Image -->
+					<div class="col-md-4" style="height:auto;width:auto">
+						<a href="javascript:void(0)" ng-click="edit(course)" style="text-decoration:none">
+							<img class="portio-image" ng-src="{{course.imageUrl}}" style="width:200px;"/>
+						</a>
+					</div>
+					<!-- Course Description -->
+					<div class="col-md-8">
+						<div class="course-contents">
+							<a href="javascript:void(0)" ng-click="edit(course)" style="text-decoration:none">
+							<div class="course-title">
+		        					<h4>{{course.title}}</h4>
+		        				
+		        			</div>
+		        			</a>
+		        			<div class="row">
+					        	<div class="col-md-3" ng-repeat="teacher in course.teachers">
+					        		<img class="portio-image" ng-src="{{teacher.teacherImage}}"
+									 	style="margin: 1px;max-width: 60px;max-height:60px; border: 2px solid #FFFFFF"/>
+									<div class="course-teacher">
+					        			<span>{{teacher.teacherName}}</span>
+					        		</div>
+					        	</div>
+				        	</div>
+				        	<div class="row" style="padding-left:16px">
+					        	<star-rating style="font-size:20pt" ng-model="course.rating" readable="true">
+					        	</star-rating>
+									<button ng-click="previewVideo(course)" class="btn btn-primary btn-radius"
+										style="color: #2196f3; background-color:#fff; text-decoration: none; width: 40px; height: 40px; border-radius: 20px; font-size: 14pt; font-weight: 800; cursor: pointer;">
+										<i class="ion-videocamera"></i>
+				                    </button>
+			                   
+		                    </div>
+		                    <div>
+								{{'course.LECTURES'|translate}} {{course.lessonCount}}
+							</div>
+							<div>
+								{{'course.VIDEO_TIMES'|translate}} {{course.totalVideoTime}}
+							</div>
+				            <div class="course-price" ng-if="course.price>0">{{course.price}} {{course.currency}}</div>
+				        	<div class="course-price" ng-if="course.price<=0">{{'common.PRICE_FREE'|translate}}</div>
+				        </div>								
+					</div>
+					<!-- /.course-content -->
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div style="overflow: hidden;margin-bottom:10px" class="portfolio" ng-if="listHelperCourse.length > 0">
+<hr style="color: #eee"/>
+<label>{{'course.HELPER_COURSE_LIST'|translate}}</label>
+	<div class="row" style="padding:5px">
+		<ul class="list-unstyled">	
+			<li style="width:auto; height: auto" class="element" ng-repeat="course in listHelperCourse">
+				<div class="portio-item row" style="height:auto;margin:15px;padding:15px;border: 1px solid #eee;box-shadow:none !important">
+					<!-- Course Image -->
+					<div class="col-md-4" style="height:auto;width:auto">
+						<a href="javascript:void(0)" ng-click="edit(course)" style="text-decoration:none">
+							<img class="portio-image" ng-src="{{course.imageUrl}}" style="width:200px;"/>
+						</a>
+					</div>
+					<!-- Course Description -->
+					<div class="col-md-8">
+						<div class="course-contents">
+							<div class="course-title">
+								<a href="javascript:void(0)" ng-click="edit(course)" style="text-decoration:none">
+		        					<h4>{{course.title}}</h4>
+		        				</a>
+		        			</div>
+		        			<div class="row">
+					        	<div class="col-md-3" ng-repeat="teacher in course.teachers">
+					        		<img class="portio-image" ng-src="{{teacher.teacherImage}}"
+									 	style="margin: 1px;max-width: 60px;max-height:60px; border: 2px solid #FFFFFF"/>
+									<div class="course-teacher">
+					        			<span>{{teacher.teacherName}}</span>
+					        		</div>
+					        	</div>
+				        	</div>
+				        	<div class="row" style="padding-left:16px">
+					        	<span class="ico_star">
+					            	<span class="ico_star_value" style="padding-top:6px;width: {{course.rating}}%"></span>
+					            </span>
+					           <span>
+									<button ng-click="previewVideo(course)" class="btn btn-primary btn-radius"
+										style="color: #2196f3; background-color:#fff; text-decoration: none; width: 40px; height: 40px; border-radius: 20px; font-size: 14pt; font-weight: 800; cursor: pointer;">
+										<i class="ion-videocamera"></i>
+				                    </button>
+			                    </span>
+		                    </div>
+		                    <div>
+								{{'course.LECTURES'|translate}}{{course.lessonCount}}
+							</div>
+							<div>
+								{{'course.VIDEO_TIMES'|translate}} {{course.totalVideoTime}}
+							</div>
+				            <div class="course-price" ng-if="course.price>0">{{course.price}} {{course.currency}}</div>
+				        	<div class="course-price" ng-if="course.price<=0">{{'common.PRICE_FREE'|translate}}</div>
+				        </div>								
+					</div>
+					<!-- /.course-content -->
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+
+</div>

@@ -1,0 +1,1 @@
+"use strict";window.ignoreDC==false;var dirtyCheck=function(){var c=$(".form-require-dirty-check");var b=$(".ng-dirty");var a=null;if(typeof c!=="undefined"&&typeof b!=="undefined"&&c.length>0&&b.length>0){a="\0"}if(a!=null){return a}};window.onbeforeunload=dirtyCheck;

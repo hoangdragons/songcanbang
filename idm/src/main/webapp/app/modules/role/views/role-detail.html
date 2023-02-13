@@ -1,0 +1,107 @@
+<section style="margin-top:36px">
+	<div class="nav1">
+		<div class="" style="text-align:left;vertical-align: middle; margin-right: 5px;float:left;color:#fff">
+			<a href="javascript:void(0)" ng-click="homePage()" style="padding:2px;color:white">
+				{{'common.GO_HOME'|translate}}	
+			</a>
+		</div>
+		{{'role.DETAIL_HEADER'|translate}}
+		<div style="float:right;margin-right:10px" ng-if="signedInUser.aud != null">
+			<span>{{'common.WELCOME'|translate}}: {{signedInUser.aud}}</span>
+			<button class="btn btn-primary scb-btn" style="width: 65px;color:black !important;height:22px !important;background-color:#f3f3f3 !important" type="button" 
+				ng-if="signedInUser.aud != null" 
+				ng-click="logout()">
+				<span class="glyphicon glyphicon-log-out"></span>
+				{{'common.LOGOUT'|translate}}
+			</button>
+		</div>
+	</div>	
+</section>
+<form name="roleForm" ng-submit="insertOrUpdate()">
+<tabset style="margin-top:1px">
+	<tab heading="{{tab1Title|translate}}">
+		<div style="margin:20px">
+			 <!-- Role name -->
+			 <input type="hidden" ng-model="role.roleId"/>
+		     <div class="form-group row-div" ng-class="{'has-error' : roleForm.roleName.$invalid && roleForm.roleName.$dirty}">
+		     	 <div style="width: 250px; display: inline-table;">
+		         	<label style="width:200px !important" for="roleName">{{'role.NAME'|translate}}</label>
+		         </div>
+		         <span ng-class="{'glyphicon glyphicon-ok' : roleForm.roleName.$valid && roleForm.roleName.$dirty}"></span>
+		         <input id="roleName" name="roleName" type="text" class="form-control form-text" maxlength="255"
+		                ng-model="role.roleName"
+		                required ng-minlength="3" ng-maxlength="512" placeholder="{{'role.NAME'|translate}}"/>
+		     </div>
+		     <div style="width: 250px; display: inline-table;">
+		     	<label style="width:200px !important" for="roleTypeDiv">{{'role.SYS_ROLE'|translate}}</label>
+		     </div>
+		     <div class="flatRoundedCheckbox" id="roleTypeDiv">	   	         
+				<input type="checkbox" ng-model="isSystemRole" ng-change="toggleSysRole()" id="systemRoleCheck" style="margin-left: 5px;">				
+				<label for="systemRoleCheck"></label>
+				<div></div>
+			 </div>
+		     <!-- Description -->
+		     <div class="form-group row-div" ng-class="{'has-error' : roleForm.description.$invalid && roleForm.description.$dirty}">
+		     	 <div style="width: 250px; display: inline-table;">
+		         	<label style="width:200px !important" for="description">{{'role.DESCRIPTION'|translate}}</label>
+		         </div>
+		         <input id="description" name="description" type="text" class="form-control form-text" maxlength="255"
+		                ng-model="role.description" placeholder="{{'role.DESCRIPTION'|translate}}"
+		                required ng-minlength="1" ng-maxlength="2048"/>
+		     </div>
+		</div>
+	</tab>
+	<tab heading="{{tab2Title|translate}}">
+		<section class="container">
+			<table>
+				<tr>
+					<td style="padding:10px">
+						<div>
+							<label for="leftValues">{{'role.AVAILABLE_FUNCTIONS'|translate}}</label>
+						</div>
+						<div>
+					        <select id="leftValues"  class="select-multi"
+					        	data-ng-model="modAvailableFunctionList"
+					        	data-ng-options="x.functionName for x in availableFunctionList track by x.functionId"
+					        	size="20" multiple style="width:300px">
+					        </select>
+					    </div>
+					</td>
+					<td style="padding:10px">
+						<div>
+					        <p><input type="button" id="btnLeft" ng-click="revoke()" value="&lt;" title="{{'role.ASSIGN'|translate}}" /></p>
+					        <p><input type="button" id="btnRight" ng-click="grant()" value="&gt;" title="{{'role.REVOKE'|translate}}"/></p>
+					    </div>
+					</td>
+					<td style="padding:10px">
+						<div>
+							<label for="rightValues">{{'role.ROLE_FUNCTIONS'|translate}}</label>
+						</div>
+						<div>
+					        <select id="rightValues" class="select-multi"
+					        	data-ng-model="roleFunctions" 
+					        	data-ng-options="y.functionName for y in roleFunctionList track by y.functionId" 
+					        	size="20" multiple style="width:300px">
+					        </select>
+				    	</div>
+					</td>
+				</tr>
+			</table>    
+		</section>
+	</tab>
+</tabset>
+<div style="margin-top:10px; text-align:center">
+	<button type="submit" class="btn btn-primary scb-btn ">
+		<span class="glyphicon glyphicon-floppy-disk"></span>	
+		{{'common.BTN_SAVE'|translate}}
+	</button>  
+	<button type="reset" class="btn btn-primary scb-btn">
+		<span class="glyphicon glyphicon-fire"></span>
+		{{'common.BTN_RESET'|translate}}
+	</button> 
+	<button type="button" ng-click="cancel()" class="btn btn-primary scb-btn">
+		<span class="glyphicon glyphicon-trash"></span>
+		{{'common.BTN_CANCEL'|translate}}
+	</button>
+</div>
+</form>

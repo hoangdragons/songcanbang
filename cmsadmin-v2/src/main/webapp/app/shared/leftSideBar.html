@@ -1,0 +1,43 @@
+<div class="left-bar" ng-controller="leftSideBarCtrl">
+        <div class="admin-logo">
+            <div class="logo-holder pull-left" style="vertical-align:middle !important;padding:2px !important">
+                <img class="logo" ng-src="assets/images/yoga-logo.png" style="width:auto" alt="logo">   
+            </div>
+            <!-- logo-holder -->            
+            <a href="#"  ng-click="$storage.miniSidebar = $storage.miniSidebar ? false : true" class="menu-bar  pull-right"><i class="ti-menu"></i></a>
+        </div>
+        <!-- admin-logo -->
+        <ul class="list-unstyled menu-parent" id="mainMenu">
+            <li>
+                    <a ui-sref="app.dashboard">
+                        <i class="ion-ios-home" style="font-size:20pt"></i>
+                        <span class="text">{{'common.DASHBOARD'|translate}}</span>
+                    </a>
+            </li>
+             <li class="submenu">
+                <a class="waves-effect waves-light" href="#layouts">
+                    <i class="ion-gear-b" style="font-size:20pt"></i>
+                    <span class="text">{{'common.SETTINGS'|translate}}</span>
+                </a>               
+            </li>
+            <li class="submenu" ng-if="isEditor()">
+                <a class="waves-effect waves-light" href="#categoryList" ui-sref="app.categoryList">
+                    <i class="ion-navicon-round" style="font-size:20pt"></i>
+                    <span class="text">{{'category.CATEGORY'|translate}}</span>
+                </a>
+            </li>
+            <li class="submenu" ng-if="isEditor()">
+                <a class="waves-effect waves-light" href="#teacherList" ui-sref="app.teacherList">
+                    <i class="ion-person-stalker" style="font-size:20pt"></i>
+                    <span class="text">{{'course.teacher.TEACHERS'|translate}}</span>
+                </a>
+            </li>
+            <li class="submenu" ng-if="isEditor()">
+                <a class="waves-effect waves-light" href="#publicationList" ui-sref="app.publicationList">
+                    <i class="ion-ios-paper" style="font-size:20pt"></i>
+                    <span class="text">{{'common.PUBLICATION'|translate}}</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>

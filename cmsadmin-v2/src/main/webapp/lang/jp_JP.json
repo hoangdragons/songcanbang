@@ -1,0 +1,119 @@
+{
+"common":{
+        "TITLE" : "ライブのバランス",
+        "HEADER" : "コンテンツ管理システム - CMS",
+        "FOOTER" : "©2016 - Golden Hearts JSC",
+        "BTN_SEARCH":"サーチ",
+        "SEARCH_PLACE_HOLDER":"入力された情報は、検索します...",
+        "BTN_CLOSE":"閉じる",
+        "BTN_ADD":"加えます",
+        "BTN_LOGOUT":"ログアウト",
+        "BTN_EDIT":"編集",
+        "BTN_RESET":"リセット",
+        "BTN_SAVE":"セーブ",
+        "BTN_CANCEL":"キャンセル",
+        "BTN_DELETE":"削除",
+        "BTN_UPLOAD":"アップロード",
+        "INVALID_MIN_LEN":"無効分の長さ",
+        "INVALID_MAX_LEN":"無効な最大長",
+        "CONTENT":"コンテンツ",
+        "BROWSE":"ブラウズ",
+        "DASHBOARD":"ダッシュボード",
+        "SETTINGS":"設定",
+        "COURSE":"コース",
+        "EDIT_PROFILE":"Profile",
+        "MESSAGES":"メッセージ",
+        "USER_INFO":"ユーザー情報",
+        "WELCOME":"Welcome",
+        "ALL":"All...",
+        "DIRTY_CHECK_ERROR":"データが変更されましたか？",
+        "CONFIRM_DELETE":"削除する: ",
+        "NOT_ALLOWED":"Empty",
+        "PREVIEW":"プレビュー",
+        "BTN_CHANGE":"変化する",
+        "OLD":" 古い",
+        "NEW":" 新しい",
+        "CONFIRM":" 確認",
+        "PASSWORD_DOES_NOT_MATCH":"パスワードが一致しません!",
+        "CHANGE_PASSWORD":"パスワードを変更する",
+        "CHANGE_PASSWORD_ERROR":"パスワードの変更中にエラーが発生しました...",
+        "CHANGE_PASSWORD_SUCCESS":"パスワードの変更の成功"
+},
+"loginPage": {
+        "HEADER": "LOGIN",
+        "LOGIN_NAME": "ユーザー名",
+        "MSG_LOGIN_NAME_REQUIRED":"ユーザー名が必要です",
+        "PASSWORD":"パスワード",
+        "MSG_PASSWORD_REQUIRED":"パスワードが必要です",
+        "BTN_LOGIN":"ログイン",
+        "NOT_A_MEMBER":"メンバーではない？",
+        "OLD_PASSWORD":"以前のパスワード",
+        "NEW_PASSWORD":"新しいパスワード",
+        "CONFIRM_NEW_PASSWORD":"新しいパスワードを確認",
+        "SIGN_UP_NOW":"今すぐ申し込む"
+ },
+  "category":{
+ 	"HEADER":"カテゴリ一覧",
+ 	"WELCOME":"ようこそ",
+ 	"LOGOUT" : "ログアウト",
+ 	"NAME_TITLE": "カテゴリー名",
+ 	"DESCRIPTION":"説明",
+ 	"DETAIL_HEADER":"CATEGORYの詳細情報",
+ 	"UPDATE_DETAIL_INFO": "更新カテゴリ情報",
+ 	"CREATE_NEW":"新しいカテゴリを作成します。",
+ 	"ACTION":"アクション",
+ 	"CATEGORY":"カテゴリー"
+ },
+ "course":{
+ 	"COURSE_LIST":"コースリスト",
+ 	"FOR_CATEGORY":"カテゴリーの",
+ 	"CHOOSE_CATEGORY":"カテゴリを選択",
+ 	"BACK_TO_CATEGORY_LIST":"戻るカテゴリリストへ",
+    "VIDEO_URL":"動画のURL",
+    "TOTAL_VIEW":"総視聴数",
+    "TITLE":"タイトル",
+    "RATING":"評価",
+    "PUBLISH_DATE":"日付を公開e",
+    "IMAGE_URL":"画像のURL",
+    "CONTENT":"コンテンツ",
+ 	"AUTHOR":"著者",
+ 
+	"CREATE_CHAPTER":"章を作る",
+ 	"CREATE_LESSON":"レッスンの作成",
+ 	"COURSE_DETAIL":"コース詳細",
+ 	"TAB":{
+ 		"BASIC_INFO":"概要",
+ 		"LESSON_DETAIL_VIDEO":"ビデオ", 		
+ 		"LESSON_DETAIL_DOCUMENT":"添付ファイル",
+ 		"LESSON_DETAIL_RECORD":"音声",
+ 		"LESSON_DETAIL_PICTURE":"画像",
+ 		"COURSE_DETAIL_INFO":"コースの詳細"
+ 		
+ 	}, 	
+ 	"lesson":{
+ 		"LESSON":"レッスン ",
+ 		"PREVIEW":"プレビュー",
+ 		"ADD_VIDEO":"ビデオを追加する",
+ 		"LIST_VIDEO":"レッスンリストビデオ",
+ 		"TITLE":"タイトル",
+ 		"LINK":"リンクURL",
+ 		
+ 		"ADD_DOCUMENT":"追加ファイル",
+ 		"LIST_DOCUMENT":"レッスンリスト添付ファイル",
+ 		
+ 		"ADD_VOICE":"音声を追加する",
+ 		"LIST_VOICE":"レッスンリストの声",
+ 		
+ 		"ADD_PICTURE":"写真を追加",
+ 		"LIST_PICTURE":"レッスンリストの画像"
+ 	},
+ 	"chapter":{
+ 		"CHAPTER":"章",
+ 		"CHAPTER_NAME":"チャプター名",
+ 		"LESSON_NAME":"レッスン名",
+ 		"CONFIRM_DELETE":"この章を本当に削除しますか？"
+ 		
+ 	},
+ 	"IMAGE_URL_SPACE_HOLDER":"イラスト画像のURL"
+ }
+}

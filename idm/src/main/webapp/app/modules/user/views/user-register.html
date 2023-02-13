@@ -1,0 +1,81 @@
+<form name="userRegForm" ng-submit="insertOrUpdate()">
+<div style="margin-left:10%;margin-top:20px;max-width:600px; height:500px; overflow-y:auto;padding-bottom:50px">
+	 <input type="hidden" ng-model="userRegForm.userId"/>	 
+	  <!-- fullName -->
+     <div ng-class="{'has-error' : userRegForm.fullName.$invalid && userRegForm.fullName.$dirty}">
+     	 <div style="width: 250px; display: inline-table;">
+         	<label style="width:200px !important" for="fullName">{{"user.FULL_NAME"|translate}}</label>
+         </div>
+         <input id="fullName" name="fullName" type="text" class="form-control form-text" maxlength="255"
+                ng-model="user.fullName"
+                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.FULL_NAME'|translate}}"/>
+     </div>
+     <!-- Telephone -->
+     <div ng-class="{'has-error' : userRegForm.telephone.$invalid && userRegForm.telephone.$dirty}">
+     	 <div style="width: 250px; display: inline-table;">
+         	<label style="width:200px !important" for="telephone">{{"user.TELEPHONE"|translate}}</label>
+         </div>
+         <input id="telephone" name="telephone" type="text" class="form-control form-text" maxlength="255"
+                ng-model="user.telephone"
+                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.TELEPHONE'|translate}}"/>
+     </div>
+    <!-- Email -->
+     <div ng-class="{'has-error' : userRegForm.email.$invalid && userRegForm.email.$dirty}">
+     	 <div style="width: 250px; display: inline-table;">
+         	<label style="width:200px !important" for="email">{{"user.EMAIL"|translate}}</label>
+         </div>
+         <input id="email" name="email" type="text" class="form-control form-text" maxlength="255"
+                ng-model="user.email"
+                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.EMAIL'|translate}}"/>
+     </div>
+	 <!-- Login name -->
+     <div ng-class="{'has-error' : userRegForm.loginName.$invalid && userRegForm.loginName.$dirty}">
+     	 <div style="width: 250px; display: inline-table;">
+         	<label style="width:200px !important" for="loginName">{{"user.LOGIN_NAME"|translate}}</label>
+         </div>
+         <input id="loginName" name="loginName" type="text" class="form-control form-text" maxlength="255"
+                ng-model="user.loginName"
+                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.LOGIN_NAME'|translate}}"/>
+     </div>
+     <!-- Password -->
+     <div ng-class="{'has-error' : userRegForm.password.$invalid && userRegForm.password.$dirty}">
+     	 <div style="width: 250px; display: inline-table;">
+         	<label style="width:200px !important" for="password">{{"user.PASSWORD"|translate}}</label>
+         </div>
+         <input id="password"  name="password" type="password" class="form-control form-text" maxlength="255"
+                ng-model="user.password" password-match="confirmPassword"
+                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.PASSWORD'|translate}}"/>
+                
+         <!-- ng-if="mode === 'bootstrap'" > Using bootstrap instead of Foundation -->
+	     <!-- BUGS -->         
+         <!-- <div > 
+			<div ng-password-strength="user.password" strength="passStrength"
+				inner-class="progress-bar" inner-class-prefix="progress-bar-"></div>
+		</div> -->
+     </div>
+     <!-- confirmPassword -->
+     <div ng-class="{'has-error' : userRegForm.confirmPassword.$invalid && userRegForm.confirmPassword.$dirty}">
+     	 <div style="width: 250px; display: inline-table;">
+         	<label style="width:200px !important" for="confirmPassword">{{"user.CONFIRM_PASSWORD"|translate}}</label>
+         </div>
+         <input id="confirmPassword" name="confirmPassword" type="password" class="form-control form-text" maxlength="255"
+         	ng-model="confirmPassword"
+             required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.CONFIRM_PASSWORD'|translate}}"/>
+         <p class="help-block error-msg" ng-show="userRegForm.password.$error.passwordMatch">{{'common.PASSWORD_DOES_NOT_MATCH'|translate}}</p>
+     </div>
+     <div>
+     	<p>{{success_message | translate}}</p>
+     </div>
+	<!-- Action -->
+	<div style="padding-left: 250px;margin-top:10px">
+		<button type="submit" class="btn btn-primary scb-btn">
+			<span class="glyphicon glyphicon-floppy-save"/>
+				{{'common.BTN_REGISTER'|translate}}
+		</button>
+		<button onclick="history.go(-1)" class="btn btn-primary scb-btn">
+			<span class="glyphicon glyphicon-trash"></span>
+			{{'common.BTN_CANCEL'|translate}}
+		</button>
+	</div>
+</div>	
+</form>	

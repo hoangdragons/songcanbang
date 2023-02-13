@@ -1,0 +1,39 @@
+<!-- <div id="category-header">
+	<div class="container" style="padding: 0px 15px;width:auto">
+		<h2 style="padding-left: 15px;"><i class="ion-ios-cart-outline" style="margin-right:5px"></i>{{'common.SHOPPING_CART_TITLE'|translate}}</h2>
+	</div>
+</div> -->
+<div style="overflow: hidden;" class="container" ng-if="shoppingCart.length == 0">
+	{{'common.EMPTY_SHOPPING_CART'|translate}}
+</div>
+<div style="overflow: hidden;" class="container" ng-if="shoppingCart.length > 0">
+	<div>
+		<div class="row" ng-repeat="course in shoppingCart" style="border:1px solid #eee;margin-bottom:5px;padding: 2px">
+			<div class="col-lg-8" style="height:auto;box-shadow:none !important;padding-bottom:10px;color: #000;font-size:10pt">
+				<!-- Course Image -->
+				<div class="col-md-4" style="margin-right:10px;height: 80px;width: 80px;vertical-align: middle;padding: 0px;position:relative;float:left">
+					<div class='bounding-box' style="background-image: url({{course.imageUrl}})"></div>
+				</div>
+				<!-- Course Description -->
+				<!-- <div class="col-md-8"> -->
+				<div>
+					<div class="course-contents" style="padding-bottom: 10px;">
+						<div class="course-title">
+	        				{{course.title}}
+	        			</div>
+	        			<div>
+		        			<span ng-repeat="teacher in course.teachers" >{{teacher.teacherName}}, </span>
+			        	</div>
+		        		<span ng-if="course.price>0" style="font-weight: 900;width:100px;">{{course.price}} {{course.currency}}</span>
+		    			<span ng-if="course.price<=0" style="font-weight: 900;width:100px;">{{'common.PRICE_FREE'|translate}}</span>
+			        </div>								
+				</div>			
+			</div>
+			<div style="text-align:right;padding:10px;">
+        		<a href="javascript:void(0)"  ng-click="removeFromCart(course)"><i class="ion-trash-a" style="color:#000;font-size:14pt"></i></a>
+        	</div>
+        </div>
+	</div>
+	
+</div>
+

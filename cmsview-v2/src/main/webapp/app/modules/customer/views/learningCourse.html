@@ -1,0 +1,273 @@
+<div style="background-color:#fff">
+<!-- Course title, Overview video -->
+<div class="learning-course-overview">
+	<div class="row" style="height: auto;margin-bottom:20px">
+	    <div class="col-lg-4 hidden-xs" style="padding:40px">
+			<div class="piluku-panel hidden-xs">
+				<jwplayer list-video-url="overviewVideoUrl" player-options="options" player-id="intro_player"></jwplayer>
+			</div>
+		</div>
+		<div class="col-lg-6" style="margin-top: 20px; height:100%;margin-left:20px">
+			<h3>{{course.title}}</h3>
+			<button style="font-size: 16px;" class="btn btn-green btn-radius" 
+            	ng-click="continueToLearn()">
+            	{{'courseDetail.CONTINUE_TO_LEARN'|translate}}
+            </button>
+            <div style="padding: 10px 0px">
+				<star-rating ng-model="rating.ratingStar" on-rating-selected="openRatingForm()"></star-rating>
+				<input type="hidden" ng-model="rating.createdBy"/>
+				<input type="hidden" ng-model="rating.courseId"/>
+				<input type="hidden" ng-model="rating.ratingEmotion"/>
+				<a class="selected-emoticon emoji emoji_like" 
+    				ng-click="openRatingForm()"
+    				ng-if="rating.ratingEmotion == null || rating.ratingEmotion == ''">{{'learning.NO_EMOTION'|translate}}</a>
+   				<a class="selected-emoticon emoji emoji_{{rating.ratingEmotion}}" 
+   					ng-click="openRatingForm()" ng-if="rating.ratingEmotion != null && rating.ratingEmotion != ''">{{rating.ratingEmotion}}</a>
+			</div>
+            <div class="progress hidden-xs" style="bottom:30px; margin-top:100px;width:100%;background-color:#737373">
+            	<span style="float:left;position:absolute">{{course.completedMaterials}} / {{course.totalMaterials}} {{'learning.LESSON_COMPLETE'|translate}}</span>
+				<div class="progress-bar progress-bar-success" role="progressbar"
+				 	style="padding: 5px" aria-valuenow="{{course.completedMaterials}}" aria-valuemin="0" 
+				 		aria-valuemax="{{course.totalMaterials}}" ng-style="{'width': course.totalMaterials > 0 ? 100 * course.completedMaterials/course.totalMaterials +'%':'0%'}">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div>
+
+<div class="container">
+<tabset style="margin-top:25px">
+	<tab heading="{{overviewTabTitle}}">
+		<div>
+			<div class="container">
+				<div class="row" style="margin-top: 10px">
+					<div class="col-lg-8" >
+						<div id="introduction-area" class="content-area">
+							<h4 translate>courseDetail.INTRODUCTION</h4>
+					        <div class="collapse-text" ng-bind-html="convertHtml(course.content)">
+					        </div>
+				        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</tab>
+	<!-- Lectures -->
+	<tab heading="{{courseContentTabTitle}}">
+		<div>
+			<div class="container">
+				<div class="search-container col-lg-12">
+                   <input id="searchText" name="searchText" type="text" class="form-control search-text" maxlength="255"
+                       ng-model="searchText" placeholder="{{'learning.SEARCH_TEXT'|translate}}"
+                       required ng-minlength="1" ng-maxlength="2048"/>                   
+                   <span class="search-btn">
+                       <span class="ion-search"></span>
+                   </span>  
+                </div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="container" >
+						<!-- Chapter repeat -->
+						<accordion class="course-content">
+						   <accordion-group ng-repeat="chapter in course.chapters" heading="" is-open="$first" class="accordion-list">
+						      <accordion-heading>						      
+						        <span class="course-chapter-title" style="width:90%">{{'courseDetail.CHAPTER'|translate}} {{$index + 1}}: {{chapter.chapterName}}</span>
+						        <span class="pull-right">/{{chapter.lessonCount}}</span>
+						      </accordion-heading>
+						      <div>
+								<div ng-repeat="lesson in chapter.lessons track by $index" class="lesson-panel" style="padding:5px">
+									<span><h5 class="course-lesson-ordinary">{{'courseDetail.LESSON'|translate}} {{$index + 1}}</h5></span>
+									<span><h5 class="course-lesson-title">{{lesson.lessionName}}</h5></span>
+									<div ng-repeat="mat in lesson.materials" class="mat-panel" ng-class="{'mat-panel-first':$first}" >
+										<div class="col-md-10">
+											<a href="javascript:void(0)" ng-click="showItem(mat)" ng-if="mat.type == 1 || mat.type == 2">
+												<div>
+	                                   				<span style="margin-left: 15px; color: #999FA3;font-size:14pt" class="fa fa-play-circle-o"></span>
+	                                    			<span>{{mat.title}}</span>
+                                    			</div>
+                                    		</a>
+                                    		<a ng-href="{{mat.url}}" ng-if="mat.type != 1 && mat.type != 2" target="_BLANK">
+												<div>
+	                                   				<span style="margin-left: 15px; color: #999FA3;font-size:14pt" class="fa fa-play-circle-o"></span>
+	                                    			<span>{{mat.title}}</span>
+                                    			</div>
+                                    		</a>
+                                   		</div>
+                                    	<div class="col-md-2">
+                                    		<div class="" style="width:100%">
+                                    			<div class="row" style="margin-right:5px">
+                                    				<span>{{mat.duration}}</span>
+                                    				<div class="col-sm-3 pull-right">
+                                    					<input style="width:30px !important;display:block" type="checkbox" ng-model="mat.isCompleted" 
+                                    					ng-click="checkComplete(mat)" value="">
+                                    				</div>
+                                    			</div>                                    			
+                                    		</div>
+                                    	</div>
+                                     </div>                             
+								</div>
+							   </div>
+						  	</accordion-group>    
+						</accordion>
+					</div>
+				</div>
+			</div>
+		</div>
+	</tab>
+	<tab heading="{{qaTabTitle}}">
+		<div class="container" style="padding: 10px;margin-top:10px;">
+			<div style="margin-bottom:10px">
+               <input id="qaSearchText" name="qaSearchText" type="text" class="qa-search-text" maxlength="255"
+                   ng-model="searchText" placeholder="{{'learning.QA_SEARCH_TEXT'|translate}}"
+                   required ng-minlength="1" ng-maxlength="2048"
+                   style="min-width:300px;width:60%;padding:5px"/> 
+               <span style="padding: 10px">{{'common.OR'|translate}}</span>                  
+               <button class="btn btn-green btn-radius" ng-click="showQuestionForm()">
+               	  {{'learning.NEW_QUESTION'|translate}}
+                   <span class="ion-plus"></span>
+               </button>  
+            </div>
+           <div id="question-form" class="new-question-form" style="display:none;width:100%; margin-top:10px;margin-bottom:10px">
+           		<hr/>
+ 				<form ng-submit="insertCourseQuestion(question)">
+ 					<label>{{'learning.QUESTION_HEADER'|translate}}</label>
+ 					<textarea id="questionArea" ng-model="question.question" name="description" class="form-control" rows="1" placeholder="{{'learning.INPUT_QUESTION_HEADER'|translate}}" ></textarea>
+ 					<label>{{'learning.QUESTION_DESCRIPTION'|translate}}</label>
+					<textarea id="questionArea" ng-model="question.description" name="description" class="form-control" rows="3" placeholder="{{'learning.INPUT_QUESTION_DESC'|translate}}" ></textarea>
+					<div class="name hidden-sm-down">{{'learning.ASK_AS'|translate}}: {{signedInUser.sub}}</div>
+         			<button type="submit" class="btn btn-radius btn-green">{{'learning.SEND_QUESTION'|translate}}</button>
+         			<button type="button" class="btn btn-radius btn-orange" ng-click="hideQuestionForm()">{{'common.CANCEL'|translate}}</button>
+ 				</form>
+			</div>
+			<accordion class="course-content">
+			   <accordion-group ng-repeat="q in listQuestion" heading="" is-open="$first" class="accordion-list">
+			      <accordion-heading>	
+			      	<div class="row">		      	
+				      	<div class="avata col-sm-1">
+				      		<img ng-src="{{q.userAvataUrl}}" style="width:30px;height:30px;border-radius:15px"/>
+				      	</div>						      
+				        <div class="col-md-10" style="width:auto; vertical-align: middle">
+				        	<span class="qa-question">{{q.question}}</span> 
+				        	<div>
+				      			{{q.userName}}	- {{q.questionDate}}		      	
+				      		</div>
+				        </div>
+				        <div class="pull-right qa-response-stat" style="margin-right:3px;">
+				        	0
+				        	<div>
+				      			{{'learning.RESPONSES'|translate}}		      	
+				      		</div>
+				        </div>
+			        </div>
+			      </accordion-heading>
+			      <!-- <span>{{'learning.QUESTION_DETAIL'|translate}}</span> -->
+		      	  <div class="collapse-text" ng-bind-html="convertHtml(q.description)"></div>
+				 <!-- Answers -->
+				 <div class="qa-answer row">
+				 	<div class="avata col-md-2">
+			      		<img ng-src="{{q.answerUserAvataUrl}}" style="width:30px;height:30px;border-radius:15px"/>
+			      		<div>
+			      			{{q.answerUserName}}	- {{q.answerDate}}		      	
+			      		</div>
+			      	</div>
+				 	<div class="collapse-text col-lg-8" ng-bind-html="convertHtml(q.answer)"></div>
+				 </div>
+			  	</accordion-group>    
+			</accordion>
+		</div>
+	</tab>
+	<tab heading="{{teacherTabTitle}}">
+		<div>
+			<div class="container">
+				<div id="teacher-area" class="content-area">
+		        	<h4 translate>courseDetail.TEACHER</h4>
+			        <div class="tl_intro_course_left teacherInfoArea" ng-repeat="teacher in course.teachers" >
+			        	<hr/>
+			             <div class="row">
+			                 <div class="k-course-details-author-img col-md-1" style="margin-right:10px">
+			                     <img class="img-fluid" ng-src="{{teacher.teacherImage}}" alt="{{teacher.teacherName}}" 
+			                     title="{{teacher.teacherName}}" style="width:100px;height:100px;border-radius:50px">
+			                 </div>
+			                 <div class="k-course-details-author-teacher col-md-6">
+			                     <span class="name">{{teacher.teacherName}}</span>
+			                     <span class="info">{{teacher.teacherCompany}}</span>
+			                     <div class="content-teacher" ng-bind-html="convertHtml(teacher.teacherContent)">
+								</div>
+			                 </div>
+			              </div>
+			        </div>
+		        </div>
+		     </div>
+	     </div>
+	</tab>
+	<tab heading="{{announcementsTabTitle}}">
+		<div style="text-align: center">
+			<span class="ion-speakerphone" style="font-size:30pt"></span>
+		</div>
+	</tab>
+</tabset>
+</div>
+
+<div class="modal fade in" id="ratingStarComment" tabindex="-1" role="dialog" aria-labelledby="ratingStarComment" 
+aria-hidden="false" style="display: none;">
+<div class="modal-backdrop fade in" style="height: auto;"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeDialog()">
+        <span aria-hidden="true" class="ti-close"></span></button>
+        <h4 class="modal-title" id="myModalLabel">{{'common.COURSE_RATING'|translate}}</h4>
+      </div>
+       <div class="modal-body">
+        <form name="ratingForm" method="POST" novalidate >
+          <div class="piluku-login" style="min-height:0px !important">              
+            <div class="form-section" style="margin-top:1px !important">              
+             	<div ng-if="signedInUser.aud != null">
+             	    <div>
+             	    		<div class="col-md-5" style="padding-bottom: 3px">
+             	    			{{'learning.RATING'|translate}} :
+				    			<star-rating ng-model="rating.ratingStar" ></star-rating>
+				    		</div>			    		
+				    		<div class="col-sm-3">
+				    			{{'learning.EMOTION'|translate}} : 
+				    			<a class="selected-emoticon emoji emoji_like" 
+				    				ng-click="showEmoticonList()"
+				    				ng-if="rating.ratingEmotion == null || rating.ratingEmotion == ''"></a>
+			    				<a class="selected-emoticon emoji emoji_{{rating.ratingEmotion}}" 
+			    					ng-click="showEmoticonList()" ng-if="rating.ratingEmotion != null && rating.ratingEmotion != ''"></a>
+				    			<input type="hidden" ng-model="rating.ratingEmotion"/>
+				    		</div>
+				    		<div class="col-sm-4 emoticon-list hide" style="padding:0px">
+					    		<a class="emoji emoji_thumbsup" ng-click="hideEmoticonList('thumbsup')" title="{{thumbsup|translate}}"></a>
+					    		<a class="emoji emoji_heart" ng-click="hideEmoticonList('heart')" title="{{heart|translate}}"></a>
+					    		<a class="emoji emoji_smile" ng-click="hideEmoticonList('smile')" title="{{smile|translate}}"></a>
+					    		
+					    		<a class="emoji emoji_hushed" ng-click="hideEmoticonList('hushed')" title="{{hushed|translate}}"></a>
+					    		<a class="emoji emoji_cry" ng-click="hideEmoticonList('cry')" title="{{cry|translate}}"></a>
+					    		<a class="emoji emoji_rage" ng-click="hideEmoticonList('rage')" title="{{rage|translate}}"></a>
+				    		<!-- 
+				    			<a class="emoji emoji_heart" ng-click="hideEmoticonList('heart')" title="{{heart|translate}}"></a>
+				    			<a class="emoji emoji_mortar_board"  ng-click="hideEmoticonList('mortar_board')" title="{{board|translate}}"></a>
+				    			<a class="emoji emoji_yellow_heart"  ng-click="hideEmoticonList('yellow_heart')" title="{{yellow_heart|translate}}"></a>
+				    			<a class="emoji emoji_worried"  ng-click="hideEmoticonList('worried')" title="{{worried|translate}}"></a>
+				    			<a class="emoji emoji_confused"  ng-click="hideEmoticonList('confused')" title="{{confused|translate}}"></a>
+				    			<a class="emoji emoji_rage"  ng-click="hideEmoticonList('rage')" title="{{rage|translate}}"></a> -->
+				    		</div>
+			    	</div>
+		       		<textarea ng-model="rating.ratingComment" class="add-question" style="width:100%" rows="3" 
+		       		placeholder="{{'courseDetail.RATING_COMMENT'|translate}}" ></textarea>
+		        	<button type="submit" class="btn btn-green btn-radius" style="padding:5px"
+		        	ng-click="saveCourseRating(rating)">{{'courseDetail.SEND_COMMENT'|translate}}</button>
+		        </div>  
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button  ng-click="closeDialog()" type="button" class="btn btn-default" data-dismiss="modal">{{'common.BTN_CLOSE'|translate}}</button>       
+      </div>
+    </div>
+  </div>
+</div>

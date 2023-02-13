@@ -1,0 +1,55 @@
+<div class="animated fadeInUpBig" style="padding: 5px;background-color: #fff;border-radius: 5px;">
+<!-- TITLE -->
+	<div class="form-group row-div" ng-class="{'has-error' : publicationForm.title.$invalid && publicationForm.title.$dirty}" style="padding-left:10px">
+ 	   <label style="width:100px !important" for="title">{{publication.title}}</label>
+   </div>      
+    <div class="info-stats" style="box-shadow: none; -webkit-box-shadow: none; padding-left:0px !important;background-color: transparent;">	        
+        <div class="col-sm-2" style="text-align:center">                                
+            <span class="avatar-holder">
+                <img ng-src="{{publication.image}}" alt="" 
+                	style="max-width:300px;max-height:300px;border-radius:5px" 
+                	ng-if="publication.image != null">
+                <span class="ion-image" 
+                	ng-if="publication.image == null" 
+                	style="max-width:300px;max-height:300px;border-radius:5px;font-size:80pt" >
+                </span>
+                <input type="file" id="pubHeaderImageFile" 
+                    ng-model="pubHeaderImageFile" 
+                    onchange="angular.element(this).scope().changeUpload(this)"
+                    style="display:none" accept="image/*"/>
+            </span>
+        </div>
+        <div class="right col-sm-10" style="padding: 0px;right:0px"> 
+            {{publication.summaryContent}}
+        </div>
+    </div>
+    <!-- content -->
+    <div style="border-top: 1px solid #eee;">
+        <div class="form-group row-div">
+        	<p ng-bind-html="convertHtml(publication.content)"></p>
+        </div>
+    </div>
+    <div class="form-group row-div">
+        <div style="width: 100px; display: inline-table;">
+        	<label style="width:100px !important" for="author">{{publication.author}}</label>
+        </div>
+    </div>
+	
+	<div class="form-group row-div" ng-class="{'has-error' : publicationForm.cameraMan.$invalid && publicationForm.cameraMan.$dirty}">
+        <div style="width: 100px; display: inline-table;">
+        	<label style="width:100px !important" for="cameraMan">{{publication.cameraMan}}</label>
+        </div>
+    </div>
+   
+   	<div>   
+	   	<div class="col-sm-5" style="text-align: left;padding: 0px; margin-left:10px;margin-top:10px; margin-bottom:10px">  		
+           <div class="form-group row-div" style="width: auto !important">
+           	 <div class="col-sm-5" style="padding-left: 0px;">
+                  <label style="width:auto" for="publishDate">                        
+                  	{{publication.publishDate}}
+                  </label>
+              </div>
+           </div>
+	   	</div>  
+    </div>   
+</div>

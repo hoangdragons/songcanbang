@@ -1,0 +1,1 @@
+alter table tbl_category add column image character varying(512);

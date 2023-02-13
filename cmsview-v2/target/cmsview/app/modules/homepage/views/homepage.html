@@ -1,0 +1,240 @@
+<div id="homepage-banner" class="top " > 
+	<section class="sc_slider_main fadeInDown wow">
+		<div class="owl-carousel owl-theme slider_main" style="">
+			<div class="item">
+				<a href=""><img  style="height: 460px" class="w_100" src="assets/images/yoga.jpg" alt=""/></a>
+			</div>
+			<div class="item">
+				<a href=""><img style="height: 460px" class="w_100" src="assets/images/yoga2.jpg" alt=""/></a>
+			</div>
+			<div class="item">
+				<a href=""><img style="height: 460px" class="w_100" src="assets/images/yoga3.jpg" alt=""/></a>
+			</div>
+			<div class="item">
+				<a href=""><img style="height: 460px" class="w_100" src="assets/images/yoga4.jpg" alt=""/></a>
+			</div>
+			<div class="item">
+				<a href=""><img style="height: 460px" class="w_100" src="assets/images/yoga5.jpg" alt=""/></a>
+			</div>
+		</div>
+	</section>
+</div>
+
+<div class="container portfolio" style="width:100%;padding:0px; background-color: #f9f9f9;" ng-repeat="categoryAndCourse in lsCategoryAndCourse track by categoryAndCourse.categoryId" 
+ng-if="categoryAndCourse.lsCourse.length>0">
+<div class="container" >
+<div class="section-heading" style="   display: inline-block;position: relative; width: 100%;margin-top: -10px;">
+	<a ng-if="categoryAndCourse.lsCourse.length > 0" ng-href="#/courses/courseList/{{categoryAndCourse.categoryId}}" class="btn-cate-courses">
+	<h3 class="section-heading">{{categoryAndCourse.categoryName}}</h3>
+	</a>
+	<!--  -->
+	<!-- <a ng-if="categoryAndCourse.lsCourse.length > 0"
+		ng-href="#/courses/courseList/{{categoryAndCourse.categoryId}}" 				 
+		class="btn-see btn btn-radius btn-primary"
+		style="float: right;font-size: 12pt !important; position: relative; display: inline-block; margin-top: 13px;">
+		{{'common.SEE_ALL'|translate}} ({{categoryAndCourse.courseCount.count}})
+	</a> -->
+</div>
+<div class="" ng-if="!$storage.miniSidebar" style="overflow:hidden">
+	<button ng-click="previousPage(categoryAndCourse)" class="course-nav-btn prev btn btn-default" ng-show="categoryAndCourse.page > 1" ng-disabled="!prevButtonIsEnabled"> 
+		<i class="ion-chevron-left"></i> 
+	</button>
+	<button ng-click="nextPage(categoryAndCourse)" class="course-nav-btn next btn btn-default right" ng-show ="categoryAndCourse.page * 6 < categoryAndCourse.courseCount.count" ng-disabled="!nextButtonIsEnabled"> 
+		<i class="ion-chevron-right"></i>
+	</button>
+</div>
+
+<div class="fadeInDown" style="padding:10px; margin-top: -31px;">
+	<div class="row">
+	<ul id ="container" class="list-unstyled">
+		<li class="element col-lg-200 col-md-2 col-md-3 col-sm-4 col-xs-6 col-480-12 websites logo" ng-repeat="course in categoryAndCourse.lsCourse" style="padding:0px 10px">
+			<div class="portio-item">
+				<div class="portio-picture" style="height:122px">
+					<a data-toggle="modal" data-target="#lightbox" ng-click="showCourseDetail(course.courseId)" href="javascript:void(0)">
+						<div class='bounding-box' style="background-image: url({{course.imageUrl}})">
+						</div>
+
+					</div>
+
+					<!-- <div class="link-t links text-center" style="height:20px;">
+						<a data-toggle="modal" data-target="#lightbox" ng-click="showCourseDetail(course.courseId)" href="javascript:void(0)">
+							<ul class="list-unstyled list-inline">							   
+								<span ng-click="showCourseDetail(course.courseId)" ng-repeat="teacher in course.teachers">
+									<img class="portio-image" ng-src="{{teacher.teacherImage}}"
+									style="margin: 1px;max-width: 40px;max-height:40px; border: 2px solid #FFFFFF"/>
+								</span>
+					
+								<span>
+									<a ng-click="previewVideo(course)" class="icon-video btn btn-primary btn-radius"
+									style="color: #2196f3;background-color:#fff;text-decoration: none;width: 24px;height: 24px;border-radius: 12px;font-size: 10pt;font-weight: 600;cursor: pointer;padding: 3px;">
+									<i class="ion-videocamera"></i>
+								</a>
+							</span>
+						</ul>
+					</a>
+									</div> -->
+			</a>
+			<a data-toggle="modal" style="text-decoration: none" data-target="#lightbox" ng-click="showCourseDetail(course.courseId)" href="javascript:void(0)">
+				<div class="portio-content" style="height:160px">
+					<div class="course-contents">
+						<div class="auto_ellipsis course-title" style="color:#29303b">{{course.title}}</div>
+						<div style="height:30%;font-size:12px;color: #686f7a;margin-top: 11px;">
+							<span ng-repeat="teacher in course.teachers">
+								{{teacher.teacherName}}
+							</span>
+							<span>, &nbsp;</span>
+						</div>						        	
+						<span class="ico_star">
+							<span class="ico_star_value" style="width: {{(course.rating/5)*100}}%"></span>
+						</span>
+						<span ng-if="course.rating > 0">{{course.rating}} ({{course.totalRating}})</span>
+
+						<div class="course-price" ng-if="course.price<=0">{{'common.PRICE_FREE'|translate}}</div>
+						<div class="course-price" ng-if="course.price>0">
+							<span>{{convertMoney(course.discountPrice)}}
+								
+							</span>
+							<span style="font-size:9pt;color:#17aa1c;text-decoration: line-through;"
+							ng-if="course.price != course.discountPrice">
+							{{convertMoney(course.price)}}
+						</span>
+						</div>
+
+					</div>
+
+				</div>
+			</a>
+		</div>
+	</li>
+</ul>
+</div>		
+</div>
+</div>
+</div>
+</script>
+<script>
+	$(document).ready(function() {
+		var owl = $('.slider_main');
+		owl.owlCarousel({
+			items: 1,
+			loop: true,
+			margin: 10,
+			nav:true,
+			autoplay: true,
+			lazyLoad:true,
+			autoplayTimeout: 4500,
+			autoplayHoverPause: false,
+			responsive:{
+				1199:{
+					items:1
+				},
+				979:{
+					items:1
+				},
+				768:{
+					items:1
+				},
+				479:{
+					items:1
+				}
+			}
+		});
+	})
+
+	$(document).ready(function() {
+		var owl = $('.slider_productlist');
+		owl.owlCarousel({
+			items: 4,
+			loop: true,
+			margin: 20,
+			nav:true,
+			autoplay: true,
+			lazyLoad:true,
+			autoplayTimeout: 5000,
+			autoplayHoverPause: false,
+			responsive:{
+				1199:{
+					items:4
+				},
+				979:{
+					items:3
+				},
+				768:{
+					items:2
+				},
+				479:{
+					items:2
+				},
+				100:{
+					items:1
+				}
+			}
+		});
+	})
+
+
+	$(document).ready(function() {
+		var owl = $('.slider_partner');
+		owl.owlCarousel({
+			items: 4,
+			loop: true,
+			margin: 25,
+			nav:true,
+			autoplay: false,
+			lazyLoad:true,
+			autoplayTimeout: 3500,
+			autoplayHoverPause: false,
+			responsive:{
+				1199:{
+					items:4
+				},
+				979:{
+					items:3
+				},
+				768:{
+					items:2
+				},
+				479:{
+					items:2
+				},
+				100:{
+					items:1
+				}
+			}
+		});
+	})
+</script>
+<script type="text/javascript">
+	$("a[href='#top']").click(function() {
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+		return false;
+	});
+	$(window).scroll(function () {
+		if ($(window).scrollTop() >=200) {
+			$('#go_top').show();
+		}
+		else {
+			$('#go_top').hide();
+		}
+	});
+</script>
+
+<script>
+	$(document).ready(function() {
+		var owl = $('.owl-carousel');
+		owl.owlCarousel({
+			items: 4,
+			loop: true,
+			margin: 10,
+			autoplay: true,
+			autoplayTimeout: 1000,
+			autoplayHoverPause: true
+		});
+		$('.play').on('click', function() {
+			owl.trigger('play.owl.autoplay', [1000])
+		})
+		$('.stop').on('click', function() {
+			owl.trigger('stop.owl.autoplay')
+		})
+	})
+</script>

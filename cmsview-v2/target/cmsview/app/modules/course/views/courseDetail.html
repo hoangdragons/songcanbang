@@ -1,0 +1,437 @@
+
+<div id="content-course" class="content-course" style=" width: 100vw;">
+	<div style="background: white; padding-bottom: 40px;">
+		<div class="header-course">
+			<!-- Mobile -->
+			<div class="container visible-xs visible-sm clearfix">
+				<div style="margin: 15px 0">
+					<h2 class="tl_intro_course_name">{{course.title}}</h2>
+					<div ng-repeat="teacher in course.teachers">{{teacher.teacherName}} / {{teacher.teacherCompany}}</div>
+					<div>
+						<star-rating style="font-size:20pt" ng-model="course.rating" readable="true"></star-rating>
+						<!-- <span class="ico_star_value" style="width:{{course.rating*100/5}}%"></span> -->
+						<span>({{course.rating}} - {{lsRatings.length}} ratings)</span>
+						<span ng-repeat="(ratingEmotion, rating) in ratingEmotionMap">
+							<span ng-if="ratingEmotion != null && ratingEmotion != '' && ratingEmotion != 'null'">
+								<i class="emoji emoji_{{ratingEmotion}}"></i>
+								{{ratingEmotion|translate}}({{rating.length}})
+							</span>
+						</span>
+					</div>
+
+				</div>
+			</div>
+			<!-- Desktop -->
+			<div class="container hidden-sm hidden-xs">
+				<div class="col-lg-8 nopad-right" style="margin: 15px 0">
+					<h2 class="tl_intro_course_name">{{course.title}}</h2>
+					<div ng-repeat="teacher in course.teachers" class="name-teach-course"> Giảng viên: {{teacher.teacherName}} - {{teacher.teacherCompany}}</div>
+					<div>
+						<star-rating style="font-size:20pt" ng-model="course.rating" readable="true"></star-rating>
+						<!-- <span class="ico_star_value" style="width:{{course.rating*100/5}}%"></span> -->
+						<span>({{course.rating}} - {{lsRatings.length}} ratings)</span>
+						<span ng-repeat="(ratingEmotion, rating) in ratingEmotionMap">
+							<span ng-if="ratingEmotion != null && ratingEmotion != '' && ratingEmotion != 'null'">
+								<i class="emoji emoji_{{ratingEmotion}}"></i>
+								{{ratingEmotion|translate}}({{rating.length}})
+							</span>
+						</span>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Desktop -->
+		<div class="container ">
+			<div class="row">
+				<div class="col-lg-8 nopad-right" id="video-area">
+
+				</div>
+				<div class="col-md-3 nopad-right " style="margin-left:3px;position: inherit;" >
+
+					<div class="right-sidebar">						
+
+						<div class="piluku-panel no-pad">
+							<jwplayer list-video-url="videoUrl" player-options="options" player-id="intro_player"></jwplayer>
+						</div>
+						<div class="piluku-panel no-pad visible-xs visible-sm clearfix">						
+							<div class="clear" >
+								<div style="font-size: 20px;font-weight: 800; margin-top: 6px;    margin-left: 4px;margin-bottom: 10px;" ng-if="course.price<=0">{{'common.PRICE_FREE'|translate}}</div>
+								<div  class="course-price" ng-if="course.price>0" style="    margin-top: 10px;margin-left: 22px;margin-bottom: 5px; ">
+									<span style="font-size:17px;font-weight: 700;">{{convertMoney(course.discountPrice)}}</span>
+									<span style="font-size:12pt;color:#17aa1c;text-decoration: line-through;" ng-if="course.price != course.discountPrice">{{convertMoney(course.price)}}</span>
+								</div>
+								<div class="text-center">
+									<button  ng-if="signedInUser.aud == null && course.price > 0" 
+										ng-click="fowardToLoginPage()" class="btn-green btn btn-radius">
+										{{'courseDetail.REGIS_LEARN'|translate}}
+									</button>
+									<button ng-if="signedInUser.aud == null && course.price == 0" 
+									ng-click="fowardToLoginPage()" class="btn-green btn btn-radius">
+									{{'courseDetail.JOIN_COURSE'|translate}}
+								</button>
+								<button ng-if="signedInUser.aud != null && !isBought && course.price > 0" 
+									ng-click="fowardToBuyCoursePage()" class="btn-green btn btn-radius" >
+									{{'courseDetail.REGIS_LEARN'|translate}}
+								</button>
+								<button ng-if="signedInUser.aud != null && !isBought && course.price <= 0" 
+								ng-click="buyCourse()" class="btn-green btn btn-radius">
+								{{'courseDetail.JOIN_COURSE'|translate}}
+							</button>
+							<button  ng-if="signedInUser.aud != null && isBought" class="btn-green btn btn-radius" 
+							ng-click="continueToLearn()">
+							{{'courseDetail.CONTINUE_TO_LEARN'|translate}}
+						</button>
+						<!-- Them vao gio hang -->
+						<button  ng-if="course.price > 0 && !isBought" 
+							ng-click="addToCart(course)" class="btn-cart btn">
+							<i class="ion-ios-cart"></i>
+							{{'courseDetail.ADD_TO_CART'|translate}}
+						</button>
+						<a class="a-coupon" id="myBtn" > Have a coupon?</a>
+
+						<div id="demo" style="position:relative;margin-top:5px;min-width:306px;" class="text-center visible-xs visible-sm clearfix">
+
+						</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+					document.getElementById("myBtn").onclick = displayCoupon;
+
+					function displayCoupon() {
+						document.getElementById("demo").innerHTML = "<input type='text'class='form-control' style='    width: 225px;display: inline-block; height: 35px; border-radius: 5px; margin-right: 10px;' name='{{'coupon.COUPON_CODE'|translate}}' placeholder='Enter a Coupon'><button type='button' class='btn-apply btn btn-green' style='height: 35px;margin-top: -4px;'>Apply</button>";
+					}
+				</script>
+				<div style="margin: 15px 0">
+					<ul class="list-unstyled text-left" style="margin-left: 24px; font-size: 14px; line-height: 1.8; display: inline-block">
+						<li><span  class="fa fa-clock-o" aria-hidden="true"></span> <span>{{'courseDetail.LENGTH'|translate}}: {{course.totalVideoTime}}</span></li>
+						<li><span class="fa fa-chevron-circle-right" aria-hidden="true"></span> <span>{{'courseDetail.LECTURES'|translate}}: {{course.lessonCount}}</span></li>
+						<li><span class="fa fa-graduation-cap" aria-hidden="true"></span> <span>{{'courseDetail.CERTIFICATE'|translate}}</span></li>	
+						<li><span class="fa fa-film" aria-hidden="true"></span> <span> {{'courseDetail.VIEWS'|translate}}: {{course.totalView}}</span></li>
+					</ul>
+				</div>
+
+				<div class="text-center">
+					<button class="btn-share btn" style="background-color:rgb(66,103,178);background-color: rgb(66,103,178);padding-top: 2px; padding-bottom: 2px;height: 20px; margin-top: -12px;font-weight: bold;
+					font-size: 11px;" ng-click="shareWithFacebook()">
+					Share
+				</button>
+				<span tweet-share="urlPage"></span>
+				<span google-plus="urlPage"></span>
+			</div>
+		</div>
+		<div class="piluku-panel no-pad  hidden-sm hidden-xs" sticky use-placeholder>						
+			<div class="clear" >
+				<div style="font-size: 20px;font-weight: 800; margin-top: 6px;    margin-left: 4px;margin-bottom: 10px;" ng-if="course.price<=0">{{'common.PRICE_FREE'|translate}}</div>
+				<div  class="course-price" ng-if="course.price>0" style="    margin-top: 10px;margin-left: 22px;margin-bottom: 5px; ">
+					<span style="font-size:17px;font-weight: 700;">{{convertMoney(course.discountPrice)}}</span>
+					<span style="font-size:12pt;color:#17aa1c;text-decoration: line-through;"
+					ng-if="course.price != course.discountPrice">{{convertMoney(course.price)}}</span>
+				</div>
+				<div class="text-center">
+					<button  ng-if="signedInUser.aud == null && course.price > 0" 
+						ng-click="fowardToLoginPage()" class="btn-green btn btn-radius">
+						{{'courseDetail.REGIS_LEARN'|translate}}
+					</button>
+					<button ng-if="signedInUser.aud == null && course.price == 0" 
+					ng-click="fowardToLoginPage()" class="btn-green btn btn-radius">
+					{{'courseDetail.JOIN_COURSE'|translate}}
+				</button>
+				<button ng-if="signedInUser.aud != null && !isBought && course.price > 0" 
+					ng-click="fowardToBuyCoursePage()" class="btn-green btn btn-radius" >
+					{{'courseDetail.REGIS_LEARN'|translate}}
+				</button>
+				<button ng-if="signedInUser.aud != null && !isBought && course.price <= 0" 
+				ng-click="buyCourse()" class="btn-green btn btn-radius">
+				{{'courseDetail.JOIN_COURSE'|translate}}
+			</button>
+			<button  ng-if="signedInUser.aud != null && isBought" class="btn-green btn btn-radius" 
+			ng-click="continueToLearn()">
+			{{'courseDetail.CONTINUE_TO_LEARN'|translate}}
+		</button>
+		<!-- Them vao gio hang -->
+		<button  ng-if="course.price > 0 && !isBought" 
+			ng-click="addToCart(course)" class="btn-cart btn">
+			<i class="ion-ios-cart"></i>
+			{{'courseDetail.ADD_TO_CART'|translate}}
+		</button>
+		<a class="a-coupon" id="myBtn1" ng-if="course.price > 0 && !isBought"> Have a coupon?</a>
+
+		<div id="demo1" style="position:relative;margin-top:5px;min-width:306px;" class="text-center">
+
+		</div>
+
+	</div>
+</div>
+<script type="text/javascript">
+	document.getElementById("myBtn1").onclick = displayCoupon1;
+
+	function displayCoupon1() {
+		document.getElementById("demo1").innerHTML = "<input type='text'class='form-control' style='    width: 225px;display: inline-block; height: 35px; border-radius: 5px; margin-right: 10px;' name='{{'coupon.COUPON_CODE'|translate}}' placeholder='Enter a Coupon'><button type='button' class='btn-apply btn btn-green' style='height: 35px;margin-top: -4px;'>Apply</button>";
+	}
+</script>
+<div style="margin: 15px 0">
+	<ul class="list-unstyled text-left" style="margin-left: 24px; font-size: 14px; line-height: 1.8; display: inline-block">
+		<li><span  class="fa fa-clock-o" aria-hidden="true"></span> <span>{{'courseDetail.LENGTH'|translate}}: {{course.totalVideoTime}}</span></li>
+		<li><span class="fa fa-chevron-circle-right" aria-hidden="true"></span> <span>{{'courseDetail.LECTURES'|translate}}: {{course.lessonCount}}</span></li>
+		<li><span class="fa fa-graduation-cap" aria-hidden="true"></span> <span>{{'courseDetail.CERTIFICATE'|translate}}</span></li>	
+		<li><span class="fa fa-film" aria-hidden="true"></span> <span> {{'courseDetail.VIEWS'|translate}}: {{course.totalView}}</span></li>
+	</ul>
+</div>
+
+<div class="text-center">
+	<button class="btn-share btn" style="background-color:rgb(66,103,178);background-color: rgb(66,103,178);padding-top: 2px; padding-bottom: 2px;height: 20px; margin-top: -12px;font-weight: bold;
+	font-size: 11px;" ng-click="shareWithFacebook()">
+	Share
+</button>
+<span tweet-share="urlPage"></span>
+<span google-plus="urlPage"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container">
+	<div class="menu-course" sticky use-placeholder>
+		<!--  background-color:rgb(81,166,236);-->
+		<ng-include src="'app/modules/course/views/advertise.html'" onload="" autoscroll=""></ng-include>
+		<div class="row">
+			<div class="col-lg-8 nopad-right" id="side-nav" style="position: relative; z-index: 1;margin-top: -15px;">
+				<ul class="nav nav-tabs piluku-tabs piluku-noborder" role="tablist">
+					<li><a style=" text-transform: none;font-size: 16px;font-weight: bold;
+					margin-bottom: 15px;" du-smooth-scroll="introduction-area" du-scrollspy translate>courseDetail.INTRODUCTION</a></li>
+					<li><a style=" text-transform: none;font-size: 16px;font-weight: bold;
+					margin-bottom: 15px;" du-smooth-scroll="course-detail-area" du-scrollspy translate>courseDetail.COURSE_DETAIL</a></li>
+					<li><a style=" text-transform: none;font-size: 16px;font-weight: bold;
+					margin-bottom: 15px;" du-smooth-scroll="teacher-area" du-scrollspy translate>courseDetail.TEACHER</a></li>
+					<li><a style=" text-transform: none;font-size: 16px;font-weight: bold;
+					margin-bottom: 15px;" du-smooth-scroll="review-area" du-scrollspy translate>courseDetail.RATING</a></li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- Course Detail Section -->
+<div>
+	<div class="container">
+		<div class="row" style="margin-top: 10px">
+			<div class="col-lg-8 nopad-right" style="margin-left: -6px;" >
+				<div id="introduction-area" class="content-area">
+					<h4 style="font-size: 22px; font-weight: 600;margin: 0 0 10px;margin-top: 25px;">{{'courseDetail.INTRODUCTION'|translate}}</h4>
+					<div class="introdue-c collapse-text" ng-bind-html="convertHtml(course.content)">
+					</div>
+				</div>
+				<div id="course-detail-area" class="content-area" style="margin-top: 10px;">
+					<h4 style="font-size: 22px; font-weight: 600;margin: 0 0 10px;margin-top: 25px;">{{'courseDetail.COURSE_DETAIL'|translate}}</h4>
+					<div class="tl_intro_course_left" id="lessonOverviewArea" ng-repeat="chapter in course.chapters">
+						<div class="info-chap row">
+							<div style="width: 100%">
+								<span class="title-chapter">{{'courseDetail.CHAPTER'|translate}} {{$index + 1}}: {{chapter.chapterName}}</span>
+								<span class="title-right">{{chapter.totalVideoDuration}}</span>
+							</div>
+							<!-- <div class="time-right pull-right col-sm-2" style=" text-align:right; padding-top: 12px;">
+								{{chapter.totalVideoDuration}}
+							</div> -->
+						</div>				           
+						<ul class="ul-course" >
+							<li>
+								<ul  class="tbl-info" style="border: 1px solid #e1e1e1; padding: 15px;">
+									<li class="" ng-repeat="lesson in chapter.lessons track by $index">
+										<a ng-href="{{contextPath.cmsview}}/#/courses/learningCourse/{{course.courseId}}" style="cursor:pointer" 
+										ng-if="signedInUser.aud != null && isBought">
+										<div class=" col-lg-10">
+											<span style="margin-left: 15px; color: #999FA3;" class="fa fa-play-circle-o"></span>
+											<span class="number-lesson">{{'courseDetail.LESSON'|translate}} {{$index + 1}}</span>
+											<span>{{lesson.lessionName}}</span>
+										</div>
+									</a>
+
+									<div style="border: 1px solid #e1e1e1;" class="lis-cat" ng-if="signedInUser.aud == null || !isBought">
+										<span style="margin-left: 15px; color: #999FA3;" class="fa fa-play-circle-o"></span>
+										<span class="number-lesson">{{'courseDetail.LESSON'|translate}} {{$index + 1}}</span>
+										<span>{{lesson.lessionName}}</span>
+										<span style="float: right; margin-right: 5px;">{{lesson.totalVideoDuration}}</span>
+									</div>
+												<!-- <div class="pull-right">
+													<span>{{lesson.totalVideoDuration}}</span>
+												</div> -->
+
+
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Course Teacher & rating Section -->
+		<div>
+			<div class="container">
+				<div id="teacher-area" class="content-area" style="margin-left: -6px;">
+					<h4 translate style="font-size: 22px; font-weight: 600;margin: 0 0 10px; margin-top: 25px;">courseDetail.TEACHER</h4>
+					<div class="introdue-b tl_intro_course_left teacherInfoArea" ng-repeat="teacher in course.teachers" >
+
+						<div class="row">
+							<div class="k-course-details-author-img col-md-3" style="margin-right:10px">
+								<img class="img-fluid" ng-src="{{teacher.teacherImage}}" alt="{{teacher.teacherName}}" 
+								title="{{teacher.teacherName}}" style="width:100px;height:100px;border-radius:50px">
+							</div>
+							<div class="k-course-details-author-teacher col-md-6">
+								<span class="name-info-teach name">{{teacher.teacherName}}</span>
+								<span class="info">{{teacher.teacherCompany}}</span>
+								<div class="content-teacher" style="width: 100%;" ng-bind-html="convertHtml(teacher.teacherContent)">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="review-area" class="content-area" style="width:811px;
+				margin-left: 0px;">
+				<h4 translate style="font-size: 22px; font-weight: 600;margin: 0 0 10px; margin-top: 25px;">courseDetail.RATING</h4>
+				<div class="tl_intro_course_left" style="padding: 15px;">
+					<!-- Rating statistic -->
+					<div class="row rating-stat" >
+						<div class="point-rating col-md-2" style="height:100%;vertical-align:middle;text-align:center">
+							<span style="font-size:24pt">{{averageRateLevel}}</span>
+							<div style="height:100%">
+								<star-rating style="font-size:20pt" ng-model="averageRateLevel" readable="true"></star-rating>
+							</div>
+							{{'courseDetail.AVERAGE_RATING'|translate}}
+						</div>
+						<div class="col-md-8">
+							<div class="row">
+								<div class="progress col-md-8" style="background-color:#f4f4f4;padding:0px"  ng-click="filterRating(5)">
+									<div class="progress-bar progress-bar-success" role="progressbar"
+									aria-valuenow="0" aria-valuemin="0" 
+									aria-valuemax="100" 
+									ng-style="{'width': rateLevel5Percentage +'%'}">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="class-rating col-sm-12" style="width:80%;padding:0px" ng-click="filterRating(5)">
+									<star-rating ng-model="rateLevel5" readable="true"></star-rating>
+									<span>{{rateLevel5Percentage}}%</span>
+								</div>
+								
+							</div> 
+						</div>
+						<div class="row">
+							<div class="progress col-md-8" style="background-color:#f4f4f4;padding:0px"  ng-click="filterRating(4)">
+								<div class="progress-bar progress-bar-success" role="progressbar"
+								aria-valuenow="0" aria-valuemin="0" 
+								aria-valuemax="100" 
+								ng-style="{'width': rateLevel4Percentage +'%'}">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="class-rating col-sm-12" style="width:80%;padding:0px" ng-click="filterRating(4)">
+								<star-rating ng-model="rateLevel4" readable="true"></star-rating>
+								<span>{{rateLevel4Percentage}}%</span>
+							</div>
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="progress col-md-8" style="background-color:#f4f4f4;padding:0px"  ng-click="filterRating(3)">
+							<div class="progress-bar progress-bar-success" role="progressbar"
+							aria-valuenow="0" aria-valuemin="0" 
+							aria-valuemax="100" 
+							ng-style="{'width': rateLevel3Percentage +'%'}">
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="class-rating col-sm-12" style="width:80%;padding:0px" ng-click="filterRating(3)">
+							<star-rating ng-model="rateLevel3" readable="true"></star-rating>
+							<span>{{rateLevel3Percentage}}%</span>
+						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="progress col-md-8" style="background-color:#f4f4f4;padding:0px" ng-click="filterRating(2)">
+						<div class="progress-bar progress-bar-success" role="progressbar"
+						aria-valuenow="0" aria-valuemin="0" 
+						aria-valuemax="100" 
+						ng-style="{'width': rateLevel2Percentage +'%'}">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="class-rating col-sm-12" style="width:80%;padding:0px" ng-click="filterRating(2)">
+						<star-rating ng-model="rateLevel2" readable="true"></star-rating>
+						<span>{{rateLevel2Percentage}}%</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="progress col-md-8" style="background-color:#f4f4f4;padding:0px"  ng-click="filterRating(1)">
+					<div class="progress-bar progress-bar-success" role="progressbar"
+					aria-valuenow="0" aria-valuemin="0" 
+					aria-valuemax="100" 
+					ng-style="{'width': rateLevel1Percentage +'%'}">
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="class-rating col-sm-12" style="width:80%;padding:0px" ng-click="filterRating(1)">
+					<star-rating ng-model="rateLevel1" readable="true"></star-rating>
+					<span>{{rateLevel1Percentage}}%</span>
+				</div>
+
+			</div>
+		</div>
+	</div>		           	 
+</div>
+<div style="margin-top:20px">
+	<span ng-repeat="(ratingEmotion, rating) in ratingEmotionMap">
+		<span ng-if="ratingEmotion != null && ratingEmotion != '' && ratingEmotion != 'null'">
+			<i class="emoji emoji_{{ratingEmotion}}"></i>
+			{{ratingEmotion|translate}}({{rating.length}})
+		</span>
+	</span>
+</div>
+<!-- END Rating statistic  -->
+<div ng-if="lsRatings.length > 0">
+	<ul class="comments-list">
+		<li class="comment" ng-repeat="rating in lsRatings">
+			<div class="info-container">
+				<div class="avatar">
+					<img ng-src="{{rating.avatarUrl}}" ng-if="rating.avatarUrl != null && rating.avatarUrl != ''">
+					<img ng-src="http://rc.songcanbang.org/images/person.png" ng-if="rating.avatarUrl == null || rating.avatarUrl == ''">
+				</div>
+				<div class="user-details">
+					<ul>
+						<li class="username ellipsis">{{rating.userFullName}}</li>
+						<li class="review-created" translate=""><span>{{rating.ratingDateStr}}</span></li>
+					</ul>
+				</div>
+			</div>
+			<div class="rating-container">
+				<span class="ico_star">
+					<span class="ico_star_value" ng-style="{width: '{{rating.ratingStar * 20}}%'}"></span>
+				</span>
+			</div>
+			<div class="comment-container">
+				<p ng-if="rating.ratingEmotion != null && rating.ratingEmotion != 'null' && rating.ratingEmotion != ''">
+					<i class="emoji emoji_{{rating.ratingEmotion}}"></i>
+					{{rating.ratingEmotion|translate}}
+				</p>
+				<p>{{rating.ratingComment}}</p>
+			</div>
+		</li>
+	</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+

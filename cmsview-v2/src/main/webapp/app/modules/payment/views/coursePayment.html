@@ -1,0 +1,159 @@
+<!-- <link rel="stylesheet" type="text/css" href="assets/css/style_v2.css"> -->
+<div class="container">
+	<div id="step_header">
+		<ul id="new_progress" ng-class="step == 4 ? 'no_background_color' : ''">
+			<li translate ng-class="$index + 1 < step ? 'wasselected' : ($index + 1 == step ? 'isselected' : 'unselected')" ng-repeat="pageName in listPage">{{pageName}}</li>
+		</ul>
+	</div>
+	<div class="container" ng-if="step == 1">
+		<div style="width: 100%">
+			<label>1. Billing information({{'coursePayment.USER_INFO'|translate}})</label>
+			<table id="userTable">
+				<tr>
+					<td style="width: 170px" translate>coursePayment.USER_NAME</td>
+					<td><input ng-model="userInfo.userName" class="w300" type="text" /></td>
+				</tr>
+				<tr>
+					<td translate>coursePayment.EMAIL</td>
+					<td><input ng-model="userInfo.email" class="w300" type="text" /></td>
+				</tr>
+				<tr>
+					<td translate>coursePayment.PHONE_NUMBER</td>
+					<td><input ng-model="userInfo.telephone" class="w300" type="text"/></td>
+				</tr>
+				<tr>
+					<td translate>coursePayment.BIRTHDAY</td>
+					<td><input ng-model="userInfo.birthday" class="w300" type="text" /></td>
+				</tr>
+				<tr>
+					<td translate>coursePayment.ID_CARD</td>
+					<td><input ng-model="userInfo.idNumber" class="w300" type="text" /></td>
+				</tr>
+			</table>
+		</div>
+	
+		<div style="width: 100%">
+			<label>2. Confirm ({{'common.CONFIRM'|translate}})</label>
+			<div style="overflow: hidden;" class="container" ng-if="shoppingCart.length > 0">
+				<div>
+					<div class="row" ng-repeat="course in courses" style="border:1px solid #eee;margin-bottom:5px;padding: 2px">
+						<div class="col-lg-8" style="height:auto;box-shadow:none !important;padding-bottom:10px;color: #000;font-size:10pt">
+							<div class="col-md-4" style="margin-right:10px;height: 80px;width: 80px;vertical-align: middle;padding: 0px;position:relative;float:left">
+								<div class='bounding-box' style="background-image: url({{course.imageUrl}})"></div>
+							</div>
+							<div>
+								<div class="course-contents" style="padding-bottom: 10px;">
+									<div class="course-title">
+				        				{{course.title}}
+				        			</div>
+				        			<div>
+					        			<span ng-repeat="teacher in course.teachers" >{{teacher.teacherName}}, </span>
+						        	</div>
+					        		<span ng-if="course.price>0" style="font-weight: 900;width:100px;">{{course.price}} {{course.currency}}</span>
+					    			<span ng-if="course.price<=0" style="font-weight: 900;width:100px;">{{'common.PRICE_FREE'|translate}}</span>
+						        </div>								
+							</div>			
+						</div>
+						<div style="text-align:right;padding:10px;">
+			        		<a href="javascript:void(0)"  ng-click="removeFromCart(course)"><i class="ion-trash-a" style="color:#000;font-size:14pt"></i></a>
+			        	</div>
+			        </div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div id="contentPayment" ng-if="step == 2">
+		<div class="pull-left" style="width: 530px;">
+			<label>{{'coursePayment.PAYMENT'|translate}}</label>
+			<div class="checkout-list">
+				<input ng-model="checkoutType" type="radio" id="radio-napas" value="1" ng-change="changeCheckoutType(1)">
+			    <label for="radio-napas" class="napasLogo">
+			        <span ng-class="checkoutType == 1 ? 'checked-radio' : ''"></span>
+			        {{'coursePayment.NAPAS' | translate}}
+			    </label>
+			    <input ng-model="checkoutType" type="radio" id="radio-visa" value="2" ng-change="changeCheckoutType(2)">
+			    <label for="radio-visa" class="visaLogo">
+			        <span ng-class="checkoutType == 2 ? 'checked-radio' : ''"></span>
+			        {{'coursePayment.VISA' | translate}}
+			    </label>
+			    <input ng-model="checkoutType" type="radio" id="radio-jcb" value="3" ng-change="changeCheckoutType(3)">
+			    <label for="radio-jcb" class="jcbLogo">
+			        <span ng-class="checkoutType == 3 ? 'checked-radio' : ''"></span>
+			        {{'coursePayment.JCB' | translate}}
+			    </label>
+			</div>
+		</div>
+		
+		<div class="pull-right" style="width: 530px;">
+			<label> {{'coursePayment.ORDER_INFO'|translate}}</label>
+			<div class="checkout-list-price">
+				<ul>
+                	<li>
+                    	<span translate>coursePayment.OLD_PRICE</span>
+                    	<span class="price total-cost" translate>{{convertMoney(course.price)}}</span>
+                	</li>
+                
+                	<li>	
+	                    <span translate>coursePayment.SALE_PRICE</span>
+    	                <span class="price"> 0d</span>
+        	        </li>
+            	    <li>
+                	    <span translate>coursePayment.TOTAL_PRICE</span>
+                    	<span class="price total-price" translate>{{convertMoney(course.price)}}</span>
+                	</li>
+            	</ul>
+        	</div>
+		</div>
+	</div>
+	<div id="contentPayment" ng-if="step == 3">
+		<label translate>coursePayment.USER_INFO</label>
+		<table id="tableConfirmData">
+			<tr>
+				<td style="width: 150px" translate>coursePayment.USER_NAME</td>
+				<td style="width: 340px">{{userInfo.userName}}</td>
+				<td style="width: 80px" translate>coursePayment.EMAIL</td>
+				<td>{{userInfo.email}}</td>
+			</tr>
+			<tr>
+				<td translate>coursePayment.PHONE_NUMBER</td>
+				<td>{{userInfo.telephone}}</td>
+				<td translate>coursePayment.BIRTHDAY</td>
+				<td>{{userInfo.birthday}}</td>
+			</tr>
+			<tr>
+				<td translate>coursePayment.ID_CARD</td>
+				<td>{{userInfo.idNumber}}</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		
+		<label translate>coursePayment.ORDER_INFO</label>
+		<div class="checkout-list-price" style="margin: 10px 0px 0px 20px">
+			<ul style="padding-left: 5px">
+               	<li style="width:60%">
+                   	<span translate>coursePayment.OLD_PRICE</span>
+                   	<span class="price total-cost" translate>{{convertMoney(course.price)}}</span>
+               	</li>
+               
+               	<li style="width:60%">	
+                    <span translate>coursePayment.SALE_PRICE</span>
+   	                <span class="price"> 0d</span>
+       	        </li>
+           	    <li style="width:60%">
+               	    <span translate>coursePayment.TOTAL_PRICE</span>
+                   	<span class="price total-price" translate>{{convertMoney(course.price)}}</span>
+               	</li>
+           	</ul>
+       	</div>
+	</div>
+	<div ng-if="step == 4">
+		{{'common.PAYMENT_COMPLETED'|translate}}
+	</div>
+	<div id="buttonArea">
+		{{checkConfirm}}
+		<button class="btn btn-ask" ng-if="step > 1 && step < 4" ng-click="prevPage()" translate>coursePayment.PREVIOS_BUTTON</button>
+		<button class="btn btn-ask" ng-click="nextPage()" translate>coursePayment.NEXT_BUTTON</button>
+	</div>
+</div>

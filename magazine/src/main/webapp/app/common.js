@@ -1,0 +1,32 @@
+angular.module('globalErrorHandlerModule', ['ngStorage'])
+    .factory('myHttpInterceptor', ['$rootScope', '$q','$injector', function ($rootScope, $q, $injector) {
+        return {
+            'responseError': function (rejection) {
+                // $modal provider come from ui.bootstrap
+                $injector.get('$modal').open({
+                    template: '<div class="error_panel">Exception occured</div>Status: '+rejection.status + '<br/> Reason: ' + rejection.statusText,
+                  });
+                return $q.reject(rejection);
+            }
+        };
+    }])   
+    .config(function ($httpProvider) {
+        $httpProvider.interceptors.push('myHttpInterceptor');
+        $httpProvider.interceptors.push(['$q','$location','$localStorage','jwtHelper', function ($q, $location, $localStorage) {
+     	   return {
+     		  'request': function (config) {
+    	           config.headers = config.headers || {};
+    	           if ($localStorage.jwt) {
+    	               config.headers.Authorization = $localStorage.jwt;
+    	           }
+    	           return config;
+    	       },
+     	       'responseError': function (response) {
+     	           if (response.status === 401 || response.status === 403) {
+     	               $location.path('/login');
+     	           }
+     	           return $q.reject(response);
+     	       }
+     	   };
+     	}]);
+    });

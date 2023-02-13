@@ -1,0 +1,28 @@
+{
+	"common": {
+		"WATCH": "Watch",
+		"TITLE" : "Live Balancing",
+		"PRICE_FREE": "Free"
+	},
+	"header": {
+		"LIST_CATEGORY_LINK" : "LIST CATEGORY",
+		"ABOUT_LINK" : "About",
+		"TEACHING_LINK" : "Teaching",
+		"COOPERATION_LINK" : "Cooperation",
+		"RECRUITMENT_LINK" : "Recruitment",
+		"SEARCH_PLACE_HOLDER" : "Search courses",
+		"LOGIN_LINK" : "LOGIN",
+		"REGISTER_LINK" : "REGISTER NOW",
+		"MY_COURSE_LINK" : "My courses",
+		"MY_PROFILE_LINK" : "My profile",
+		"EXIT_LINK" : "Logout"
+	},
+	"loginPage": {
+	 	"HEADER": "LOGIN",
+	 	"LOGIN_NAME": "ユーザー名",
+	 	"MSG_LOGIN_NAME_REQUIRED":"ユーザー名が必要です",
+	 	"PASSWORD":"パスワード",
+	 	"MSG_PASSWORD_REQUIRED":"パスワードが必要です",
+	 	"BTN_LOGIN":"ログイン"
+	}
+}

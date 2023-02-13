@@ -1,0 +1,50 @@
+<div class="nav1" style="margin-top: 36px">
+	{{'role.ROLE_LIST'|translate}}
+	<div style="float:right;margin-right:10px" ng-if="signedInUser.aud != null">
+		<span>{{'common.WELCOME'|translate}}: {{signedInUser.aud}}</span>
+		<button class="btn btn-primary scb-btn" style="width: 65px;color:black !important;height:22px !important;background-color:#f3f3f3 !important" type="button" 
+			ng-if="signedInUser.aud != null" 
+			ng-click="logout()">
+			<span class="glyphicon glyphicon-log-out"></span>
+			{{'common.LOGOUT'|translate}}
+		</button>
+	</div>
+</div>
+<div class="search-bar">
+	<table style="width: 100%">
+		<tr>
+			<td style="vertical-align: top; align:left;">
+				<div class="" style="text-align:left;vertical-align: middle; margin-left: 5px;">
+					<input type="text" placeholder="{{'common.SEARCH_PLACE_HOLDER'|translate}}" id="searchTxt" ng-enter='search()' class="search-text"/>			 
+					<button type="button" class="btn btn-primary scb-btn" ng-click='search()' id="searchBtn">
+						 <span class="glyphicon glyphicon-search"></span>
+						 {{'common.BTN_SEARCH'|translate}}
+					</button> 
+					<button type="button" class="btn btn-primary scb-btn" ng-click='create()' id="addBtn">
+						<span class="glyphicon glyphicon-plus"></span>
+						{{'common.BTN_ADD'|translate}}
+					</button>
+				</div>
+			</td>
+			<td style="vertical-align: top;align:right">
+				<div class="" style="text-align:right;vertical-alignt: middle; margin-right: 5px;">
+					<a href="javascript:void(0)" ng-click="homePage()" style="padding:2px">
+						{{'common.GO_HOME'|translate}}
+					</a>
+				</div>
+			</td>
+	</tr>
+	</table>	
+</div>
+<div class="history-panel">
+   	<div class="nav-div" >
+   		<div id="historySearchLink"	style="width: 100%;padding-top:5px;padding-bottom:3px"/>
+   	</div>		    	
+</div>
+<div class="history-panel-container">
+  	<div class="grid-panel">
+	  		<div class="grid-container">
+	  			<div id="grid1"  ui-grid="gridOptions" class="grid" ui-grid-pinning ui-grid-auto-resize style="height:100%"></div>				    			
+  			</div>
+	</div>
+</div>

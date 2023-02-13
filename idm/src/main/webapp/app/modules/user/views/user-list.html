@@ -1,0 +1,189 @@
+	<div class="search-bar">
+		<div class="" style="text-align:left;vertical-align: middle; margin-left: 5px;">
+			<input type="text" placeholder="{{'common.SEARCH_PLACE_HOLDER'|translate}}" id="searchTxt" ng-enter='search()'
+			 class="search-text"/>			 
+			<button type="button" class="btn btn-primary scb-btn" ng-click='search()' id="searchBtn">
+				 <span class="glyphicon glyphicon-search"></span>
+				 {{'common.BTN_SEARCH'|translate}}
+			</button> 
+			<button type="button" class="btn btn-primary scb-btn" ng-click='create()' id="addBtn">
+				<span class="glyphicon glyphicon-plus"></span>
+				{{'common.BTN_ADD'|translate}}
+			</button>
+			<div class="" style="text-align:right;vertical-alignt: middle; margin-right: 5px;float:right">
+				<a href="javascript:void(0)" ng-click="homePage()" style="padding:2px">
+					{{'common.GO_HOME'|translate}}	
+				</a>
+			</div>
+		</div>
+		
+		
+	</div>
+<div class="history-panel" style="display:none">
+	<nav >
+	    <section class="">		    	
+	    	<div class="nav-div" >   	
+	    		<table class="" id="historySearchLink" style="width: 100%">
+	    		</table>
+	    	</div>		    	
+	    </section>
+	</nav>	
+</div>
+<div class="history-panel-container">
+<table style="width: 100%">
+	<tr>
+  	<td style="padding:10px; vertical-align:top; text-align:left;border-top: 1px rgb(221,221,221) solid;">
+	  <div style="padding:10px; background-color: rgb(185,211,232);">
+	  	  <div style="background-color: rgb(185,211,232);">
+			  <div style="text-align:right; background-color: rgb(185,211,232);margin-bottom:10px">
+			  		<table>
+						<tr>
+							<td style="width:80%"></td>
+							<td>
+								<select class="category-select" style="width:60px !important"
+									data-ng-model="pageInfo.limit" 
+									data-ng-options="x.value for x in pageInfo.rowPerPageList track by x.id"
+								 	ng-change="loadUserWithPaging()">
+								 <option value="">-- {{'common.SELECT_RPP'|translate}} --</option>
+								 </select>
+							</td>
+							<td nowrap style="padding:2px">
+								<input type="button" value="<<" ng-click='move2FirstPage()' id="moveFirstBtn" ng-disabled="pageInfo.limit.id == -1 || pageInfo.offset == 1"/>
+								<input type="button" value="<" ng-click='move2PrevPage()' id="movePrevBtn" ng-disabled="pageInfo.limit.id == -1 || pageInfo.offset == 1"/>
+							</td>
+							<td style="width:150px;text-align:center">
+								<div ng-if="pageInfo.lastRow < 0")>
+									All
+								</div>
+								<div ng-if="pageInfo.lastRow > 0")>
+								{{pageInfo.offset}}-{{pageInfo.lastRow}} {{'common.OF_TEXT'|translate}} {{totalRow.count}}
+								</div>
+							</td>
+							<td nowrap style="padding:2px">
+								<input type="button" value=">" ng-click='move2NextPage()' id="moveFirstBtn" ng-disabled="pageInfo.limit.id == -1 || pageInfo.offset == totalRow.count"/>
+								<input type="button" value=">>" ng-click='move2LastPage()' id="moveLastBtn" ng-disabled="pageInfo.limit.id == -1 || pageInfo.offset == totalRow.count"/>
+							</td>
+						</tr>
+					</table>
+			 </div>
+		 </div>
+		 
+		<!-- User list -->
+		<div style="height:480px;overflow: auto">
+	  	<div ng-repeat="user in users track by $index" ng-class=" {true:'odd-row', false:'even-row'}[$index %2 == 0 ]" style="padding:3px;margin-bottom:5px">
+			<table style="width:100%">
+				<tbody>
+					<tr>
+						<td style="width: 15%;text-align:center;">
+							<!-- <img ng-src="data:image/JPEG;base64,{{user.avata}}" ng-if="user.avata != null"> -->
+							<img ng-src="{{user.avataUrl}}" alt="user" style="width:100px; height:100px"/>
+						</td>
+						<td style="width:25%;text-align:left;">
+							<!-- Basic information -->					
+							<span><h4>{{'user.BASIC_INFO_TITLE'|translate}}</h4></span>
+							<h6>
+								<!-- <p class="glyphicon glyphicon-qrcode" style="font-size:10pt"> -->
+								<p style="font-size:10pt">
+									<img ng-src="{{app.resourceBaseUrl}}/images/person.png" style="width:15px;height:15px"/>
+									{{'user.FULL_NAME'|translate}}: {{user.fullName}}
+								</p>
+							</h6>
+							<h6>
+								<p style="font-size:10pt">
+									<img ng-src="{{app.resourceBaseUrl}}/images/email.png" style="width:15px;height:15px"/>
+								<!-- <p class="glyphicon glyphicon-envelope" style="font-size:10pt"> -->
+									{{'user.EMAIL'|translate}}: {{user.email}}
+								</p>
+							</h6>
+							<h6>
+								<p style="font-size:10pt">
+									<img ng-src="{{app.resourceBaseUrl}}/images/mobile.png" style="width:15px;height:15px"/>
+								<!-- <p class="glyphicon glyphicon-phone" style="font-size:10pt"> -->
+									{{'user.TELEPHONE'|translate}}: {{user.telephone}}
+								</p>
+							</h6>
+						</td>
+						<td style="width:15%; text-align: left; vertical-align:top">
+							<!-- Advanced information -->
+							<span><h4>{{'user.SOCIAL_INFO_TITLE'|translate}}</h4></span>
+							<h6>
+							<p style="font-size:10pt">
+								<img ng-src="{{app.resourceBaseUrl}}/images/facebook.png" style="width:20px;height:15px"/>
+								{{'user.FACEBOOK'|translate}}: {{user.faceBook}}
+							</p>
+							</h6>
+							
+							<h6>
+								<p style="font-size:10pt">
+									<img ng-src="{{app.resourceBaseUrl}}/images/g+.png" style="width:15px;height:15px"/>
+									{{'user.GOOGLE'|translate}}: {{user.google}}
+								</p>
+							</h6>
+							<h6>
+								<p style="font-size:10pt">
+									<img ng-src="{{app.resourceBaseUrl}}/images/twitter.png" style="width:15px;height:15px"/>
+									{{'user.TWITTER'|translate}}: {{user.twitter}}
+								</p>
+							</h6>
+						</td>
+						<td style="width:25%; text-align: left; vertical-align:top">
+							<!-- Advanced information -->
+							<span><h4>{{'user.OTHER_INFO_TITLE'|translate}}</h4></span>
+							<h6>
+								<p style="font-size:10pt">
+									<img ng-src="{{app.resourceBaseUrl}}/images/address.png" style="width:15px;height:15px"/>
+									{{'user.ADRESS'|translate}}: {{user.mainAddress}}
+								</p>
+							</h6>
+							<h6>
+								<p style="font-size:10pt">
+									<img ng-src="{{app.resourceBaseUrl}}/images/occupation.png" style="width:15px;height:15px"/>
+									{{'user.OCCUPATION'|translate}}: {{user.occupation}}
+								</p>
+							</h6>
+							<h6>
+								<p style="font-size:10pt">
+									<img ng-src="{{app.resourceBaseUrl}}/images/sex.png" style="width:15px;height:15px"/>
+									{{'user.SEX'|translate}}: {{user.sex}}
+								</p>
+							</h6>
+						</td>
+						<td style="width:15%;text-align:right">
+							<!-- Action -->
+							<div class="" style="text-align:left;vertical-align: middle; margin-left: 5px; text-align:right">
+								<p>
+								<button type="button" class="btn btn-primary scb-btn" ng-click='edit(user)' id="editBtn"
+								 	ng-if="user.loginName != 'admin' || (user.loginName == 'admin' && signedInUser.aud == 'admin')">
+									<span class="glyphicon glyphicon-pencil"></span>
+									{{'common.BTN_EDIT'|translate}}
+								</button>
+								</p>
+								<p>
+								<button type="button" class="btn btn-primary scb-btn" ng-click='deleteUser(user)' 
+									id="deleteBtn" style="color:pink" 
+									ng-if="user.loginName != 'admin' || (user.loginName == 'admin' && signedInUser.aud == 'admin')">
+									<span class="glyphicon glyphicon-trash"></span>
+									{{'common.BTN_DELETE'|translate}}
+								</button>
+								</p>
+								<p> 
+								<button type="button" ng-click="history(user)" class="btn btn-primary scb-btn" id="historyBtn">
+									<span class="glyphicon glyphicon-film"></span>
+									{{'common.BTN_HISTORY'|translate}}
+								</button>
+								</p>
+								<!-- <br> --> 
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				</table>
+  			</div>
+  		</div>
+  		</div>
+	</td>
+</tr>
+</table>
+</div>
+
+			    			

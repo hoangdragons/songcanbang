@@ -1,0 +1,42 @@
+<div class="container animated fadeInUpBig" style="padding-top: 10px">
+	<div style="overflow: hidden;margin-bottom:10px" class="portfolio" ng-if="users.length > 0">
+		<div class="row" style="padding:5px">
+			<ul class="list-unstyled">	
+				<li style="width:auto; height: auto" class="element" ng-repeat="user in users">
+					<div class="portio-item row" style="height:auto;margin:15px;padding:15px;border: 1px solid #eee;box-shadow:none !important">
+						<!-- user Image -->
+						<div class="col-md-4" style="height:auto;width:auto">
+							<a href="javascript:void(0)" ng-click="showProfile(user)" style="text-decoration:none">
+								<img class="portio-image" ng-src="{{user.avataUrl}}" style="width:100px;" ng-if="user.avataUrl != null"/>
+								<img src="http://rc.songcanbang.org/images/person.png" style="width:100px;" alt="User avata" ng-if="user.avataUrl == null">
+							</a>
+						</div>
+						<!-- user Description -->
+						<div>
+							<div class="col-md-3 pull-left">
+								<a href="javascript:void(0)" ng-click="showProfile(user)" style="text-decoration:none">
+									<div>
+				        				<h4>{{user.fullName}}</h4>
+				        			</div>
+			        			</a>
+			                    <div>
+									{{'user.OCCUPATION'|translate}} {{user.occupation}}
+								</div>
+								<div>
+									{{'user.SEX'|translate}} {{user.sex == 0? 'Male':'Female'}}
+								</div>
+					            <div>{{'user.BIRTHDAY'|translate}} {{user.birthday}}</div>
+					        </div>
+					        <div style="text-align:right;overflow:hidden" class="col-md-6 pull-right">
+							  <button class="btn btn-primary">{{'common.ADD_FRIEND'|translate}}</button>
+							  <button class="btn btn-primary">{{'common.WRITE_MESSAGE'|translate}}</button>
+							</div>						
+						</div>
+						<!-- /.course-content -->
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</div>

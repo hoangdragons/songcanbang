@@ -1,0 +1,1 @@
+SELECT t FROM RegisterUser t WHERE t.loginName = :loginName AND t.deleteFlg <> 1

@@ -1,0 +1,1 @@
+(function(){angular.module("ng-jwplayer",[]).constant("jwplayer",jwplayer)})();

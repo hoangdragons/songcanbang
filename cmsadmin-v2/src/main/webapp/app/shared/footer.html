@@ -1,0 +1,74 @@
+  <div style="background-color:rgb(51,51,51);color:#fff">
+  <!-- /.container -->
+  <div class="container" style="padding-top:15px;">
+    <div class="row">
+      <div  style="position: inherit;" class="col-md-4">
+        <div class="aboutus widget" >
+          <div class="widget-title">
+            {{'common.ABOUT_US'|translate}}
+          </div>
+          <p>
+            {{'common.ABOUT_US_DESC'|translate}}
+          </p>
+        </div>      
+      </div>
+      <div  style="position: inherit;" class="col-md-4">
+        <div class="aboutus widget" >
+          <div class="widget-title">
+            {{'common.SOCIAL_CONNECT'|translate}}
+          </div>
+          <div>
+            <button class="btn btn-radius btn-primary social-icon"><i class="ion-social-facebook"></i></button>
+            <button class="btn btn-radius btn-primary social-icon"><i class="ion-social-googleplus"></i></button>
+          </div>
+          <p>
+            <b>{{'common.COMPANY_NAME'|translate}}</b>            
+          </p>
+          <p>
+            Văn phòng: 74/13/1 Trương Quốc Dung, Phường 10, Quận Phú Nhuận, Tp. Hồ Chí Minh
+          <p>
+            Cơ sở 2: 465 Nơ Trang Long kéo dài (đường Bình Lợi mới), Quận Bình Thạnh, TP. Hồ Chí Minh.
+            <br>Hotline :0932 009 920
+          </p>
+          <p>
+            Chi nhánh Hà Nội: Tầng 5, tháp A, tòa nhà Hà Thành, 102 Thái Thịnh, Đống Đa, Hà Nội
+          </p>
+          <p>
+            Trung tâm huấn luyện: Tầng 1, tòa nhà VAS, khu đô thị Mỹ Đình, Nam Từ Liêm, Hà Nội
+          </p>
+          <p>
+            Hotline: 0909 624 689 Hà nội
+          </p>
+          <p>
+            {{'common.CALL_CENTER'|translate}}: 19007167          
+          </p>
+          <p>
+            Email: Info@ghs.vn
+          </p>
+        </div>
+      </div>
+      <div  style="position: inherit;" class="col-md-4">
+        <div class="aboutus widget" >       
+          <div class="widget-title">
+            {{'common.KEEP_IN_TOUCH'|translate}}
+          </div>    
+          <div>
+            <form ng-submit=" contactInfo.contactName && contactInfo.contactEmail && contactInfo.contactMessage && contactSCB(contactInfo)" 
+            	class="form">
+              <input type="text" class="form-control contact-form-control" placeholder="{{'common.NAME'|translate}} *" name="name"
+              	 ng-model="contactInfo.contactName">
+              <input type="text" class="form-control contact-form-control" placeholder="{{'common.EMAIL'|translate}} *" name="email"
+              	 ng-model="contactInfo.contactEmail">
+              <textarea name="" id="" cols="30" rows="5" class="form-control contact-form-control" placeholder="{{'common.YOUR_WORD'|translate}} *"
+              	 ng-model="contactInfo.contactMessage"></textarea>
+              <button type="submit" class="btn btn-block btn-form btn-green" style="color:#fff">{{'common.SEND_MESAGE'|translate}}</button>
+            </form>
+          </div>
+          
+        </div>      
+      </div>    
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+  </div>

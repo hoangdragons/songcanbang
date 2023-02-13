@@ -1,0 +1,30 @@
+{
+	"common": {
+		"WATCH": "Watch",
+		"TITLE" : "Live Balancing",
+		"PRICE_FREE": "Free",
+		"MAGAZINE_CATOGORY" : "Magazines",
+		"MAGAZINE_DESCRIPTION" : "Magazines form GHS"
+	},
+	"header": {
+		"LIST_CATEGORY_LINK" : "LIST CATEGORY",
+		"ABOUT_LINK" : "About",
+		"TEACHING_LINK" : "Teaching",
+		"COOPERATION_LINK" : "Cooperation",
+		"RECRUITMENT_LINK" : "Recruitment",
+		"SEARCH_PLACE_HOLDER" : "Search courses",
+		"LOGIN_LINK" : "LOGIN",
+		"REGISTER_LINK" : "REGISTER NOW",
+		"MY_COURSE_LINK" : "My courses",
+		"MY_PROFILE_LINK" : "My profile",
+		"EXIT_LINK" : "Logout"
+	},
+	"loginPage": {
+	 	"HEADER": "LOGIN",
+	 	"LOGIN_NAME": "User name",
+	 	"MSG_LOGIN_NAME_REQUIRED":"User name is required",
+	 	"PASSWORD":"Password",
+	 	"MSG_PASSWORD_REQUIRED":"Password is required",
+	 	"BTN_LOGIN":"Login"
+ 	}
+}

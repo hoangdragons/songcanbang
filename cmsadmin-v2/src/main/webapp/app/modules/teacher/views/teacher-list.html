@@ -1,0 +1,40 @@
+
+<div class="animated fadeInUpBig">
+	<div style="text-align:center;padding-bottom:10px;"  ng-if="checkPrivilege('TEACHER_FUNC_001')">
+		<button ng-click="create()" class="btn btn-green btn-radius">
+			<i class="ion-plus"></i>
+			{{'course.teacher.TEACHER_SELECT' | translate}}
+		</button>
+	</div>
+	<div ng-repeat="teacher in teachers track by $index" class="col-md-3 col-xs-12 col-sm-6" 
+	style="margin-top: 2px; margin-right: 0px; margin-bottom: 5px; margin-left: 0px;">
+		<div class="info-category-bg-out">		    
+			 <div class="info-control">
+	    	 	<span>
+                    <a ng-if="checkPrivilege('TEACHER_FUNC_002')" href="javascript:void(0)" ng-click="edit(teacher)" class="ion-ios-compose-outline" style="color:blue"></a>
+                    <a ng-if="checkPrivilege('TEACHER_FUNC_003')" href="javascript:void(0)" ng-click="deleteTeacher(teacher)" class="ion-ios-trash-outline" style="color:red"></a>
+	        	</span>
+	    	</div>
+			<div class="info-category primarybg-info" >
+		        <div class="logo"  ng-if="teacher.teacherImage == null">
+		        	<i class="ti-list"></i>
+		        	
+		    	</div>
+		    	<p style="float:top" ng-if="teacher.teacherImage != null">
+	        		<img name="teacherImage" id="teacherImage" ng-src="{{teacher.teacherImage}}" class="category-image" placeholder="150x200"/>
+	        	</p>
+		        {{teacher.teacherCompany}}
+		        <p ng-if="checkPrivilege('TEACHER_FUNC_000')">
+		        	<a href="javascript:void(0)" ng-click="edit(teacher)">
+		        		{{teacher.teacherName}}
+		        	</a>
+		        </p>
+		        <p ng-if="!checkPrivilege('TEACHER_FUNC_000')">
+		        	{{teacher.teacherName}}
+		        </p>
+		    </div>
+		   
+		</div>
+	</div>
+</div>
+			    			

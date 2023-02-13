@@ -1,0 +1,181 @@
+<div class="overlay"></div>     
+    <div class="top-bar">
+      <nav class="navbar navbar-default top-bar">
+        <div class="menu-bar-mobile" id="open-left">
+        	<i class="ti-menu"></i>
+        </div>
+        <div class="navbar-header">
+			<img src="assets/images/yoga-logo.png" />
+			<span style="font-size:11pt">Golden Hearts JSC</span>
+		</div>
+        <form class="navbar-left" role="search">
+          <div class="search">
+            <input type="text" class="form-control" placeholder="{{'common.SEARCH_PLACE_HOLDER'|translate}}">
+          </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right top-elements">
+          <li class="piluku-dropdown dropdown">
+            <a data-target="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><img id="selectedLangImg" class="flag_img" src="assets/images/flags/vn.png" alt=""><span class="drop-icon"><i class="ion ion-chevron-down"></i></span>
+            </a>
+            <ul class="dropdown-menu dropdown-piluku-menu piluku-right animated fadeInUp wow language-drop neat_drop" data-wow-duration="1500ms" role="menu">
+              <li>
+                <a href="#" ng-click="setLang('vn_VI')"><img class="flag_img" src="assets/images/flags/vn.png" alt="flags"> Vietnamese</a>
+              </li>
+              <li>
+                <a href="#" ng-click="setLang('en_US')"><img class="flag_img" src="assets/images/flags/en.png" alt="flags"> English</a>
+              </li>
+              <li>
+                <a href="#" ng-click="setLang('jp_JP')"><img class="flag_img" src="assets/images/flags/jp.png" alt="flags"> Japanese</a>
+              </li>
+            </ul>
+          </li>
+         <!--  <li class="piluku-dropdown dropdown">
+            <a  data-target="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="ion-ios-bell-outline icon-notification"></i><span class="badge info-number message">22</span></a>
+            <ul class="dropdown-menu dropdown-piluku-menu piluku-right animated fadeInUp wow notification-drop neat_drop" data-wow-duration="1500ms" role="menu">
+              <li>
+                <a href="#">
+                  <div class="hexagon danger">
+                    <span><i class="ion-ios-alarm-outline"></i></span>
+                  </div>
+                  <span class="text_info"> Important notification</span>
+                  <span class="time_info">3:30am</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="hexagon success">
+                    <span><i class="ion-ios-body-outline"></i></span>
+                  </div>
+                  <span class="text_info"> Info notification</span>
+                  <span class="time_info">4:30am</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="hexagon warning">
+                    <span><i class="ion-ios-cart-outline"></i></span>
+                  </div>
+                  <span class="text_info"> New item added</span>
+                  <span class="time_info">6:07am</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="hexagon info">
+                    <span><i class="ion-ios-calendar-outline"></i></span>
+                  </div>
+                  <span class="text_info"> reminder please complete the task</span>
+                  <span class="time_info">3:30pm</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="outline-hexagon">
+                    <span><i class="ion-ios-checkmark-outline"></i></span>
+                  </div>
+                  <span class="text_info"> Marked as complete</span>
+                  <span class="time_info">1:30pm</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="last_info">See all notifications</a>
+              </li>
+
+            </ul>
+          </li> -->
+         <!--  <li class="piluku-dropdown dropdown">
+            <a  data-target="#"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="ion-ios-box-outline icon-notification"></i><span class="badge info-number bell">22</span></a>
+            <ul class="dropdown-menu dropdown-piluku-menu piluku-right animated fadeInUp wow message_drop neat_drop" data-wow-duration="1500ms" role="menu">
+              <a href="#">
+                <span class="avatar_left"><img src="assets/images/avatar.jpeg" alt=""></span>
+                <span class="text_info"> Hi want to know about the company freelance for wizard</span>
+                <span class="time_info">3:30am <i class="online ion-record"></i></span>
+              </a>
+              <a href="#">
+                <span class="avatar_left"><img src="assets/images/avatar.jpeg" alt=""></span>
+                <span class="text_info"> Hi want to know about the company freelance for wizard</span>
+                <span class="time_info">3:30am <i class="offline ion-record"></i></span>
+              </a>
+              <a href="#">
+                <span class="avatar_left"><img src="assets/images/avatar.jpeg" alt=""></span>
+                <span class="text_info"> Hi want to know about the company freelance for wizard</span>
+                <span class="time_info">3:30am <i class="away ion-record"></i></span>
+              </a>
+              <a href="#">
+                <span class="avatar_left"><img src="assets/images/avatar.jpeg" alt=""></span>
+                <span class="text_info"> Hi want to know about the company freelance for wizardi want to know about the company freelance for wii want to know about the company freelance for wi</span>
+                <span class="time_info">3:30am <i class="grey ion-record"></i></span>
+              </a>
+            </ul>
+          </li> -->
+          <!-- <li class="piluku-dropdown dropdown">
+            <a  data-target="#"  class="dropdown-toggle avatar_width" data-toggle="dropdown" role="button" aria-expanded="false"><span class="avatar-holder">
+              <img ng-src="{{signedInUser.avataUrl}}" alt="" style="width:30px;height:30px"></span>
+              <span class="avatar_info">{{signedInUser.aud}}</span><span class="drop-icon">
+              </span></a>
+            <ul class="dropdown-menu dropdown-piluku-menu piluku-right animated fadeInUp wow avatar_drop neat_drop" data-wow-duration="1500ms" role="menu">
+              <li>
+                <a href="#"> <i class="ion-android-chat"></i>{{'common.MESSAGES'|translate}}</a>
+              </li>
+              <li>
+                <a href="#" data-toggle="modal" data-target="#changePassword"> <i class="fa fa-lock"></i>{{'common.CHANGE_PASSWORD'|translate}}</a>
+              </li>
+              <li>
+                <a href="#"> <i class="ion-android-create"></i>{{'common.EDIT_PROFILE'|translate}}</a>
+              </li>
+              <li>
+                <a href="#logout" class="logout_button" ng-click="logout()"><i class="ion-power"></i>{{'common.BTN_LOGOUT'|translate}}</a>
+              </li>   
+            </ul>
+          </li> -->
+          <!-- <li class="chat_btn">
+            <a href="#" class="right-bar-toggle flatRed">
+              <i class="ion-ios-people-outline"></i>                              
+            </a>
+          </li> -->
+        </ul>
+
+      </nav>
+
+    </div>
+<!-- /top-bar -->
+<div class="modal fade in" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;">
+<div class="modal-backdrop fade in" style="height: auto;"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="postClose()">
+        <span aria-hidden="true" class="ti-close"></span></button>
+        <h4 class="modal-title" id="myModalLabel">{{'common.CHANGE_PASSWORD'|translate}}</h4>
+      </div>
+       <div class="modal-body">
+        <form name="form" ng-submit="form.new_password.$error.passwordMatch && changePass(user)" method="POST" novalidate >
+          <div class="piluku-login">              
+            <div class="form-section">              
+              <div class="input-group" ng-class="{'has-error' : form.password.$invalid && form.password.$dirty}">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.OLD'|translate}}</span>
+                <input id="password" type="password" class="form-control" placeholder="{{'loginPage.OLD_PASSWORD'|translate}}" ng-model="user.password"/>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.NEW'|translate}}</span>
+                <input type="password" id="new_password" name="new_password" password-match="user.confirm_password" class="form-control" placeholder="{{'loginPage.NEW_PASSWORD'|translate}}" ng-model="new_password"/>
+              </div>
+              <div class="input-group" ng-class="{'has-error' : (form.confirm_password.$invalid && form.confirm_password.$dirty) || !form.new_password.$error.passwordMatch}">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.CONFIRM'|translate}}</span>
+                <input type="password" id="confirm_password" class="form-control" placeholder="{{'loginPage.CONFIRM_NEW_PASSWORD'|translate}}" ng-model="user.confirm_password"/>
+              </div>     
+              <div class="input-group" style="color:red">
+                <p class="help-block error-msg" ng-show="!form.new_password.$error.passwordMatch">{{'common.PASSWORD_DOES_NOT_MATCH'|translate}}</p>
+                <p class="help-block error-msg" ng-show="errorMsg != '' ">{{errorMsg}}</p>                
+              </div>            
+              <button type="submit" class="btn btn-success btn-block"><strong>{{'common.BTN_CHANGE' | translate}}</strong></button>    
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button  ng-click="postClose()" type="button" class="btn btn-default" data-dismiss="modal">{{'common.BTN_CLOSE'|translate}}</button>       
+      </div>
+    </div>
+  </div>
+</div>

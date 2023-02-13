@@ -1,0 +1,1 @@
+angular.module("pascalprecht.translate").factory("$translateMissingTranslationHandlerLog",$translateMissingTranslationHandlerLog);function $translateMissingTranslationHandlerLog(a){return function(b){a.warn("Translation for "+b+" doesn't exist")}}$translateMissingTranslationHandlerLog.displayName="$translateMissingTranslationHandlerLog";

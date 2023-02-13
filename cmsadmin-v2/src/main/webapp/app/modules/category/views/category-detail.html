@@ -1,0 +1,59 @@
+<div class="animated fadeInUpBig" style="background-color:#fff;padding:5px;text-align:center">	
+	<div class="search-bar">
+		<div class="" style="text-align:left;vertical-alignt: middle; margin-left: 5px; font-weight:bold" ng-if="category.categoryId != null" >
+			<i class="ion-edit"></i>{{'category.UPDATE_DETAIL_INFO'|translate}}
+		</div>
+		<div class="" style="text-align:left;vertical-alignt: middle; margin-left: 5px; font-weight:bold" ng-if="category.categoryId == null" >
+			<i class="ion-plus"></i>
+				{{'category.CREATE_NEW'|translate}}			
+		</div>
+	</div>
+	<div style="text-align:center">
+		<form name="categoryForm" ng-submit="insertOrUpdate()" class="form-require-dirty-check">
+			<div>
+				<div class="primarybg-info" >
+			        <div class="logo" style="text-align:center">
+			        	<p>
+			        		<img name="categoryImage" id="categoryImage" ng-src="{{category.image}}" class="category-image" placeholder="150x200"/>
+			        	</p>
+			        	<input type="hidden" ng-model="category.image"/>
+			        	<input type="file" id="categoryImageFile" name="categoryImageFile" 
+						 	ng-model="categoryImage" 
+						 	onchange="angular.element(this).scope().changeUpload(this)"
+						 	style="display:none" accept="image/*"/>			        	
+				         <label style="width:200px !important" for="categoryImageFile">{{'common.BTN_UPLOAD'|translate}}</label>				         
+			    	</div>
+			    	<div class="input-group" style="margin-bottom:3px">
+                        <span class="input-group-addon bg">
+                           <i class="ion-plus"></i>
+                       </span>
+                        <input id="categoryName" name="categoryName" type="text" class="form-control form-text" maxlength="255"
+            			ng-model="category.categoryName"
+            			required ng-minlength="3" ng-maxlength="512" placeholder="{{'category.NAME_TITLE'|translate}}"/>	                       
+                    </div>	
+			    	<div class="input-group">
+                        <span class="input-group-addon bg">
+                           <i class="ion-plus"></i>
+                       </span>
+                        <input name="description" ng-model="category.description" type="text" class="form-control" placeholder="{{'category.DESCRIPTION'|translate}}" required ng-minlength="1" ng-maxlength="2048">
+                    </div>
+			    </div>
+
+			   <div style="margin-top:10px;text-align:center">
+					<button type="submit" class="btn btn-primary btn-radius">
+						<span class="ti-save"></span>
+						{{'common.BTN_SAVE'|translate}}
+					</button>
+					<button type="reset" class="btn btn-primary btn-radius" ng-if="category.categoryId == null">
+						<span class="ti-reload"></span>
+						{{'common.BTN_RESET'|translate}}
+					</button> 
+					<button type="button" ng-click="cancel()" class="btn btn-primary btn-radius">
+						<span class="glyphicon glyphicon-trash" style="color:red"></span>
+						{{'common.BTN_CANCEL'|translate}}
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

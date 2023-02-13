@@ -1,0 +1,39 @@
+
+<div class="animated fadeInUpBig">
+	<div ng-if="publications == null">
+		{{'publication.NO_ARTICAL'|translate}}
+	</div>
+	<div ng-repeat="publication in publications track by $index" style="margin-top: 2px; margin-right: 0px; margin-bottom: 5px; margin-left: 0px;">
+		<div class="info-category-bg-out">	
+			 <span style="font-size:16pt;padding:10px">
+			 	<a href="javascript:void(0)" ng-click="edit(publication)" style="color:blue">
+			 		{{publication.title}}
+			 	</a>
+			 </span>  
+			<div class="info-stats" style="padding:10px !important">
+	        	<i class="ti-list" ng-if="publication.image == null" style="float:left"></i>		
+	        	<img  ng-if="publication.image != null" ng-src="{{publication.image}}" alt="" name="image" id="image" 
+                	style="width:120px;height:120px;border-radius:5px;float:left;margin-right:10px" >
+	        	<div style="display:inline;text-align: justify">
+		        	{{publication.summaryContent}}
+		    	</div>
+		    	<div style="margin-top:10px">
+		        	<div class="col-sm-5" style="text-align:left">
+				        <div style="width: auto; display: inline-table;">
+				        	<label style="width:100px !important">{{'publication.AUTHOR'|translate}}</label>
+				        	{{publication.author}}
+				        </div>
+				    </div>					
+					<div class="col-sm-3" style="text-align:left;">
+				        <div style="width: auto; display: inline-table;">
+				        	<label style="width:100px !important">{{'publication.CAMERA_MAN'|translate}}</label>
+				        	{{publication.cameraMan}}
+				        </div>				      
+				    </div>
+		    	</div>
+		    </div>
+		   
+		</div>
+	</div>
+</div>
+			    			

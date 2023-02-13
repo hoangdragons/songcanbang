@@ -1,0 +1,197 @@
+<!doctype html>
+<!-- Our PilukuApp module defined here -->
+<html lang="en" ng-app="dolphin">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+  <meta property="fb:app_id" content="1249390865130712"> 
+  <meta property="article:author" content="nghia.n.v2007@gmail.com"> 
+  <meta property="article:publisher" content="nghianv"> 
+  <!-- For google bot  -->
+  <meta name="fragment" content="!">
+  
+  <!-- using twitter bootstrap, but of course -->
+  <link href="assets/img/favicon.ico" rel="Songcanbang icon"/>
+  <link rel="stylesheet" href="assets/owlcarousel/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="assets/owlcarousel/assets/owl.theme.default.min.css">
+
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+  <!-- styles for ng-animate are located here -->
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/loading-bar.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/material.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/emoji.min.css">
+  <link href="assets/css/menu_desktop.css" rel="stylesheet">
+  <link href="assets/css/menu_moblie.css" rel="stylesheet"> 
+  <link href="assets/css/setmedia.css" rel="stylesheet"> 
+  <link href="assets/css/style00.css" rel="stylesheet">
+  <link href="assets/css/style01.css" rel="stylesheet"> 
+  <link href="assets/css/font-awesome.css" rel="stylesheet">
+  <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- Include Jquery file -->
+  <script src="assets/js/jquery.js"></script>
+  <script type="text/javascript">
+    appHelper   = {
+
+      componentsDir: 'app/modules',
+      assetsDir: 'assets',
+
+      componentView: function(componentName,viewName)
+      {
+        return this.componentsDir + '/' + componentName + '/views/' + viewName +'.html' ;
+      },
+      componentJs: function(componentName,jsName)
+      {
+        return this.componentsDir + '/' + componentName + '/js/' + jsName +'.js' ;
+      },
+      componentData: function(componentName,dataName)
+      {
+        return this.componentsDir + '/' + componentName + '/data/' + dataName +'.json' ;
+      },
+
+      assetPath: function(file_path)
+      {
+        return this.assetsDir + '/' + file_path;
+      }
+    };
+
+    var ASSETS = {
+      'core' : 
+      {
+        'core' : 'assets/js/core.js',
+        'liveTile' : 'assets/js/MetroJs.lt.js',
+      },
+      'bootstrap': {
+            'css': 'js/bootstrap.min.js', // Some plugins which do not support angular needs this
+
+            'js': appHelper.assetPath('js/bootstrap.js'),
+          },
+          'materialize' : appHelper.assetPath('js/materialize.js'),
+          get : function(fileName)
+          {
+            return appHelper.assetPath(fileName);
+          },
+          js : function(moduleName,fileName)
+          {
+            return appHelper.componentsDir + '/' + moduleName + '/js/' + fileName + '.js';
+          },
+          css : function(moduleName,fileName)
+          {
+            return appHelper.componentsDir + '/' + moduleName + '/css/' + fileName + '.css';
+          }
+        };
+      </script>
+      <!-- could easily use a custom property of the state here instead of 'name' -->
+      <title ng-if="course != null">{{course.title}} {{'common.TITLE'|translate}}</title>
+
+    </head>
+    <body ng-controller="CommonController" style="background-color:#ddeaf7">
+      <!-- Load Facebook SDK for JavaScript -->
+      <div id="fb-root"></div>
+      <script type="text/javascript">
+        window.fbAsyncInit = function() {
+          FB.init({ 
+          appId: '1249390865130712',//songcanbang.org
+          //appId: '274920862930671',//songcanbang@localhost
+          status: true, 
+          cookie: true, 
+          xfbml: true,
+          version: 'v2.8'
+        });
+        };
+
+        (function(d, s, id){
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) {return;}
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+      </script> 
+      <div class="wrapper" ng-class="{'mini-bar': $storage.miniSidebar}">
+
+        <ui-view></ui-view> 
+
+      </div>
+      <script src="assets/js/angular-1.5.8.js"></script>
+      <script src="assets/js/angular-animate-1.5.8.js"></script>
+      <script src="assets/js/angular-resource-1.5.8.js"></script>
+      <script src="assets/js/angular-ui-router.js"></script>
+      <script src="assets/js/angular-scroll.min.js"></script>
+      <script src="assets/js/ngStorage.js"></script>
+      <script src="assets/js/angular-sanitize.min.js"></script>
+      <script src="app/angular-drag-drop.min.js"></script>
+
+      <script src="assets/libs/ocLazyLoad.js"></script>
+      <script src="assets/js/loading-bar.js"></script>
+
+      <script src="assets/js/jwplayer.js"></script>
+      <script src="assets/js/jwplayer.module.js"></script>
+      <script src="assets/js/jwplayer.service.js"></script>
+      <script src="assets/js/jwplayer.directive.js"></script>
+      <script data-require="ui-bootstrap@0.10.0" data-semver="0.11.0" src="assets/js/ui-bootstrap-tpls-0.10.0.js">
+      </script>
+
+      <script type="text/javascript" src="assets/js/angular-jwt.js"></script>
+
+    <!-- app.js declares the PilukuApp module and adds items to $rootScope, and defines
+         the "home" and "about" states
+       -->
+       <!--////// NEW //////-->
+       <!-- BODY -->
+       <script src="assets/js/tinymce/tinymce.js"></script>
+       <script src="app/app.js"></script>
+       <script src="app/controllers.js"></script>
+       <script src="app/common.js"></script>
+       <script src="app/services.js"></script>
+       <script src="app/directives.js"></script>
+
+       <script src="app/modules/customer/js/learning-course.js"></script>
+       <script src="app/modules/course/js/public-course.js"></script>
+       <script src="app/modules/payment/js/payment.js"></script>
+    <!--
+    Load js/angular-translate 
+  -->
+  <script src="assets/js/angular-translate/translate.js"></script>
+  <script src="assets/js/angular-translate/service/default-interpolation.js"></script>
+  <script src="assets/js/angular-translate/service/sanitization.js"></script>
+  <script src="assets/js/angular-translate/service/handler-log.js"></script>
+  <script src="assets/js/angular-translate/service/loader-static-files.js"></script>
+
+  <script src="assets/js/angular-translate/service/storage-key.js"></script>
+  <script src="assets/js/angular-translate/service/storage-local.js"></script>
+  <script src="assets/js/angular-translate/service/storage-cookie.js"></script>
+  <script src="assets/js/angular-translate/service/translate.js"></script>
+  <script src="assets/js/angular-translate/directive/translate.js"></script>
+  <script src="assets/js/angular-translate/filter/translate.js"></script>
+
+  <script type="text/javascript">
+    jwplayer.key="4zVZTycAaug4SaE7dKIq3pKm3GPn0aGNoOgbjA==";
+  </script>
+
+  <!-- ////// END-NEW //////-->
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.nicescroll.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.accordion.js"></script>
+  <script type="text/javascript" src="assets/js/wow.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.loadmask.min.js"></script>
+  <script type="text/javascript" src="assets/js/jquery.countTo.js"></script>
+
+  <script src="assets/js/dirty-check.js"></script>
+  <script src="assets/js/bootstrap-datepicker.js"></script>
+  <ng-include src="'app/shared/footer.html'" onload="" autoscroll=""></ng-include>
+  <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+      var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+      s1.async=true;
+      s1.src='https://embed.tawk.to/58c7ff3b5b89e2149e16c2e7/default';
+      s1.charset='UTF-8';
+      s1.setAttribute('crossorigin','*');
+      s0.parentNode.insertBefore(s1,s0);
+    })();
+  </script>
+</body>
+</html>

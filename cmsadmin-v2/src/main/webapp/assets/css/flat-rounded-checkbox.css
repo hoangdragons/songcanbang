@@ -1,0 +1,56 @@
+.flatRoundedCheckbox {
+    width: 42px;
+    height: 22px;
+    margin: 0px 0px;
+    position: relative;
+}
+
+input[type=checkbox] {
+    visibility: visible;
+     margin-left: 5px;
+}
+
+input[type="checkbox" i] {
+    margin: 0px 0px 0px 0px;
+     
+}
+
+.flatRoundedCheckbox input[type=checkbox]:checked ~ label {
+    left: 22px;
+   
+}
+
+.flatRoundedCheckbox label {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 20px;
+   /* -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;*/
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    z-index: 1;
+    left: 3px;
+    background: #FFF;
+}
+
+label {
+    cursor: default;
+}
+
+.flatRoundedCheckbox input[type=checkbox]:checked ~ div {
+    background: rgb(4, 127, 238);
+}
+
+.flatRoundedCheckbox div {
+    width: 40px;
+    height: 20px;
+    background: #999;
+    border-radius: 50px;
+    position: absolute;
+    top: 0px;
+}

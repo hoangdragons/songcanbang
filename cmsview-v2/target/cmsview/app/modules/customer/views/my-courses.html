@@ -1,0 +1,148 @@
+<div class="category-header">
+	<div class="container" style="width:auto">
+		<h2 style="padding-left: 15px;">{{'header.MY_STUDY_COURSE_LINK'|translate}}</h2>
+	</div>
+</div>
+<div class="container portfolio" style="width:100%;padding:0px" >
+	<div style="overflow: hidden;">
+		<div style="padding-left:5px" ng-if="listCourse.length > 0">
+			<h4 class="feature-title">{{'header.MY_STUDY_COURSE_LINK'|translate}}</h4>
+			<ul class="list-unstyled">
+				<li class="element col-md-2 websites logo" ng-repeat="course in listCourse" style="padding:10px">
+				<a data-toggle="modal" data-target="#lightbox" ng-click="showCourseDetail(course.courseId)" href="javascript:void(0)"
+					style="text-decoration:none">
+					<div class="portio-item">
+						<div class="portio-picture" style="height:122px">
+							<div class='bounding-box' style="background-image: url({{course.imageUrl}})">
+							</div>
+						</div>
+						<div class="links text-center" style="height:150px;cursor:pointer">
+							<ul class="list-unstyled list-inline">							   
+								<span ng-click="showCourseDetail(course.courseId)" ng-repeat="teacher in course.teachers">
+									<img class="portio-image" ng-src="{{teacher.teacherImage}}"
+									 	style="margin: 5px;max-width: 40px;max-height:40px; border: 2px solid #FFFFFF"/>
+								</span>
+								<div>
+									{{'courseList.LECTURES'|translate}}{{course.lessonCount}}
+								</div>
+								<div>
+									{{'courseList.VIDEO_TIMES'|translate}}
+								</div>
+							</ul>
+						</div>
+						<div class="portio-content" style="height:160px">
+							<div class="course-contents" style="height:100%">
+					        	<div class="auto_ellipsis course-title" style="color:#000">{{course.title}}</div>
+					        	<div style="height:25%;font-size:9pt;color: #000; margin:5px 0px">
+						            <span ng-repeat="teacher in course.teachers">
+										{{teacher.teacherName}}
+									</span>
+									<span>, &nbsp;</span>
+					            </div>
+					        	<span class="ico_star">
+					            	<span class="ico_star_value" style="width: {{(course.rating/5)*100}}%"></span>
+					            </span>
+					            <span ng-if="course.rating > 0">
+					            	{{course.rating}} ({{course.totalRating}})
+					            </span>
+					            <div style="height:10%"></div>
+					        	<div class="course-price" ng-if="course.price<=0">
+					        		{{'common.PRICE_FREE'|translate}}
+					        	</div>
+					        	<div class="course-price" ng-if="course.price>0">
+					        		<span>{{course.discountPrice}} {{course.currency}}</span>
+					        		<span style="font-size:9pt;color:#17aa1c;text-decoration: line-through;"
+										ng-if="course.price != course.discountPrice">{{course.price}} {{course.currency}}</span>
+					        	</div>
+					        </div>
+						</div>
+					</div>
+				</a>
+				</li>
+			</ul>		
+		</div>
+	</div>
+</div>
+<!-- HELPER COURSE -->
+<div class="container portfolio" style="width:100%;padding:0px" >
+	<div style="overflow: hidden;">
+<div style="margin-top:10px;padding-left:5px">
+	<ul class="list-unstyled" ng-if="listHelperCourse.length > 0">
+		<li><h4 style="font-size:18px;font-weight:500; margin-left:25px; color: rgb(51,137,202)">{{'header.SCB_INTRO_COURSE'|translate}}</h4></li>
+	</ul>
+	<ul class="list-unstyled" ng-if="listHelperCourse.length > 0">
+		<li class="element col-md-2 websites logo" ng-repeat="course in listHelperCourse"  style="padding:10px"
+			href="javascript:void(0)" ng-click="showCourseDetail(course.courseId)">
+			<div class="portio-item">
+				<div class="portio-picture" style="height:122px">
+					<a data-toggle="modal" data-target="#lightbox" ng-click="showCourseDetail(course.courseId)" href="javascript:void(0)">
+						<div class='bounding-box' style="background-image: url({{course.imageUrl}})">
+						</div>
+					</a>
+				</div>
+				<div class="links text-center" style="height:180px;">
+					<ul class="list-unstyled list-inline">							   
+						<a  href="javascript:void(0)"
+							ng-click="showCourseDetail(course.courseId)">
+							<span ng-repeat="teacher in course.teachers">
+								<img class="portio-image" ng-src="{{teacher.teacherImage}}"
+								 	style="margin: 5px;max-width: 40px;max-height:40px; border: 2px solid #FFFFFF"/>
+							</span>
+						</a>
+						<div>
+							{{'courseList.LECTURES'|translate}}{{course.lessonCount}}
+						</div>
+						<div>
+							{{'courseList.VIDEO_TIMES'|translate}}{{course.totalVideoTime}}
+						</div>
+						<span>
+							<a ng-click="previewVideo(course)" class="btn btn-primary btn-radius"
+								style="color: #2196f3;background-color:#fff;text-decoration: none;width: 24px;height: 24px;border-radius: 12px;font-size: 10pt;font-weight: 600;cursor: pointer;padding: 3px;">
+								<i class="ion-videocamera"></i>
+		                    </a>
+	                    </span>
+					</ul>
+				</div>
+				<div class="portio-content" style="height:160px">
+					<div class="course-contents" style="height:100%">
+			        	<div class="auto_ellipsis course-title" style="color:#000">{{course.title}}</div>
+			        	<div style="height:30%;font-size:9pt;color: #000" ng-if="course.teachers != null && course.teachers.length >0">
+				            <span ng-repeat="teacher in course.teachers">
+								{{teacher.teacherName}}
+							</span>
+							<span>, &nbsp;</span>
+			            </div>
+			            <div style="height:30%" ng-if="course.teachers== null || course.teachers.length ==0"></div>
+			        	<span class="ico_star">
+			            	<span class="ico_star_value" style="width: {{course.rating*100/5}}%"></span>
+			            </span>
+			            <div class="course-price" ng-if="course.price>0">{{course.price}} {{course.currency}}</div>
+			        	<div class="course-price" ng-if="course.price<=0">{{'common.PRICE_FREE'|translate}}</div>
+			        </div>
+					
+				</div>
+			</div>
+		</li>
+	</ul>	
+</div>
+
+<div class="paging-area" ng-if="totalPage > 1">
+	<ul class="pagination rounded-pagination">
+		<li>
+			<a ng-click="p > 1 && reloadlistCourse(--p)">
+				<i class="ion ion-ios-arrow-left"></i>
+			</a>
+		</li>
+		<li ng-repeat="page in listPage" ng-class="page == p ? 'active' : ''">
+			<a ng-if="page != p" ng-click="reloadlistCourse(page)">{{page}}</a>
+			<a ng-if="page == p">{{page}}</a>
+		</li>
+		<li>
+			<a ng-click="p < totalPage && reloadlistCourse(++p)">
+				<i class="ion ion-ios-arrow-right"></i>
+			</a>
+		</li>
+	</ul>
+</div>
+</div>
+</div>

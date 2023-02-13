@@ -1,0 +1,865 @@
+<div class="category-header">
+	<div class="container" style="width:auto">
+		<h2 style="padding-left: 15px;">{{'header.MY_INSTRUCTION_COURSE_LINK'|translate}}</h2>
+	</div>
+</div>
+<div class="container animated fadeInUpBig" style="background-color:#fff;padding:3px">
+<form name="courseForm" ng-submit="insertOrUpdate()"  class="form-require-dirty-check">
+<input type="hidden" ng-model="course.helperCourse"/>
+
+<div style="margin-top:10px;padding-bottom: 5px">
+    <div class="left">
+        <div class="right" style="float:right">
+            <button type="submit" class="btn btn-primary btn-radius">
+                <span class="glyphicon glyphicon-floppy-disk"></span>   
+                {{'common.BTN_SAVE'|translate}}
+            </button>  
+            <button type="reset" class="btn btn-orange btn-radius" ng-if="course.courseId == null">
+                <span class="glyphicon glyphicon-fire"></span>
+                {{'common.BTN_RESET'|translate}}
+            </button> 
+            <button type="button" ng-click="cancel()" class="btn btn-red btn-radius">
+                <span class="glyphicon glyphicon-trash"></span>
+                {{'common.BTN_CANCEL'|translate}}
+            </button>
+        </div>
+         <h4 ng-if="course.courseId == null" style="font-size:20pt">
+         	<i class="ion-document" style="margin-right:5px;font-size:16pt"></i>{{'common.BTN_ADD_COURSE'|translate}}
+         </h4>
+         <h4 ng-if="course.courseId != null"  style="font-size:20pt">
+         	<i class="ion-compose"  style="font-size:16pt;margin-right:5px"></i>
+         	{{course.title}}
+         </h4>
+    </div>
+</div>   
+
+<tabset style="margin-top:1px">
+	<tab heading="{{tab1Title}}">
+        <div class="tab-content-d" style="width:100%; height: auto; padding: 3px;">
+            <div>
+                <div class="form-group row-div" ng-class="{'has-error' : courseForm.tblCategoryDto.$invalid && courseForm.tblCategoryDto.$dirty}"  style="padding-left:10px">
+                    <div style="width: 100px; display: inline-table;">
+                        <label style="width:100px !important" for="tblCategoryDto">
+                            {{'category.CATEGORY'|translate}}
+                        </label>
+                    </div>
+                    <select required id="tblCategoryDto" 
+	                    name="tblCategoryDto" 
+	                    class="form-control" 
+                        data-ng-model="course.tblCategoryDto" 
+                        data-ng-options="x.categoryName for x in categories track by x.categoryId" >
+                    <option value="">-- {{'course.CHOOSE_CATEGORY'|translate}} --</option>
+                    </select>
+                </div>
+                <!-- Is helper course -->
+                <div class="col-lg-12 toggle-switch" ng-if="isSuperRole()" style="padding:5px 0px;vertical-align:middle;">
+                 	<label class="col-sm-3" style="padding-left:10px">{{'course.HELPER_COURSE'|translate}}</label>
+					<div class="col-sm-3">
+						<div class="flatRoundedCheckbox">	         
+							<input type="checkbox" ng-model="course.helper" id="helper">				
+							<label for="helper"></label>
+							<div></div>
+						</div>
+					</div>
+				</div>
+                <!-- title -->
+                <div ng-class="{'has-error' : courseForm.title.$invalid && courseForm.title.$dirty}" 
+                	style="padding-left:10px">
+                    <div style="width: 100px; display: inline-table;">
+                    	<label style="width:100px !important" for="title">{{'course.TITLE'|translate}}</label>
+                    </div>
+                    <div style="margin-right:10px;padding-bottom:5px">
+	                    <input id="title" name="title" type="text" class="form-control form-text" maxlength="255"
+	                        ng-model="course.title" placeholder="{{'course.TITLE'|translate}}"
+	                        required ng-minlength="1" ng-maxlength="2048"/>
+                    </div>
+                </div>
+               
+                <!-- imageUrl -->
+                <div class="form-group row-div" ng-class="{'has-error' : courseForm.imageUrl.$invalid && courseForm.imageUrl.$dirty}">
+                    <div style="display: inline-table;vertical-align:top;height:100%;padding-left:10px">
+                        <span> 
+                            <label style="width:auto" for="imageUrl">{{'course.IMAGE_URL'|translate}}</label>
+                        </span>
+                    </div>
+                    <div class="input-group">
+                        <input id="newImageUrl" name="newImageUrl" type="text" class="form-control" maxlength="255" 
+                                ng-model="newImageUrl" placeholder="{{'course.IMAGE_URL_SPACE_HOLDER'|translate}}"
+                                ng-minlength="1" ng-maxlength="255" ng-blur="course.imageUrl = newImageUrl"/>
+                        <input type="hidden" ng-model="imageUrl"/>
+                        <input type="file" id="overviewImgFile" 
+                                ng-model="overviewImgFile" 
+                                onchange="angular.element(this).scope().changeUpload(5, this, 'previewOverviewImg')" 
+                                style="display:none" accept="image/*"/>
+                        <span class="input-group-addon bg">
+                            <span class="ion-upload" style="font-size:12pt"></span>
+                            <label for="overviewImgFile" style="cursor: pointer;">
+                                {{'common.BTN_UPLOAD'|translate}}
+                            </label>
+                        </span>
+                    </div>
+                    <div style="border-radius:5px;margin-top:10px;padding-left:10px" id="previewOverviewImg">
+                        <img ng-src="{{course.imageUrl}}" style="max-width:300px; max-height: 300px"/>
+                    </div>
+                </div>
+                <input type="hidden" ng-model="courseForm.courseId"/>
+
+                <!-- videoUrl -->
+                <div class="form-group row-div" ng-class="{'has-error' : courseForm.videoUrl.$invalid && courseForm.videoUrl.$dirty}" style="width: auto !important;">
+                    <div style="width: 100px; display: inline-table;padding-left:10px">
+                        <label style="width:100px !important" for="videoUrl">{{'course.VIDEO_URL'|translate}}</label>
+                    </div>
+                    <div class="input-group">
+                        <input id="videoUrl" name="videoUrl" type="text" class="form-control form-text" maxlength="255"
+                            ng-model="course.videoUrl" placeholder="{{'course.VIDEO_URL'|translate}}" ng-blur="updateOverViewVideoUrl(course.videoUrl)"
+                            required ng-minlength="1" ng-maxlength="2048"/>
+                        <input type="file" id="overviewVideoFile" 
+                            ng-model="overviewVideoFile" 
+                            onchange="angular.element(this).scope().changeUpload(6, this, 'testVideo')" 
+                            style="display:none" accept="video/*"/>
+                        <span class="input-group-addon bg">
+                            <span class="ion-upload" style="font-size:12pt"></span>
+                            <label for="overviewVideoFile" style="cursor: pointer;">
+                                {{'common.BTN_UPLOAD'|translate}}
+                            </label>
+                        </span>  
+                    </div>
+                    <div id="testVideo" style="margin-top:5px;padding-left:10px">       
+                        <jwplayer ng-src="{{ previewOverviewVideoUrl }}"
+                               player-options="options1"
+                               player-id="overviewVideoPlayer">
+                        </jwplayer>
+                    </div>
+                </div>
+                    
+                <!-- content -->
+                <div>    
+                    <div class="form-group row-div" ng-class="{'has-error' : courseForm.content.$invalid && courseForm.content.$dirty}">
+                		<textarea ui-tinymce="tinymceOptions" 
+                            rows="5" cols="1" id="content" name="courseContent" class="form-control form-text-area"
+                			maxlength="2048" 
+                            ng-model="tinymceModel" placeholder="{{'course.CONTENT'|translate}}"
+                            required ng-minlength="1" ng-maxlength="2048">
+                         </textarea> 
+                    </div>
+                </div>
+                <!-- puslishDate -->
+                <div class="row" ng-class="{'has-error' : courseForm.videoUrl.$invalid && courseForm.videoUrl.$dirty}" style="width: auto !important">
+                    <div class="col-md-4 col-sm-6 col-xs-12">  
+                        <div class="col-sm-6" style="width: auto;padding-left:0px" >
+                            <label style="width:auto;padding-top: 3px" for="puslishDate">
+                                {{'course.PUBLISH_DATE'|translate}}(<span style="color:red">*</span>)
+                            </label>
+                        </div>
+                        <div class="col-sm-2" style="padding-left: 0px;">
+                            <input type="text" class="special-text" ng-model="course.puslishDate" 
+                            data-provide="datepicker" data-date-format="dd/mm/yyyy"/>                                  
+                        </div>
+                    </div>
+                    
+                    <!-- Price-->
+                    <div class="col-md-3 col-sm-6 col-xs-12">   
+                        <div class="col-sm-2" style="padding-left: 0px;">       
+                            <label style="width:180px !important;padding-top:3px" for="price">{{'course.PRICE'|translate}}</label>
+                        </div>
+                        <div class="col-sm-8" style="padding-left: 0px;">
+                            <input id="price" name="price" class="special-text" placeholder="{{'course.PRICE'|translate}}" 
+                                type="text"  style="width:100px !important"
+                                ng-model="course.price" />
+                        </div>
+                    </div> 
+                    <!-- Currency -->
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="col-sm-5" style="padding-left: 0px;">
+                        	<input type="hidden" value="VND" ng-model="course.currency"/>
+                        	<label style="width:180px !important;padding-top:3px">{{course.currency}}</label>
+                            <!-- <select id="currency" 
+                                name="currency" 
+                                class="form-control" 
+                                style="width:150px !important"
+                                ng-model="course.currency">
+                                <option value="">
+                                    -- {{'course.CURRENCY'|translate}} --
+                                </option>
+                                <option value="VND">VND</option>
+                                <option value="USD">USD</option>                                    
+                            </select>    -->                             
+                        </div>
+                    </div>  
+                </div>                  
+            </div>
+        </div>
+        <div style="text-align:right;margin-top:10px;bottom:0;padding-top: 5px" class="right">
+            <button type="submit" class="btn btn-primary btn-radius">
+                <span class="glyphicon glyphicon-floppy-disk"></span>   
+                {{'common.BTN_SAVE'|translate}}
+            </button>  
+            <button type="reset" class="btn btn-orange btn-radius" ng-if="course.courseId == null">
+                <span class="glyphicon glyphicon-fire"></span>
+                {{'common.BTN_RESET'|translate}}
+            </button> 
+            <button type="button" ng-click="cancel()" class="btn btn-red btn-radius">
+                <span class="glyphicon glyphicon-trash"></span>
+                {{'common.BTN_CANCEL'|translate}}
+            </button>
+        </div>
+    </tab>
+
+	<!-- TAB Course Lectures -->
+	<tab heading="{{tab2Title}}">
+		<div class="tab-content-d" style="width:100%; height: auto; padding: 3px;">
+            <div>
+                  <div style="margin-bottom:3px;white-space: nowrap">
+                        <div class="input-group">
+                            <input type="text" placeholder="{{'course.chapter.CHAPTER_NAME'|translate}}" 
+                                class="form-control form-text"
+                                ng-model="newChapterName" id="newChapterName" ng-blur=""/>
+                            <span class="input-group-addon bg" style="cursor: pointer;"
+                                ng-click="newChapterName != null && createChapter(newChapterName)">
+                                <a href="javascript:void(0)"
+                                    style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                     <span class="glyphicon glyphicon-plus"></span>
+                                     {{'course.CREATE_CHAPTER'|translate}}
+                                </a>
+                            </span>
+                        </div>
+                  </div>
+                  <!-- CHAPTER ACCORDIONS-->
+                  <accordion close-others="oneAtATime">
+                      <accordion-group ng-repeat="chapter in course.chapters track by $index" 
+                      	is-open="$first"
+                      	ng-class=" {true:'odd-row', false:'even-row'}[$index %2 == 0 ]">
+			                <accordion-heading>
+			                   <div ng-click="isOpen = !isOpen" style="cursor:pointer" class="col-lg-11">
+			                   	   <div class="chapter-name-label open"
+			                   	   	ng-dblclick="showChapterNameEditor()">
+				                   	   	<i class="ion-clipboard"></i>
+					                   {{'course.chapter.CHAPTER'|translate}}{{$index+1}}: {{chapter.chapterName}}
+			                   	   </div>
+			                   	   <div class="chapter-name-editor closed">
+				                   	   	<i class="ion-clipboard"></i>
+					                   <input type="text" ng-model="chapter.chapterName"
+					                   	style="width:70%;line-height:30px"/>
+					                   <button class="btn btn-radius btn-green"
+				                         ng-click="hideChapterNameEditor()"
+				                         type="button"
+				                         style="margin-bottom:5px;">
+				                            <span class="ion-archive"></span>      
+				                        </button>
+			                   	   </div>
+			                   </div>
+			                   <div class="pull-right">
+				                   <button class="btn btn-red btn-radius"
+			                         ng-click="deleteChapter(chapter)"
+			                         type="button"
+			                         style="margin-bottom:5px;">
+			                            <span class="ion-ios-trash"></span>      
+			                        </button>
+			                    </div>
+			                </accordion-heading> 
+                        <input type="hidden" ng-model="chapter.courseChapterId" value="{{chapter.courseChapterId}}"/>
+                        <input type="hidden" ng-model="chapter.courseId" value="{{chapter.courseId}}"/>
+                        <div style="min-height:30px; margin-top:10px; margin-bottom:10px;padding: 5px;display:inline-block;width:100%">
+                            <div class="input-group">
+                                <input type="text" placeholder="{{'course.chapter.LESSON_NAME'|translate}}"  
+                                    class="form-control form-text" ng-model="newLessonName" id="newLessonName" ng-blur=""/>
+                                <span class="input-group-addon bg" style="cursor: pointer;"
+                                    ng-click="newLessonName != null && addLesson(chapter, newLessonName)">
+                                    <a href="javascript:void(0)"
+                                        style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                         <span class="glyphicon glyphicon-plus"></span>
+                                         {{'course.CREATE_LESSON'|translate}}
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- LESSON ACCORDION -->
+                        <!-- <ul class="thumbnails" style="-webkit-padding-start: 0px;">
+	                        <li class="thumbnail vthumbnail" ng-repeat="lesson in chapter.lessons track by lesson.lessionName"" data-drop="true" data-drag="true" ng-model="chapter.lessons" 
+									   jqyoui-droppable="{index: {{$index}}}" jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection'}" 
+									   data-jqyoui-options="{revert: 'invalid'}" data-direction="{{topic.jqyouiDirection}}" 
+									   style="background-color:transparent !important;border: none !important; padding:0px">
+									   <div ng-click="isOpen = !isOpen" style="cursor:pointer;" class="col-lg-11">
+					                   <div class="lesson-name-label open"
+				                   	   	ng-dblclick="showLessonNameEditor()">
+					                   	   	<i class="ion-document-text"></i>
+					                   		{{'course.lesson.LESSON'|translate}}{{lesson.order}}: {{lesson.lessionName}}
+				                   	   </div>
+				                   	   <div class="lesson-name-editor closed">
+					                   	   	<i class="ion-clipboard"></i>
+						                   <input type="text" ng-model="lesson.lessionName"
+						                   	style="width:70%;line-height:30px"/>
+						                   <button class="btn btn-radius btn-green"
+					                         ng-click="hideLessonNameEditor()"
+					                         type="button"
+					                         style="margin-bottom:5px;">
+					                            <span class="ion-archive"></span>      
+					                        </button>
+				                   	   </div>
+				                   </div>
+				                   <div class="pull-right">
+					                   <button class="btn btn-red btn-radius" 
+					                     ng-click="deleteLesson(chapter, lesson)"
+					                     type="button"
+					                     style="margin-bottom:5px;">
+					                        <span class="ion-ios-trash"></span>      
+					                    </button>
+				                    </div>
+							</li>
+						</ul> -->
+                        <accordion close-others="oneAtATime">
+                        	<accordion-group
+				            	is-open="$first"  class="dolphin-lesson"
+				            	ng-repeat="lesson in chapter.lessons track by lesson.lessionName">
+				           <!--  <div data-drop="true" jqyoui-droppable="{index: {{$index}}}" ng-model="chapter.lessons"></div>
+				            <accordion-group is-open="$first" class=" thumbnail vthumbnail dolphin-lesson"
+				            	data-drag="true" ng-model="chapter.lessons" 
+								jqyoui-draggable="{index: {{$index}}, insertInline: true, direction:'jqyouiDirection'}" 
+								data-jqyoui-options="{revert: 'invalid'}" data-direction="{{topic.jqyouiDirection}}"> -->
+				                <accordion-heading>
+				                   <div ng-click="isOpen = !isOpen" style="cursor:pointer;" class="col-lg-11">
+					                   <div class="lesson-name-label open"
+				                   	   	ng-dblclick="showLessonNameEditor()">
+					                   	   	<i class="ion-document-text"></i>
+					                   		{{'course.lesson.LESSON'|translate}}{{lesson.order}}: {{lesson.lessionName}}
+				                   	   </div>
+				                   	   <div class="lesson-name-editor closed">
+					                   	   	<i class="ion-clipboard"></i>
+						                   <input type="text" ng-model="lesson.lessionName"
+						                   	style="width:70%;line-height:30px"/>
+						                   <button class="btn btn-radius btn-green"
+					                         ng-click="hideLessonNameEditor()"
+					                         type="button"
+					                         style="margin-bottom:5px;">
+					                            <span class="ion-archive"></span>      
+					                        </button>
+				                   	   </div>
+				                   </div>
+				                   <div class="pull-right">
+					                   <button class="btn btn-red btn-radius" 
+					                     ng-click="deleteLesson(chapter, lesson)"
+					                     type="button"
+					                     style="margin-bottom:5px;">
+					                        <span class="ion-ios-trash"></span>      
+					                    </button>
+				                    </div>
+				                </accordion-heading>
+				                <input type="hidden" ng-model="lesson.courseLessonId" value="{{lesson.courseLessonId}}"/>
+                                <input type="hidden" ng-model="lesson.courseChapterId" value="{{lesson.courseChapterId}}"/>                                
+                                 <div class="course-material-tab-content" >
+                                    <div style="margin:5px;padding: 0px; display:inline-block;width:99%">
+                                        <div style="text-align:center">
+                                            <button  data-toggle="modal" data-target="#uploadContent" type="button" 
+                                                class="btn btn-green btn-radius" 
+                                                ng-click="setWorkingLesson(lesson)"
+                                                style="min-width:40px;">
+                                                <span class="glyphicon glyphicon-upload"></span>
+                                                {{'common.ADD_CONTENT'|translate}}
+                                            </button>  
+                                        </div>
+                                       <fieldset>
+                                        <legend>{{'course.lesson.CONTENT_LEGEND'|translate}}</legend>
+                                        <div ng-repeat="mat in lesson.materials" class="panel panel-piluku mat-panel">
+                                            <div style="height:auto; min-height:200px">
+                                                <div class="row" style="height:auto !important">
+                                                    <div class="right">     
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon bg">
+                                                                <a href="javascript:void(0)"
+                                                                    style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                                                     <span class="ion-ribbon-b"></span>
+                                                                     {{'course.lesson.TITLE'|translate}}
+                                                                </a>
+                                                            </span>
+                                                            <input type="text"
+                                                                class="form-control" 
+                                                                ng-model="mat.title" id="title" 
+                                                                ng-blur=""/>
+                                                        </div> 
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon bg">
+                                                                <a href="javascript:void(0)"
+                                                                    style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                                                     <span class="ion-link"></span>
+                                                                     {{'course.lesson.LINK'|translate}}
+                                                                </a>
+                                                            </span>
+                                                            
+                                                            <input type="text"
+                                                                class="form-control" 
+                                                                ng-model="mat.url" id="newLessonMatUrl" 
+                                                                ng-blur=""/>
+                                                        </div>
+                                                         <div class="input-group" ng-if="mat.type == 2 || mat.type == 1" >
+                                                            <span class="input-group-addon bg">
+                                                                <a href="javascript:void(0)"
+                                                                    style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                                                     <span class="ion-ios-time"></span>
+                                                                     {{'course.lesson.DURATION'|translate}}
+                                                                </a>
+                                                            </span>
+                                                            
+                                                            <input type="text"
+                                                                class="form-control" 
+                                                                ng-model="mat.duration" id="newLessonMatDuration" 
+                                                                ng-blur=""/>
+                                                        </div>
+                                                    </div> 
+                                                    <div style="margin: 10px" class="left">
+                                                        <img ngf-src="!mat.$error && mat.url" style="max-width:100%;max-height:100%;"
+                                                        ng-if="mat.type == 3">
+                                                        <audio width="100%" height="auto" controls ngf-src="!mat.$error && mat.url" ng-if="mat.type == 2"></audio>
+                                                        <video width="100%" height="auto" controls ngf-src="!mat.$error && mat.url" ng-if="mat.type == 1"></video>
+                                                        <span class="ion-document-text" ng-if="mat.type == 4" style="font-size:60pt"></span>
+                                                        <input type="hidden" ng-model="mat.duration"/>
+                                                    </div>  
+                                                    <button type="button" class="btn btn-red btn-radius"
+                                                        style="color:red;margin-left:10px"
+                                                        ng-click="deleteResource(lesson,lesson.materials, mat)">
+                                                        <span class="ion-ios-trash" style="color:white"></span>
+                                                        <label style="color:white">
+                                                            {{'common.BTN_DELETE'|translate}}
+                                                        </label>
+                                                    </button>                                  
+                                                </div>                                               
+                                            </div>                        
+                                        </div> 
+                                        </fieldset>                                       
+                                    </div>
+                                 </div>                     
+				            </accordion-group>
+				        </accordion>     
+				    <!-- END chapter div accordion-group -->                   
+                    </accordion-group>
+                    
+                </accordion>
+            </div>
+		</div>
+        <div style="text-align:right;margin-top:10px;bottom:0;padding-top: 5px" class="right">
+            <button type="submit" class="btn btn-primary btn-radius">
+                <span class="glyphicon glyphicon-floppy-disk"></span>   
+                {{'common.BTN_SAVE'|translate}}
+            </button>  
+            <button type="reset" class="btn btn-orange btn-radius" ng-if="course.courseId == null">
+                <span class="glyphicon glyphicon-fire"></span>
+                {{'common.BTN_RESET'|translate}}
+            </button> 
+            <button type="button" ng-click="cancel()" class="btn btn-red btn-radius">
+                <span class="glyphicon glyphicon-trash"></span>
+                {{'common.BTN_CANCEL'|translate}}
+            </button>
+        </div>
+        <!-- UPLOAD Lecture Materials dialog -->
+        <div class="modal fade in" id="uploadContent" tabindex="-1" role="dialog" aria-labelledby="uploadContent" aria-hidden="false" style="display: none;top:0px !important">
+        <div class="modal-backdrop fade in" style="height: auto;"></div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="postClose()"><span aria-hidden="true" class="ti-close"></span></button>
+                <h4 class="modal-title" id="uploadContent">{{'common.ADD_CONTENT'|translate}}</h4>
+              </div>
+               <div class="modal-body">
+                <fieldset>
+                    <legend>{{'common.ADD_CONTENT'|translate}}</legend>
+                            <div class="row" style="height:auto !important">    
+                                <div class="right">     
+                                    <div class="input-group">
+                                        <span class="input-group-addon bg">
+                                            <a href="javascript:void(0)"
+                                                style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                                 <span class="ion-ribbon-b"></span>
+                                                 {{'course.lesson.TITLE'|translate}}
+                                            </a>
+                                        </span>
+                                        <input type="text"
+                                            class="form-control" 
+                                            placeholder="{{'course.lesson.TITLE'|translate}}"
+                                            ng-model="newMat.title" id="title" 
+                                            ng-blur=""/>
+                                    </div> 
+                                    <div class="input-group">
+                                        <span class="input-group-addon bg">
+                                            <a href="javascript:void(0)"
+                                                style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                                 <span class="ion-link"></span>
+                                                 {{'course.lesson.LINK'|translate}}
+                                            </a>
+                                        </span>
+                                        
+                                        <input type="text"
+                                            placeholder="{{'course.lesson.LINK'|translate}}"
+                                            class="form-control" 
+                                            ng-model="newMat.url" id="newLessonMatUrl" 
+                                            ng-blur=""/>
+                                    </div>   
+                                    <div class="input-group">
+                                        <span class="input-group-addon bg">
+                                            <a href="javascript:void(0)"
+                                                style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                                 <span class="ion-document"></span>
+                                                 {{'course.lesson.MAT_TYPE'|translate}}
+                                            </a>
+                                        </span>
+                                         <select id="newMatType" 
+                                            name="newMatType" 
+                                            class="form-control" 
+                                            ng-model="newMat.type">
+                                            <option value="">
+                                                -- {{'course.lesson.MAT_TYPE'|translate}} --
+                                            </option>
+                                            <option value="1">Video</option>
+                                            <option value="2">Audio</option>
+                                            <option value="3">Image</option>
+                                            <option value="4">Document</option>
+                                        </select>
+                                    </div> 
+                                </div>   
+                                <div  style="margin: 10px">
+                                    <img ngf-src="newMat.url" style="max-width:200px;max-height:200px;width:auto;height:auto"
+                                    ng-if="!newMat.$error && newMat.type == 3">
+                                    <audio width="100%" height="auto" controls ngf-src="newMat.url" ng-if="!newMat.$error && newMat.type == 2"></audio>
+                                    <video id="newMatVideo" preload="metadata"
+                                        ng-if="!newMat.$error && (newMat.type == 1)"
+                                        width="100%" height="auto" controls 
+                                        ngf-src="newMat.url"></video>
+                                    <span class="ion-document-text" ng-if="newMat.type == 4" style="font-size:60pt"></span>
+                                </div>  
+                                
+                                <button class="btn btn-green btn-radius"
+                                 ng-click="addLectureMaterial(lesson, newMat.title, newMat.url, newMat.type, true)"
+                                 type="button" style="margin-left:10px;margin-top:5px;margin-bottom:5px;min-width:40px">
+                                    <span class="ion-android-attach"> </span> 
+                                </button>   
+                                <button type="button" ng-click="newMat = {}" 
+                                    class="btn btn-orange btn-radius" style="min-width:40px;">
+                                    <span class="glyphicon glyphicon-fire"></span>
+                                </button>
+                                <label ng-if="errorMessage != null" style="color:red">{{errorMessage}}</label>
+
+                            </div>  
+                </fieldset>
+                <!-- Batch UPLOAD -->
+                <fieldset>
+                    <legend>{{'common.BATCH_ADD_CONTENT'|translate}}</legend>
+                <div ngf-select ngf-drop
+                    ng-model="files" 
+                    ng-change="multipleUpload(files, workingLesson)" 
+                    class="drop-box"
+                    ngf-drag-over-class="'dragover'" 
+                    ngf-multiple="true"
+                    ngf-pattern="'image/*,application/pdf,video/*, audio/*'">
+                     <span class="ion-upload"></span>
+                    {{'common.SELECT_FILE'|translate}}
+                    {{'common.DROP_FILE'|translate}}
+                </div>                                       
+                <div ngf-no-file-drop>
+                    File Drag/Drop is not supported for this browser
+                </div>
+                <div  class="upload-file-row">
+                    <div style="text-align:right">
+                        <button class="btn btn-red btn-radius"
+                         ng-click="clearUploadStat(files)"
+                         type="button"
+                         ng-if="files.length > 0" style="margin-bottom:5px;">
+                            <span class="ion-ios-trash"></span>      
+                        </button>
+                    </div>
+                    <div ng-repeat="file in files">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: {{file.progress}}%;text-align:left">
+                                 <label>
+                                    {{file.progress}}% of {{file.url}} uploaded
+                                </label>
+                            </div>                                                
+                        </div>                  
+                    </div> 
+                </div>
+                </fieldset>
+              </div>
+              <div class="modal-footer">
+                <button  ng-click="postClose()" type="button" class="btn btn-default" data-dismiss="modal">{{'common.BTN_CLOSE'|translate}}</button>       
+              </div>
+            </div>
+          </div>
+        </div>
+	</tab>
+
+	<!-- TEACHER TAB -->
+    <tab heading="{{tab3Title}}">
+        <div class="tab-content-d" style="width:100%; height: auto; padding: 3px;">
+            <div style="text-align:center">
+                <button type="button" class="btn btn-green btn-radius" style="margin-top: 6px;"
+                    data-toggle="modal" data-target="#addTeacher" >
+                    <span class="ion ion-ios-people"></span>
+                    {{'course.teacher.TEACHER_SELECT'|translate}}
+                </button>
+            </div>            
+            <fieldset ng-if="course.teachers.length > 0">
+                <legend>{{'course.teacher.TEACHERS'|translate}}</legend>
+                <div ng-repeat="teacher in course.teachers track by teacher.teacherName">
+                    <div class="info-stats" ng-style="{'border-bottom': course.teachers.length >1 ? '1px solid #eee': 'none'}" style="box-shadow: none; -webkit-box-shadow: none;">
+                        <div class="col-sm-2" >
+                            <span class="avatar-holder">
+                                <img ng-src="{{teacher.teacherImage}}" alt="" style="width:80px;height:80px;border-radius:40px" ng-if="teacher.teacherImage != null">
+                                <img ng-src="http://rc.songcanbang.org/images/person.png" alt="" style="width:80px;height:80px;border-radius:40px" ng-if="teacher.teacherImage == null">
+                                <input type="hidden" ng-model="teacher.teacherImage"/>
+                            </span>
+                        </div>
+                        <div class="col-sm-6"> 
+                            <h5>{{teacher.teacherName}}</h5>
+                            <label>{{teacher.teacherCompany}}</label>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="choose-teacher-switch-{{teacher.teacherName}}" ng-model="teacher.choosen">
+                                <div class="toggle">
+                                    <label for="choose-teacher-switch-{{teacher.teacherName}}" ng-click="toggleChoosenTeacher(teacher)"><i></i></label>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <!--  Command button -->
+        <div style="text-align:right;margin-top:10px;bottom:0;padding-top: 5px" class="right">
+            <button type="submit" class="btn btn-primary btn-radius">
+                <span class="glyphicon glyphicon-floppy-disk"></span>   
+                {{'common.BTN_SAVE'|translate}}
+            </button>  
+            <button type="reset" class="btn btn-orange btn-radius" ng-if="course.courseId == null">
+                <span class="glyphicon glyphicon-fire"></span>
+                {{'common.BTN_RESET'|translate}}
+            </button> 
+            <button type="button" ng-click="cancel()" class="btn btn-red btn-radius">
+                <span class="glyphicon glyphicon-trash"></span>
+                {{'common.BTN_CANCEL'|translate}}
+            </button>
+        </div>
+        <!-- Add teacher Dialog -->
+        <div class="modal fade in" id="addTeacher" tabindex="-1" role="dialog" aria-labelledby="addTeacherLabel" aria-hidden="false" style="display: none;top:0px !important">
+            <div style="height: auto;">    
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="ti-close"></span></button>
+                    <h4 class="modal-title" id="addTeacherLabel">{{'course.teacher.TEACHER_SELECT'|translate}}</h4>
+                  </div>
+                   <div class="modal-body">
+                     <div class="toggle-switch" ng-if="!disableSelectSignedInUser || $scope.course.teachers.length == 0">
+                        <div>
+                            <label class="col-sm-6">{{'course.teacher.LOGIN_USER'|translate}}</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="checkbox" id="login-user-switch" ng-model="useLoginUserAsTeacher"/>
+                            <div class="toggle" ng-click="selectLoginAsTeacher(useLoginUserAsTeacher)">
+                                <label for="login-user-switch"><i></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div  style="position:relative !important">
+                        <div class="info-stats" style="box-shadow: none; -webkit-box-shadow: none">
+                            <div class="right col-sm-6">                               
+                                <input class="special-text" placeholder="{{'course.teacher.FULL_NAME'|translate}}" type="text" ng-model="newTeacher.teacherFullname"/>
+                                <input class="special-text" placeholder="email" type="text" ng-model="newTeacher.teacherEmail"/>
+                                <input type="hidden" ng-model="newTeacher.loginName"/>
+                            </div>
+                            <div class="left col-sm-3" >                                
+                                <span class="avatar-holder" onclick="$('#teacherAvataFile').click()">
+                                    <img ng-src="{{newTeacher.teacherAvataUrl}}" alt="" style="width:80px;height:80px;border-radius:40px" ng-if="newTeacher.teacherAvataUrl != null">
+                                    <img ng-src="http://rc.songcanbang.org/images/person.png" alt="" style="width:80px;height:80px;border-radius:40px" ng-if="newTeacher.teacherAvataUrl == null">
+                                    
+                                    <input type="file" id="teacherAvataFile" 
+                                        ng-model="teacherAvataFile" 
+                                        onchange="angular.element(this).scope().changeUpload(7, this, '')"
+                                        style="display:none" accept="image/*"/>
+
+                                    <input type="hidden" ng-model="newTeacher.teacherAvataUrl"/>
+                                </span>
+                                <div>
+                                    <label for="teacherAvataFile" 
+                                    style="cursor: pointer;cursor: pointer;color: black;font-size: 10pt;font-weight: 100;text-decoration: underline;">
+                                        {{'common.CHANGE_AVATAR'|translate}}
+                                    </label>
+                                </div>
+                            </div>                            
+                        </div>
+                        <!-- teacher_company -->
+                        <div class="input-group" style="margin-top:5px">
+                            <span class="input-group-addon bg">
+                                <a href="javascript:void(0)"
+                                    style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                     <span class="ion-ribbon-b"></span>
+                                     {{'course.teacher.COMPANY_INFO'|translate}}
+                                </a>
+                            </span>
+                            <input type="text"
+                                placeholder="Company information"
+                                class="form-control"
+                                ng-model="newTeacher.teacherCompany" id="title" />
+                        </div>
+                        <!-- Phone -->
+                        <div class="input-group" style="margin-top:5px">
+                            <span class="input-group-addon bg">
+                                <a href="javascript:void(0)"
+                                    style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                     <span class="ion-iphone"></span>
+                                     {{'course.teacher.PHONE'|translate}}
+                                </a>
+                            </span>
+                            <input type="text"
+                                placeholder="Phone number"
+                                class="form-control"
+                                ng-model="newTeacher.phone" id="title" />
+                        </div> 
+                        <!-- teacher_content -->
+                        <div>
+                            <div class="form-group row-div">
+                                <textarea ui-tinymce="teacherDescOptions" 
+                                    rows="5" cols="1" id="content" name="teacherDesc" class="form-control form-text-area"
+                                    maxlength="2048" 
+                                    ng-model="teacherDescModel" placeholder="{{'course.TEACHER_DESC'|translate}}"
+                                    ng-minlength="1" ng-maxlength="2048">
+                                 </textarea>
+                                 <!-- <textarea  rows="5" cols="1" id="content" name="teacherDesc" class="form-control form-text-area"
+                                    maxlength="2048" 
+                                    ng-model="teacherContent" placeholder="{{'course.TEACHER_DESC'|translate}}"
+                                    ng-minlength="1" ng-maxlength="2048">
+                                 </textarea>  -->
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align:center;margin-bottom:10px">
+                        <button type="button" class="btn btn-green btn-radius"
+                            ng-click="addTeacherAndContinue(newTeacher)">
+                            <span class="ion-ios-plus-outline"></span>
+                            {{'course.teacher.ADD_AND_CONTINUE'|translate}}
+                        </button>
+                    </div>
+                    <div class="toggle-switch" style="margin-bottom:10px">
+                        <label class="col-sm-5">{{'course.teacher.LIST_TEACHER'|translate}}</label>
+                        <div class="col-sm-1">
+                            <input type="checkbox" id="list-teacher-switch" ng-model="selectTeacher">
+                            <div class="toggle">
+                                <label for="list-teacher-switch"><i></i>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 input-group">                            
+                        <input type="text"
+                            placeholder="Teacher Search"
+                            class="form-control"
+                            ng-model="newTeacher.teacherCompany" id="title" />
+                        <span class="input-group-addon bg">
+                            <a href="javascript:void(0)"
+                                style="color:#fff;text-decoration:none;font-size: 10pt;">
+                                 <span class="ion-search"></span>
+                            </a>
+                        </span>
+                    </div>
+                    
+                   <fieldset ng-if="selectTeacher">
+                        <legend>{{'course.teacher.TEACHER_SELECT'|translate}}</legend>
+                         <div ng-repeat="teacher in teachers" style="overflow:auto">
+                            <div class="info-stats" style="box-shadow: none; -webkit-box-shadow: none;border-bottom: 1px solid #eee">
+                                 <div class="col-sm-3" >
+                                    <span class="avatar-holder">
+                                        <img ng-src="{{teacher.teacherImage}}" alt="" style="width:80px;height:80px;border-radius:40px" ng-if="teacher.teacherImage != null">
+                                        <img ng-src="http://rc.songcanbang.org/images/person.png" alt="" style="width:80px;height:80px;border-radius:40px" ng-if="teacher.teacherImage == null">
+                                        <input type="hidden" ng-model="teacher.teacherImage"/>
+                                    </span>
+                                </div>
+                                <div class="col-sm-6">  
+                                    <h5>{{teacher.teacherName}}</h5>
+                                    <label>{{teacher.teacherCompany}}</label>
+                                    <div class="toggle-switch">
+                                        <input type="checkbox" id="choose-teacher-switch-{{teacher.teacherName}}" ng-model="teacher.choosen">
+                                        <div class="toggle">
+                                            <label for="choose-teacher-switch-{{teacher.teacherName}}" ng-click="toggleChoosenTeacher(teacher)"><i></i></label>
+                                        </div>
+                                    </div>
+                                </div>                       
+                            </div>
+                        </div>
+                    </fieldset>
+                    
+                  </div>
+                  <div class="modal-footer">
+                    <button  type="button" class="btn btn-default" data-dismiss="modal">
+                        {{'common.BTN_CLOSE'|translate}} 
+                    </button>       
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>        
+    </tab>    
+  	<!-- END TEACHER TAB -->
+<!-- TAB QA -->
+	<tab heading="{{tab4Title}}" ng-if="course.courseId != null">
+        <div class="tab-content-d" style="width:100%; height: auto; padding: 3px;">
+            <accordion class="course-content">
+			   <accordion-group ng-repeat="q in listQuestion" heading="" is-open="$first" class="accordion-list">
+			      <accordion-heading>	
+			      	<div class="row">		      	
+				      	<div class="avata col-sm-1">
+				      		<img ng-src="{{q.userAvataUrl}}" style="width:30px;height:30px;border-radius:15px"/>
+				      	</div>						      
+				        <div class="col-md-10" style="width:auto; vertical-align: middle">
+				        	<span class="qa-question">{{q.question}}</span> 
+				        	<div>
+				      			{{q.userName}}	- {{q.questionDate}}		      	
+				      		</div>
+				        </div>
+				       <!--  <div class="pull-right qa-response-stat" style="margin-right:3px;text-align:center">
+				        	0 - {{'teaching.RESPONSES'|translate}}
+				        	<div ng-if="q.answer == null">
+				      			<span class="btn btn-radius btn-green ion-reply" ng-click="initReply()"></span>		      	
+				      		</div>
+				        </div> -->
+			        </div>
+			      </accordion-heading>
+			     	  <div class="collapse-text" style="padding:5px" ng-bind-html="convertHtml(q.description)"></div>
+			          <div ng-if="q.answer == null && !canManageQA(course)">
+			           	{{'teaching.NO_ANSWER'|translate }}:
+			          </div>
+			          <div ng-if="q.answer != null && !canManageQA(course)" class="qa-answer">
+			           	<span style="text-decoration: underline">{{'teaching.CURRENT_ANSWER'|translate}}</span>
+			          	<div class="collapse-text" style="padding:5px" ng-bind-html="convertHtml(q.answer)"></div>
+			          </div>
+			          <div ng-if="canManageQA(course)" class="qa-answer">
+			          	<span style="text-decoration: underline">{{'teaching.CURRENT_ANSWER'|translate}}</span>
+			          	<div class="collapse-text" style="padding:5px" ng-bind-html="convertHtml(q.answer)"></div>
+			            <span style="text-decoration: underline">{{'teaching.UPDATE_ANSWER'|translate}}</span>
+			           	<textarea ng-model="q.newAnswer" name="newAnswer" id="newAnswer" 
+			           		class="answer-text" rows="3" placeholder="{{'teaching.INPUT_ANSWER'|translate}}">
+			           	</textarea>
+			           	<div style="padding: 10px 0px">
+			           		<span class="btn btn-radius btn-green ion-reply" ng-click="updateCourseQuestion(q)"></span>
+			           	</div>
+			          </div>
+			  	</accordion-group>    
+			</accordion>
+        </div>
+        <!--  Command button -->
+        <div style="text-align:right;margin-top:10px;bottom:0;padding-top: 5px" class="right">
+            <button type="submit" class="btn btn-primary btn-radius">
+                <span class="glyphicon glyphicon-floppy-disk"></span>   
+                {{'common.BTN_SAVE'|translate}}
+            </button>  
+            <button type="reset" class="btn btn-orange btn-radius" ng-if="course.courseId == null">
+                <span class="glyphicon glyphicon-fire"></span>
+                {{'common.BTN_RESET'|translate}}
+            </button> 
+            <button type="button" ng-click="cancel()" class="btn btn-red btn-radius">
+                <span class="glyphicon glyphicon-trash"></span>
+                {{'common.BTN_CANCEL'|translate}}
+            </button>
+        </div>
+        <!-- END Command button -->
+    </tab>
+    <!-- END Tab QA -->  
+
+</tabset>
+</form>
+</div>

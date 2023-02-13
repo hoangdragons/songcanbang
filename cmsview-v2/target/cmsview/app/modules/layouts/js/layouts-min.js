@@ -1,0 +1,1 @@
+"use strict";$(document).ready(function(){$(".menu-bar").click(function(a){a.preventDefault();$(".wrapper").toggleClass("mini-bar");$(".left-bar").getNiceScroll().remove();setTimeout(function(){$(".left-bar").niceScroll()},200)})});

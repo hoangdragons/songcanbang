@@ -1,0 +1,188 @@
+<div class="top-bar" style="height:auto">
+	<nav class="navbar navbar-default top-bar"  style="height:auto !important">
+		<div>
+			<div>
+				<a ng-href="{{contextPath.cmsview}}" style="margin-right:5px" class="nav navbar-nav navbar-left top-elements hidden-xs">
+					<img src="assets/images/ehlogo.png" style="width:50px">
+				</a>	
+			</div>
+			<div class="search input-group navbar-left" style="margin-left:5px;margin-top: 5px;border: 1px solid #eee">
+				<input ng-model="searchText" type="text" class="" placeholder="{{'common.GLOBAL_SEARCH'|translate}}"
+					ng-keyup="searchText && $event.keyCode == 13 && globalSearch(searchText)">
+				<span ng-click="searchText && globalSearch(searchText)" type="button" class="input-group-addon bg" style="padding: 2px 8px !important;">
+					<i class="fa fa-search"></i>
+				</span>
+			</div>
+			
+			<div class="nav navbar-nav navbar-right top-elements" style="oveflow: hidden">
+					<li class="piluku-dropdown dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="padding:3px;border-left: 1px solid #eee">
+							<img class="flag_img" id="selectedLangImg" src="assets/images/flags/vn.png" alt="">
+							<span class="drop-icon"><i class="ion ion-chevron-down"></i></span>
+						</a>
+						<ul class="dropdown-menu dropdown-piluku-menu animated fadeInUp wow language-drop neat_drop" data-wow-duration="1500ms" role="menu">
+			              <li>
+			                <a href="#" ng-click="setLang('vn_VI')"><img class="flag_img" src="assets/images/flags/vn.png" alt="flags"> Tiếng việt</a>
+			              </li>
+						</ul>
+					</li>
+					<!-- NOTIFICATION AREA  -->
+					<li class="piluku-dropdown dropdown" ng-if="signedInUser != null">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true"
+							 style="padding:3px;border-left: 1px solid #eee; border-right: 1px solid #eee">
+						<i class="ion-ios-bell-outline icon-notification"></i><span class="badge info-number message">1</span></a>
+						<ul class="dropdown-menu dropdown-piluku-menu  animated fadeInUp wow notification-drop neat_drop dropdown-right animated" data-wow-duration="1500ms" role="menu" style="visibility: visible; animation-duration: 1500ms; animation-name: fadeInUp;">
+							<li class="current">
+								<a class="current" href="#/app/profile/">
+									<div class="hexagon danger">
+										<span><i class="ion-ios-alarm-outline"></i></span>
+									</div>
+									<span class="text_info"> Privacy settings have been changed</span>
+									<span class="time_info">3:30am</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					
+					<!-- USER MENU -->
+					<li class="piluku-dropdown dropdown" ng-if="signedInUser.aud != null" style="margin-right:50px">
+						<a class="dropdown-toggle avatar_width" data-toggle="dropdown" role="button" aria-expanded="false" style="padding:3px">
+							<span class="avatar-holder">
+								<img ng-src="{{signedInUser.avataUrl}}" alt=""
+								ng-if="signedInUser.avataUrl != null && signedInUser.avataUrl != ''">
+								<img ng-src="http://rc.songcanbang.org/images/person.png" alt="" 
+									ng-if="signedInUser.avataUrl == null || signedInUser.avataUrl == ''">
+							</span>
+							<span class="drop-icon" style="padding-left:0px !important">
+							<i class="ion ion-chevron-down"></i></span>
+						</a>
+						<ul class="dropdown-menu dropdown-piluku-menu piluku-right animated fadeInUp wow avatar_drop neat_drop" data-wow-duration="1500ms" role="menu">
+							<li>
+								<a href="#" data-toggle="modal" data-target="#loginUserInfo">
+									<i class="ion-android-settings"></i>{{'header.MY_PROFILE_LINK'|translate}} ({{signedInUser.aud}})
+								</a>
+								<!-- <a href="javascript:void(0)" ng-click="openProfile()">
+									<i class="ion-android-settings"></i>{{'header.MY_PROFILE_LINK'|translate}} ({{signedInUser.aud}})
+								</a> -->
+							</li>
+							<li>
+			                    <a href="#" data-toggle="modal" data-target="#changePassword">
+			                    	<i class="fa fa-lock"></i>{{'common.CHANGE_PASSWORD'|translate}}
+			                    </a>
+			                </li>
+							<li>
+								<a href="javascript:void(0)" ng-click="homePage()"> 
+									<i class="ion-compose"></i>{{'common.GO_HOME'|translate}}
+								</a>
+							</li>
+							
+							<li>
+								<a href="javascript:void(0)" ng-click="logout()" class="logout_button"><i class="ion-power"></i>Logout</a>
+							</li>   
+						</ul>
+					</li>
+					<li ng-if="signedInUser.aud == null" style="margin-right:30px">
+						<a ng-click="fowardToLoginPage()" class="login-button"  style="padding:3px">
+							{{'header.LOGIN_LINK'|translate}}
+						</a>
+					</li>
+			</div>		
+		</div>
+	</nav>
+</div>
+<!-- Change password modal -->
+<div class="modal fade in" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false" style="display: none;z-index:1050">
+<div class="modal-backdrop fade in" style="height: auto;"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="postClose()">
+        <span aria-hidden="true" class="ti-close"></span></button>
+        <h4 class="modal-title" id="myModalLabel">{{'common.CHANGE_PASSWORD'|translate}}</h4>
+      </div>
+       <div class="modal-body">
+        <form name="form" ng-submit="form.new_password.$error.passwordMatch && changePass(user)" method="POST" novalidate >
+          <div class="piluku-login">              
+            <div class="form-section">              
+              <div class="input-group" ng-class="{'has-error' : form.password.$invalid && form.password.$dirty}">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.OLD'|translate}}</span>
+                <input id="password" type="password" class="form-control" placeholder="{{'loginPage.OLD_PASSWORD'|translate}}" ng-model="user.password"/>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.NEW'|translate}}</span>
+                <input type="password" id="new_password" name="new_password" password-match="user.confirm_password" class="form-control" placeholder="{{'loginPage.NEW_PASSWORD'|translate}}" ng-model="new_password"/>
+              </div>
+              <div class="input-group" ng-class="{'has-error' : (form.confirm_password.$invalid && form.confirm_password.$dirty) || !form.new_password.$error.passwordMatch}">
+                <span class="input-group-addon"><i class="fa fa-lock"></i>{{'common.CONFIRM'|translate}}</span>
+                <input type="password" id="confirm_password" class="form-control" placeholder="{{'loginPage.CONFIRM_NEW_PASSWORD'|translate}}" ng-model="user.confirm_password"/>
+              </div>     
+              <div class="input-group" style="color:red">
+                <p class="help-block error-msg" ng-show="!form.new_password.$error.passwordMatch">{{'common.PASSWORD_DOES_NOT_MATCH'|translate}}</p>
+                <p class="help-block error-msg" ng-show="errorMsg != '' ">{{errorMsg}}</p>                
+              </div>            
+              <button type="submit" class="btn btn-success btn-block"><strong>{{'common.BTN_CHANGE' | translate}}</strong></button>    
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button  ng-click="postClose()" type="button" class="btn btn-default" data-dismiss="modal">{{'common.BTN_CLOSE'|translate}}</button>       
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ Change password modal -->
+<!-- Login user info -->
+<div class="modal fade in" id="loginUserInfo" tabindex="-1" role="dialog" aria-labelledby="loginInfoLabel" aria-hidden="false" style="display: none;z-index:1050">
+<div class="modal-backdrop fade in" style="height: auto;"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="postClose()">
+        <span aria-hidden="true" class="ti-close"></span></button>
+        <h4 class="modal-title" id="loginInfoLabel">{{'loginPage.LOGIN_INFO'|translate}}</h4>
+      </div>
+       <div class="modal-body">
+          <div class="piluku-login">              
+            <div class="form-section" style="padding-top:5px;text-align:left; font-size:14px"> 
+            	<div style="padding-top:5px;text-align:center">
+            		<span class="avatar-holder">
+						<img ng-src="{{signedInUser.avataUrl}}" alt=""
+						ng-if="signedInUser.avataUrl != null && signedInUser.avataUrl != ''" style="max-height:120px">
+						<img ng-src="http://rc.songcanbang.org/images/person.png" alt="" 
+							ng-if="signedInUser.avataUrl == null || signedInUser.avataUrl == ''" style="max-height:120px">
+					</span>
+				</div>
+              	<div style="padding-top:5px">
+              		<label>{{'loginPage.LOGIN_NAME'|translate}}: </label>: {{signedInUser.aud}}
+			     </div>
+			     <!-- Full name -->
+			     <div style="padding-top:5px">
+			         <label>{{'loginPage.FULL_NAME'|translate}}: </label>:{{signedInUser.fullName}}
+			     </div>
+			     <!-- Telephone -->
+			     <div style="padding-top:5px">
+			        <label>{{'loginPage.TELEPHONE'|translate}}: </label>{{signedInUser.telephone}}
+			     </div>
+			    <!-- Email -->
+			     <div style="padding-top:5px">
+			        <label>Email: </label>{{signedInUser.email}}
+			     </div>
+				 <!-- Login name -->
+			     <div style="padding-top:5px">
+					<div><label>{{'loginPage.ROLE'|translate}}: </label></div>	
+					<span ng-if="signedInUser.ROLES == '[]'">
+			         	- {{'loginPage.NO_ROLE'|translate}}
+			         </span>		     	
+			         <span>{{getRoleNames()}}</span>
+			     </div> 
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button  ng-click="postClose()" type="button" class="btn btn-default" data-dismiss="modal">{{'common.BTN_CLOSE'|translate}}</button>       
+      </div>
+    </div>
+  </div>
+</div>
+<!--/ Login user info -->

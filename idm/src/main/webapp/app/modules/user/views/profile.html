@@ -1,0 +1,198 @@
+<div class="main-content">
+		<!--row-->
+	<div class="row">
+		<div class="col-md-12 nopad-right">
+			<!--                        *** Profile ***-->
+			<div class="panel panel-piluku">
+				<div class="panel-body profile-body">
+					<!--                        *** Profile cover ***-->
+					<div class="profile-heading">
+						<div class="profile-img">
+							<img ng-src="{{user.avataUrl}}" alt="User avata" ng-if="user.avataUrl != '' && user.avataUrl != null">
+							<img src="http://rc.songcanbang.org/images/person.png" alt="User avata" ng-if="user.avataUrl == null || user.avataUrl ==''">
+						</div>
+						<div class="profile-name">
+							{{user.fullName}}
+						</div>
+						<div class="profile-age-country">
+							{{user.birthday}} {{usr.sex}}, {{user.occupation}} <br>
+							<i class="ion ion-ios-location"></i> {{user.mainAddress}}
+						</div>
+						<div class="profile-heading-footer">
+							<div class="col-md-5 col-md-offset-1  col-xs-12">
+								<ul class="list-inline list-unstyled profile-stats">
+								<li><a href="#"><span>216</span>followers</a></li>
+									<li><a href="#"><span>689</span>following</a></li>
+									<li><a href="#"><span>5000</span>posts</a></li>
+								</ul>
+							</div>
+							<div class="col-md-5" ng-if="user.userId != signedInUser.jti">
+								<div class="profile-buttons">
+									<a href="#" class="btn btn-primary btn-icon-primary btn-icon-block btn-icon-blockleft btn-profile btn-green">
+										<i class="ion ion-ios-personadd"></i>
+										<span>Add Friend</span>
+									</a>
+									<a href="#" class="btn btn-primary btn-icon-primary btn-icon-block btn-icon-blockleft btn-profile">
+										<i class="ion ion-ios-email"></i>
+										<span>Write Message</span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--                        *** /Profile cover ***-->
+					<div class="row">
+						<!--                        *** Profile left ***-->
+						<div class="profile-left">
+							<div class="col-md-7 col-md-offset-1">
+								<div class="form-group">
+									<textarea name="" class="form-control text-area" cols="30" rows="10" 
+									placeholder="{{'user.SHARE_YOUR_SMOOD'|translate}}"></textarea>
+								</div>
+								<ul class="list-unstyled list-inline profile-type">
+									<li><i class="ti-text"></i></li>
+									<li><i class="ion ion-image"></i></li>
+									<li><i class="ion ion-ios-film"></i></li>
+									<li><i class="ion ion-ios-location"></i></li>
+									<li class="pull-right"><a href="#" class="btn btn-primary">Share</a></li>
+								</ul>
+								<!--                        *** Profile post ***-->
+								<div class="piluku-post">
+									<!--                        *** Profile header ***-->
+									<div class="piluku-post-header">
+										<div class="piluku-post-img">
+											<img src="assets/images/avatar/eight.png" alt="eight">
+										</div>
+										<!-- <div class="piluku-post-time pull-right">4 hrs ago</div> -->
+										<div class="piluku-post-share">
+											<a href="#">{{user.fullName}}</a> shared a post
+										</div>
+										<!-- <div class="piluku-post-via">
+											<span>via</span> Mobile,New York
+										</div> -->
+									</div>
+									<!--                        *** /Profile header ***-->
+									<!--                        *** Profile body ***-->
+									<div class="piluku-post-body">
+										{{'common.YOUR_POST_HERE'|translate}}
+									</div>
+									<!--                        *** /Profile body ***-->
+									<!--                        *** Profile footer ***-->
+									<ul class="list-unstyled list-inline piluku-post-footer">
+										<li><a href="#"><i class="ion ion-ios-star-outline"></i> 1.5k</a></li>
+										<li><a href="#"><i class="ion ion-reply"></i> reply </a></li>
+										<li><a href="#"><i class="ion ion-share"></i> share </a></li>
+									</ul>
+									<!--                        *** /Profile footer ***-->
+								</div>
+								<!--                        *** /Profile post ***-->
+								<!--                        *** Profile post ***-->
+								<div class="piluku-post">
+									<!--                        *** Profile header ***-->
+									<div class="piluku-post-header">
+										<div class="piluku-post-img">
+											<img src="assets/images/avatar/eight.png" alt="eight">
+										</div>
+										<!-- <div class="piluku-post-time pull-right">4 hrs ago</div> -->
+										<div class="piluku-post-share">
+											<a href="#">{{user.fullName}}</a> shared a post
+										</div>
+										<!-- <div class="piluku-post-via">
+											<span>via</span> Mobile,New York
+										</div> -->
+									</div>
+									<!--                        *** /Profile header ***-->
+									<!--                        *** Profile body ***-->
+									<div class="piluku-post-body">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="piluku-post-body-img">
+													<a href="#"><img src="assets/images/post1.jpg" alt="post1"></a>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="piluku-post-body-img">
+													<a href="#"><img src="assets/images/post2.jpg" alt="post2"></a>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--                        *** /Profile body ***-->
+									<!--                        *** Profile footer ***-->
+									<ul class="list-unstyled list-inline piluku-post-footer">
+										<li><a href="#"><i class="ion ion-ios-star-outline"></i> 1.5k</a></li>
+										<li><a href="#"><i class="ion ion-reply"></i> reply </a></li>
+										<li><a href="#"><i class="ion ion-share"></i> share </a></li>
+									</ul>
+									<!--                        *** /Profile footer ***-->
+								</div>
+								<!--                        *** /Profile post ***-->
+							</div>
+						</div>
+						<!--                        *** /Profile left ***-->
+						<!--                        *** Profile right ***-->
+						<div class="profile-right">
+							<div class="col-md-3">
+								<!--                        *** Profile sidebar ***-->
+								<div class="profile-sidebar">
+									<div class="profile-sidebar-heading">
+										{{'user.FRIENDS'|translate}}
+									</div>
+									<!--                        *** Profile friends ***-->
+									<ul class="list-unstyled list-inline profile-friends-img">
+										<li><a href="#"><img src="assets/images/avatar/two.png" alt="two"></a></li>
+										<li><a href="#"><img src="assets/images/avatar/eight.png" alt="eight"></a></li>
+										<li><a href="#"><img src="assets/images/avatar/seven.png" alt="seven"></a></li>
+										<li><a href="#"><img src="assets/images/avatar/ten.png" alt="ten"></a></li>
+										<li><a href="#"><img src="assets/images/avatar/three.png" alt="three"></a></li>
+										<li><a href="#" class="hi">{{'common.SEE_MORE'|translate}}</a></li>
+									</ul>
+									<!--                        *** /Profile friends ***-->
+								</div>
+								<!--                        *** /Profile sidebar ***-->
+								<!--                        *** Profile sidebar ***-->
+								<div class="profile-sidebar">
+									<div class="profile-sidebar-heading">
+										{{'user.PERSONAL_INFO'|translate}}
+										<a href="javascript:void(0)" ng-click="userDetail()"
+										 ng-if="user.userId == signedInUser.jti"><i class="ion ion-edit"></i></a>
+									</div>
+									<!--                        *** Profile Personal ***-->
+									<ul class="list-inline list-unstyled profile-personal-info">
+										<li>{{'user.BIRTHDAY'|translate}}<span>{{user.birthday}}</span></li>
+										<li>{{'user.CREATED_AT'|translate}}<span>{{user.addDate}}</span></li>
+										<li>{{'user.SEX'|translate}}<span>{{user.sex}}</span></li>
+										<li>{{'user.OCCUPATION'|translate}}<span>{{user.occupation}}</span></li>
+										<li>{{'user.TELEPHONE'|translate}}<span>{{user.telephone}}</span></li>
+										<li>{{'user.EMAIL'|translate}}<span>{{user.email}}</span></li>
+									</ul>
+									<!--                        *** /Profile Personal ***-->
+								</div>
+								<!--                        *** /Profile sidebar ***-->
+								<!--                        *** Profile sidebar ***-->
+								<div class="profile-sidebar">
+									<div class="profile-sidebar-heading">
+										{{'user.SOCIAL_LINKS'|translate}}
+									</div>
+									<!--                        *** Profile Personal ***-->
+									<ul class="list-inline list-unstyled profile-social-links">
+										<li><a ui-sref="app.profile"><i class="ion ion-social-facebook profile-fb"></i></a></li>
+										<li><a ui-sref="app.profile"><i class="ion ion-social-twitter profile-twitter"></i></a></li>
+										<li><a ui-sref="app.profile"><i class="ion ion-social-googleplus profile-google"></i></a></li>
+										<li><a ui-sref="app.profile"><i class="ion ion-social-linkedin profile-linkedin"></i></a></li>
+										<li><a ui-sref="app.profile"><i class="ion ion-social-github profile-github"></i></a></li>
+									</ul>
+									<!--                        *** /Profile Personal ***-->
+								</div>
+								<!--                        *** /Profile sidebar ***-->
+							</div>
+						</div>
+						<!--                        *** /Profile right ***-->
+					</div>
+				</div>
+			</div>
+			<!--                        *** /Profile ***-->
+			<!-- /panel -->
+		</div>
+	</div>
+</div>

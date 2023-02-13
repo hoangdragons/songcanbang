@@ -1,0 +1,1 @@
+angular.module("pascalprecht.translate").factory("$translateCookieStorage",$translateCookieStorageFactory);function $translateCookieStorageFactory(b){var a={get:function(c){return b.get(c)},set:function(c,d){b.put(c,d)},put:function(c,d){b.put(c,d)}};return a}$translateCookieStorageFactory.displayName="$translateCookieStorage";

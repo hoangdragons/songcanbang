@@ -1,0 +1,198 @@
+<div class="container" style="background-color: #fff;margin-top:10px;margin-bottom:10px;padding-bottom:10px">
+<form name="userForm" ng-submit="insertOrUpdate()">
+<tabset>
+	<tab heading="{{tab1Title|translate}}">
+	  <div>
+		<div class="col-md-4 col-sm-4" style="padding: 5px">
+		 <!-- avata -->
+	     <div ng-class="{'has-error' : userForm.avata.$invalid && userForm.avata.$dirty}" style="padding:5px;">
+	         <p style="text-align:center">
+	         	 <input type="hidden" id="avataUrl" name="avataUrl" ng-model="user.avataUrl" value="{{user.avataUrl}}"/>
+		         <!-- Use to load image normally -->
+		         <img id="avataThumb" ng-src="{{user.avataUrl}}" style="width:200px;height:200px; border-radius:10px">
+				 <input type="file" id="avata" name="avata" 
+				 	ng-model="user.avataByte" 
+				 	onchange="angular.element(this).scope().changeAvata(this, 'avataThumb')" 
+				 	style="display:none" accept="image/gif, image/jpeg, image/png"/>
+			 </p>
+			 <p style="text-align:center">
+			 	 <input id="newAvatarUrl" name="newAvatarUrl" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="newAvatarUrl" placeholder="{{'user.INPUT_AVATA_URL'|translate}}" ng-blur="updateUserAvata(newAvatarUrl);newAvatarUrl = ''"/>
+			 </p>
+			 <p style="text-align:center">
+			 	<label for="avata" style="cursor: pointer;">{{"user.CHOOSE_AVATA"|translate}}</label>
+			 </p>
+	     </div>		
+		 <!-- fullName -->
+	     <div ng-class="{'has-error' : userForm.fullName.$invalid && userForm.fullName.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="fullName">{{"user.FULL_NAME"|translate}}</label>
+	         </div>
+	         <input id="fullName" name="fullName" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.fullName"
+	                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.FULL_NAME'|translate}}"/>
+	     </div>
+	     <!-- Email -->
+	     <div ng-class="{'has-error' : userForm.email.$invalid && userForm.email.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="email">{{"user.EMAIL"|translate}}</label>
+	         </div>
+	         <input id="email" name="email" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.email"
+	                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.EMAIL'|translate}}"/>
+	     </div>	
+		 <!-- Telephone -->
+	     <div ng-class="{'has-error' : userForm.telephone.$invalid && userForm.telephone.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="telephone">{{"user.TELEPHONE"|translate}}</label>
+	         </div>
+	         <input id="telephone" name="telephone" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.telephone"
+	                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.TELEPHONE'|translate}}"/>
+	     </div>
+		</div>
+		<!-- Second column  -->
+		<div class="col-md-8 col-sm-8 col-lg-8">
+		 <!-- Login name -->
+	     <div ng-class="{'has-error' : userForm.loginName.$invalid && userForm.loginName.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="loginName">{{"user.LOGIN_NAME"|translate}}</label>
+	         </div>
+	         <input id="loginName" name="loginName" type="text" class="form-control form-text" maxlength="255"
+	         		ng-if="user.userId == null"
+	                ng-model="user.loginName"
+	                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.LOGIN_NAME'|translate}}"/>
+	         <input id="loginName" name="loginName" type="text" class="form-control form-text" maxlength="255"
+	                ng-if="user.userId != null" readonly="readonly"
+	                ng-model="user.loginName"
+	                required ng-minlength="3" ng-maxlength="512" placeholder="{{'user.LOGIN_NAME'|translate}}"/>
+	     </div>
+	     <!-- CMND -->
+	     <div ng-class="{'has-error' : userForm.cmtnd.$invalid && userForm.cmtnd.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="cmtnd">{{"user.CMND"|translate}}</label>
+	         </div>
+	         <input id="cmtnd" name="cmtnd" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.cmtnd"
+	                ng-minlength="3" ng-maxlength="512" placeholder="{{'user.CMND'|translate}}"/>
+	     </div>
+	     <!-- CCCD -->
+	     <div ng-class="{'has-error' : userForm.cccd.$invalid && userForm.cccd.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="cccd">{{"user.CCCD"|translate}}</label>
+	         </div>
+	         <input id="cccd" name="cccd" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.cccd"
+	                ng-minlength="3" ng-maxlength="512" placeholder="{{'user.CCCD'|translate}}"/>
+	     </div>
+	      <!-- Dia chi -->
+	     <div ng-class="{'has-error' : userForm.mainAddress.$invalid && userForm.mainAddress.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="mainAddress">{{"user.ADDRESS"|translate}}</label>
+	         </div>
+	         <input id="mainAddress" name="mainAddress" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.mainAddress"
+	                ng-minlength="3" ng-maxlength="512" placeholder="{{'user.ADDRESS'|translate}}"/>
+	     </div>	     
+	     <!-- occupation -->
+	     <div ng-class="{'has-error' : userForm.occupation.$invalid && userForm.occupation.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="occupation">{{"user.OCCUPATION"|translate}}</label>
+	         </div>
+	         <input id="occupation" name="occupation" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.occupation"
+	                ng-minlength="3" ng-maxlength="512" placeholder="{{'user.OCCUPATION'|translate}}"/>
+	     </div>
+	     <!-- langId -->
+	     <div ng-class="{'has-error' : userForm.langId.$invalid && userForm.langId.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="langId">{{"user.LANGID"|translate}}</label>
+	         </div>
+	         <input id="langId" name="langId" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.langId"
+	                ng-minlength="2" ng-maxlength="512" placeholder="{{'user.LANGID'|translate}}"/>
+	     </div>
+	     <!-- Birthday -->
+	     <div ng-class="{'has-error' : userForm.birthday.$invalid && userForm.birthday.$dirty}">
+	     	 <div style="width: 250px; display: inline-table;">
+	         	<label style="width:200px !important" for="birthday">{{"user.BIRTHDAY"|translate}}</label>
+	         </div>
+	         <input id="birthday" name="birthday" type="text" class="form-control form-text" maxlength="255"
+	                ng-model="user.birthday"
+	                ng-minlength="3" ng-maxlength="512" placeholder="{{'user.BIRTHDAY'|translate}}"/>
+	     </div>
+	     <div>
+	     	<label style="width:200px !important">{{'user.SEX'|translate}}({{"user.MALE"|translate}})</label>
+	     </div>
+     	 <!-- sex -->
+	     <div class="row" ng-class="{'has-error' : userForm.sex.$invalid && userForm.sex.$dirty}">
+	     	 <input type="hidden" ng-model="user.sex"/>	
+	     	 <div class="col-md-10">
+		         <div class="flatRoundedCheckbox">
+					<input type="checkbox" ng-model="user.sex" id="sex" style="margin-left: 5px;">				
+					<label for="sex"></label>
+					<div></div>
+				</div>
+			</div>
+	     </div>
+     </div>	
+</div>	
+
+	</tab>
+	<!-- --------------------------------------------------------------------------------------------------------- -->
+    <tab heading="{{tab2Title|translate}}" ng-if="isSuperRole()">
+	<section class="container">
+		<table>
+			<tr>
+				<td style="padding:10px">
+					<div>
+						<label for="leftValues">{{'role.AVAILABLE_ROLES'|translate}}</label>
+					</div>
+					<div>
+				        <select id="leftValues"  class="select-multi"
+				        	data-ng-model="modAvailableRoleList" 
+				        	data-ng-options="x.roleName for x in availableRoleList track by x.roleId"
+				        	size="20" multiple style="width:300px">
+				        </select>
+				    </div>
+				</td>
+				<td style="padding:10px">
+					<div>
+				        <p><input type="button" id="btnLeft" ng-click="revoke()" value="&lt;" title="{{'role.ASSIGN'|translate}}" /></p>
+				        <p><input type="button" id="btnRight" ng-click="grant()" value="&gt;" title="{{'role.REVOKE'|translate}}"/></p>
+				    </div>
+				</td>
+				<td style="padding:10px">
+					<div>
+						<label for="rightValues">{{'role.ASIGNED_ROLES'|translate}}</label>
+					</div>
+					<div>
+				        <select id="rightValues" class="select-multi"
+				        	data-ng-model="userRoles" 
+				        	data-ng-options="y.roleName for y in userRoleList track by y.roleId" 
+				        	size="20" multiple style="width:300px">
+				        </select>
+			    	</div>
+				</td>
+			</tr>
+		</table>    
+		</section>
+    </tab>
+</tabset>
+<!-- Action -->
+	<div style="padding-top:10px;margin-top:10px;text-align:center;">
+		<button type="submit" class="btn btn-primary scb-btn ">
+			<span class="glyphicon glyphicon-floppy-disk"></span>	
+			{{'common.BTN_SAVE'|translate}}
+		</button>  
+		<button type="reset" class="btn btn-primary scb-btn" ng-if="user.userId == null">
+			<span class="glyphicon glyphicon-fire"></span>
+			{{'common.BTN_RESET'|translate}}
+		</button> 
+		<button type="button" ng-click="cancel()" class="btn btn-primary scb-btn">
+			<span class="glyphicon glyphicon-trash"></span>
+			{{'common.BTN_CANCEL'|translate}}
+		</button>
+	</div>
+</form>
+</div>

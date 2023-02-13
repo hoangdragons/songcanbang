@@ -1,0 +1,160 @@
+<div class="signin_wrapper" style="height:100vh">
+		<div class="row">
+			<div class="right_block">
+				<div class="row">
+					<form id="form" name="form" class="col-md-12 col-sm-12 col-xs-12" autocomplete="off"
+						ng-submit="form.$valid && login(user)" method="POST" novalidate >
+                        <!-- fixes autocomplete off -->
+                        <input type="text" style="display:none">
+						<input type="password" style="display:none">
+                        <!-- /fixes autocomplete off -->
+						<div class="row" style="margin-top:10px">
+							<div class="input-field col-md-12 col-sm-12 col-xs-12" ng-class="{ 'has-error': form.$submitted && form.loginName.$invalid }">
+								<div class="col-md-1 col-sm-1" style="text-align:right">
+									<i class="fa fa-user prefix"></i>
+								</div>
+								<div class="col-md-10 col-sm-10">
+									<input id="icon_prefix-2" ng-model="user.loginName" name="username" id="username" 
+										style="width:100%; height: 35px;padding: 5px;color: #000"
+										autocomplete="off" 
+										type="text" class="validate" placeholder="{{'loginPage.LOGIN_NAME' | translate}}">
+								</div>
+							</div>
+							<div class="input-field col-md-12 col-sm-12 col-xs-12" ng-class="{ 'has-error': form.$submitted && form.password.$invalid }">
+								<div class="col-md-1 col-sm-1" style="text-align:right">
+									<i class="ion-key prefix"></i>
+								</div>
+								<div class="col-md-10 col-sm-10">
+									<input id="icon_prefix-3" ng-model="user.password" 
+										name="password" id="password" type="password"
+										autocomplete="off" 
+										style="width:100%; height: 35px;padding: 5px;color: #000" 
+										class="validate" placeholder="{{'loginPage.PASSWORD'|translate}}">
+								</div>
+							</div>
+						</div>
+						
+						<div style="text-align:left;margin-left:60px;margin-bottom:30px">
+							<!-- <a href="#" class="pull-left" data-toggle="modal" data-target="#forgot"> -->
+							<a href="#" class="pull-left" ng-click="lostPassword()" style="cursor:pointer">
+								{{'loginPage.LOSS_PASSWORD'|translate}}
+							</a>
+						</div>
+						<div style="text-align:left;margin-left:60px">
+							<button type="submit" class="btn btn-primary">{{'loginPage.BTN_LOGIN'| translate}}</button>
+						</div>
+						
+						<div  style="margin-top:20px;text-align:left;">
+							<label style="color:#fff">{{'loginPage.SIGNIN_WITH'|translate}}</label>
+						</div>
+ 						<div>
+ 							<span>
+ 								<div class="col-sm-2">
+									<button type="button" ng-click="loginFacebook()" class="btn btn-primary btn-radius" style="width:45px;margin-bottom:10px">
+									  <i class="ion-social-facebook" style="color:#fff;font-size:18pt"></i>
+									</button>
+								</div>
+							</span>
+						
+							<!-- <div
+							  class="fb-like"
+							  data-share="true"
+							  data-width="450"
+							  data-show-faces="true">
+							</div> -->
+							<google-plus-signin autorender="false" clientid="643663070374-066oelhsu4me2rl17bhnq27caihgst5i.apps.googleusercontent.com"></google-plus-signin>
+							
+							<style>
+								#googlebutton{width:45px !important}
+							</style>
+						</div>						
+					</form>
+				</div>     
+				<!-- USER REGISTRATION -->
+				<div class="row" style="color:#fff;lineheight:1.5">
+				 <hr style="color:#fff;"/>
+					<label>{{'user.REGISTER_USER_TITLE'|translate}}</label>
+					<form name="userRegForm" ng-submit="registerUser(newUser)">
+						 <!-- fullName -->
+					     <div style="padding-top:5px">
+					         <input id="fullName" name="fullName" type="text" class="form-control form-text" maxlength="255"
+					                ng-model="newUser.fullName" style="background-color: rgba(0,0,0,0.1)"
+					                required placeholder="{{'user.FULL_NAME'|translate}}"/>
+					     </div>
+					     <!-- Telephone -->
+					     <div style="padding-top:5px">
+					         <input id="telephone" name="telephone" type="text" class="form-control form-text" maxlength="255"
+					                ng-model="newUser.telephone"  style="background-color: rgba(0,0,0,0.1)"
+					                required placeholder="{{'user.TELEPHONE'|translate}}"/>
+					     </div>
+					    <!-- Email -->
+					     <div style="padding-top:5px">
+					         <input id="email" name="email" type="text" class="form-control form-text" maxlength="255"
+					                ng-model="newUser.email" style="background-color: rgba(0,0,0,0.1)"
+					                required placeholder="{{'user.EMAIL'|translate}}"/>
+					     </div>
+						 <!-- Login name -->
+					     <div style="padding-top:5px">
+					         <input id="loginName" name="loginName" type="text" class="form-control form-text" maxlength="255"
+					                ng-model="newUser.loginName" style="background-color: rgba(0,0,0,0.1)"
+					                required  placeholder="{{'user.LOGIN_NAME'|translate}}"/>
+					     </div>
+					     <!-- Password -->
+					     <div style="padding-top:5px">
+					         <input id="newPassword"  name="newPassword" type="password" class="form-control form-text" maxlength="255"
+					                ng-model="newUser.password" password-match="newUser.confirmPassword" style="background-color: rgba(0,0,0,0.1)"
+					                required placeholder="{{'user.PASSWORD'|translate}}"/>
+					     </div>
+					     <!-- confirmPassword -->
+					     <div style="padding-top:5px">
+					         <input id="confirmPassword" name="confirmPassword" type="password" class="form-control form-text" maxlength="255"
+					         	ng-model="newUser.confirmPassword" style="background-color: rgba(0,0,0,0.1)"
+					             required placeholder="{{'user.CONFIRM_PASSWORD'|translate}}"/>
+					         <p class="help-block error-msg" ng-show="userRegForm.password.$error.passwordMatch">{{'common.PASSWORD_DOES_NOT_MATCH'|translate}}</p>
+					     </div>
+					     <div>
+					     	<p>{{success_message | translate}}</p>
+					     </div>
+					     <div class="input-group" style="color:red !important">
+			                <p class="error-msg" ng-show="userRegForm.newPassword.$error.passwordMatch">{{'common.PASSWORD_DOES_NOT_MATCH'|translate}}</p>
+			                <p class="error-msg" ng-show="errorMsg != '' ">{{errorMsg}}</p>                
+			              </div> 
+					     <div style="padding-bottom:30px;padding-top:10px">
+							 <button type="submit" class="btn btn-primary scb-btn">
+								<span class="glyphicon glyphicon-floppy-save"></span>
+									{{'common.BTN_REGISTER'|translate}}
+							 </button>
+							 <button type="reset" class="btn btn-primary scb-btn">
+								<span class="glyphicon glyphicon-floppy-save"></span>
+									{{'common.BTN_RESET'|translate}}
+							 </button>
+						 </div>
+					</form>
+				</div>           
+			</div>
+			<!-- right_block -->
+		</div>
+		<!-- row -->
+		<!-- Modal -->
+	</div>
+	
+<!-- <div class="modal fade" id="forgot" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title" id="myModalLabel"><i class="ion-android-settings"></i> Thiết lập lại mật khẩu</h4>
+			</div>
+			<div class="modal-body">
+				<div class="col-sm-12">
+					<input type="text" class="form-control" placeholder="Enter Email here">
+					<h6 class="note"><i class="ion-android-mail"></i> Liên kết thiết lập lại mật khẩu sẽ được gửi qua email cho bạn</h6>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-red" data-dismiss="modal">Đóng</button>
+				<button type="button" class="btn btn-primary">Gửi</button>
+			</div>
+		</div>
+	</div>
+</div> -->

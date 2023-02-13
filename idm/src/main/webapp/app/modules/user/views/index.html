@@ -1,0 +1,19 @@
+<div style="text-align:center;margin-top:5px">
+	<img id="avataThumb" ng-src="{{signedInUser.avataUrl}}" style="width:250px;height:250px;border-radius:15px">	
+	<p style="padding:2px">{{'common.WELCOME'|translate}}: {{signedInUser.sub}}</p>
+</div>
+<div style="text-align: center;vertical-align: middle;">
+	<div style="text-align: center;">
+		<span>
+			<input  type="button" ng-click="userProfile(signedInUser.jti)" class="dolphin-big-btn " value="{{'menu.PROFILE_MANAGEMENT'|translate}}"/>
+			<input ng-if="checkPrivilege('ROLE_DEFINITION')" type="button" ng-click="roleDef()" class="dolphin-big-btn " value="{{'menu.ROLE_DEFINITION'|translate}}"/>
+		</span>
+	</div>
+	<div style="text-align: center;margin-top:5px">
+		<span>
+			<input type="button" ng-if="checkPrivilege('USER_MANAGEMENT')" ng-click="userMgmt()" class="dolphin-big-btn " value="{{'menu.USER_MANAGEMENT'|translate}}"/>
+			<input type="button" ng-if="checkPrivilege('FUNCTION_DEFINITION')" ng-click="functionDef()" class="dolphin-big-btn " value="{{'menu.FUNCTION_DEFINITION'|translate}}"/>
+		</span>
+	</div>
+	
+</div>

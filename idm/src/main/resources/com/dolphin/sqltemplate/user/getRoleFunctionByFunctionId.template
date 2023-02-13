@@ -1,0 +1,1 @@
+SELECT t FROM RoleFunction t WHERE t.functionId = :functionId  AND deleteFlg <> 1

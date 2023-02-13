@@ -1,0 +1,187 @@
+<!doctype html>
+<!-- Our PilukuApp module defined here -->
+<html lang="en" ng-app="dolphin">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> <!--320-->
+	<!-- <meta name="google-signin-client_id" content="643663070374-066oelhsu4me2rl17bhnq27caihgst5i.apps.googleusercontent.com"> -->
+    <!-- using twitter bootstrap, but of course -->
+    <link href="assets/img/favicon.ico" rel="shortcut icon"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <!-- styles for ng-animate are located here -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/loading-bar.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/material.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	<link rel="stylesheet" href="assets/css/ui-grid.css">  
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/jquery-ui-1.10.3.custom.css">
+    <!-- Include Jquery file -->
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <script type="text/javascript">
+    appHelper   = {
+          
+          componentsDir: 'app/modules',
+          assetsDir: 'assets',
+
+          componentView: function(componentName,viewName)
+          {
+            return this.componentsDir + '/' + componentName + '/views/' + viewName +'.html' ;
+          },
+          componentJs: function(componentName,jsName)
+          {
+            return this.componentsDir + '/' + componentName + '/js/' + jsName +'.js' ;
+          },
+          componentData: function(componentName,dataName)
+          {
+            return this.componentsDir + '/' + componentName + '/data/' + dataName +'.json' ;
+          },
+
+          assetPath: function(file_path)
+          {
+            return this.assetsDir + '/' + file_path;
+          }
+        };
+
+        var ASSETS = {
+          'core' : 
+          {
+            'core' : 'assets/js/core.js',
+            'liveTile' : 'assets/js/MetroJs.lt.js',
+          },
+          'bootstrap': {
+            'css': 'js/bootstrap.min.js', // Some plugins which do not support angular needs this
+
+            'js': appHelper.assetPath('js/bootstrap.js'),
+          },
+          'materialize' : appHelper.assetPath('js/materialize.js'),
+          get : function(fileName)
+          {
+              return appHelper.assetPath(fileName);
+          },
+          js : function(moduleName,fileName)
+          {
+              return appHelper.componentsDir + '/' + moduleName + '/js/' + fileName + '.js';
+          },
+          css : function(moduleName,fileName)
+          {
+              return appHelper.componentsDir + '/' + moduleName + '/css/' + fileName + '.css';
+          }
+        };
+
+        </script>
+    <!-- could easily use a custom property of the state here instead of 'name' -->
+    <title>Identification Management System </title>
+  </head>
+  	<body ng-controller="CommonController" style="background-color:#ddeaf7">
+  	<div id="fb-root"></div>
+  	<script type="text/javascript">
+		window.fbAsyncInit = function() {
+		    FB.init({ 
+		      appId: '1249390865130712',//Dolphin
+		      status: true, 
+		      cookie: true, 
+		      xfbml: true,
+		      version: 'v2.9'
+		    });
+		};
+
+	   (function(d, s, id){
+	      var js, fjs = d.getElementsByTagName(s)[0];
+	      if (d.getElementById(id)) {return;}
+	      js = d.createElement(s); js.id = id;
+	      js.src = "//connect.facebook.net/en_US/sdk.js";
+	      fjs.parentNode.insertBefore(js, fjs);
+	    }(document, 'script', 'facebook-jssdk'));
+  	</script>
+  	<div class="wrapper" ng-class="{'mini-bar': $storage.miniSidebar}">
+	  <ui-view></ui-view> 
+  	</div>
+  	<!-- wrapper -->
+  	
+	<script src="assets/js/angular-1.5.8.js"></script>
+	<script src="assets/js/angular-animate-1.5.8.js"></script>
+	<script src="assets/js/angular-resource-1.5.8.js"></script>
+	<script src="assets/js/angular-ui-router.js"></script>
+	<script src="assets/js/angular-scroll.min.js"></script>
+	<script src="assets/js/ngStorage.js"></script>
+	<script src="assets/js/angular-sanitize.min.js"></script>
+
+    <script src="assets/libs/ocLazyLoad.js"></script>
+    <script src="assets/js/loading-bar.js"></script>
+    
+	<script src="assets/js/jwplayer.js"></script>
+	<script src="assets/js/jwplayer.module.js"></script>
+	<script src="assets/js/jwplayer.service.js"></script>
+	<script src="assets/js/jwplayer.directive.js"></script>
+	<script data-require="ui-bootstrap@0.10.0" data-semver="0.11.0" src="assets/js/ui-bootstrap-tpls-0.10.0.js">
+    </script>
+	<script type="text/javascript" src="assets/js/angular-jwt.js"></script>
+	<script type="text/javascript" src="assets/js/google-plus-signin.js"></script>
+	<script type="text/javascript" src="assets/js/ui-grid.js"></script>
+	
+    <!-- app.js declares the PilukuApp module and adds items to $rootScope, and defines
+         the "home" and "about" states
+    -->
+    <!--////// NEW //////-->
+    <!-- BODY -->
+    <script src="assets/js/tinymce/tinymce.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/services.js"></script>
+    <script src="app/controllers.js"></script>
+    <script src="app/common.js"></script>
+    <script src="app/directives.js"></script>
+    <script src="app/filters.js"></script>
+    <script type="text/javascript" src="assets/js/passwordMatch.js"></script>
+     
+    <script src="app/modules/user/js/user-search-controller.js"></script>
+    <script src="app/modules/user/js/user-list-controller.js"></script>
+	<script src="app/modules/user/js/user-detail-controller.js"></script>
+	<script src="app/modules/user/js/user-profile-controller.js"></script>
+	<script src="app/modules/user/js/user-register-controller.js"></script>
+	<script src="app/modules/user/js/user-reset-password-controller.js"></script>
+	<script src="app/modules/user/js/user-service.js"></script>
+	<script src="app/modules/user/js/user-index-controller.js"></script>
+	<script src="app/modules/role/js/role-list-controller.js"></script>
+	<script src="app/modules/role/js/role-detail-controller.js"></script>
+	<script src="app/modules/role/js/role-service.js"></script>
+	<script src="app/modules/function/js/function-list-controller.js"></script>
+	<script src="app/modules/function/js/function-detail-controller.js"></script>
+	<script src="app/modules/function/js/function-service.js"></script>
+	<script src="app/modules/security/js/login-controller.js"></script>
+	<script src="app/modules/security/js/logout-controller.js"></script>
+    <!--
+    Load js/angular-translate 
+     -->
+    <script src="assets/js/angular-translate/translate.js"></script>
+    <script src="assets/js/angular-translate/service/default-interpolation.js"></script>
+    <script src="assets/js/angular-translate/service/sanitization.js"></script>
+    <script src="assets/js/angular-translate/service/handler-log.js"></script>
+    <script src="assets/js/angular-translate/service/loader-static-files.js"></script>
+
+    <script src="assets/js/angular-translate/service/storage-key.js"></script>
+    <script src="assets/js/angular-translate/service/storage-local.js"></script>
+    <script src="assets/js/angular-translate/service/storage-cookie.js"></script>
+    <script src="assets/js/angular-translate/service/translate.js"></script>
+    <script src="assets/js/angular-translate/directive/translate.js"></script>
+    <script src="assets/js/angular-translate/filter/translate.js"></script>
+
+    <script type="text/javascript">
+      jwplayer.key="4zVZTycAaug4SaE7dKIq3pKm3GPn0aGNoOgbjA==";
+    </script>
+    
+    <!-- ////// END-NEW //////-->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.nicescroll.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.accordion.js"></script>
+    <script type="text/javascript" src="assets/js/wow.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.loadmask.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.countTo.js"></script>
+
+    <script src="assets/js/dirty-check.js"></script>
+    <script src="assets/js/bootstrap-datepicker.js"></script>
+  </body>
+</html>

@@ -1,0 +1,94 @@
+{
+"common":{
+	"TITLE" : "Live Balancing",
+	"HEADER" : "Content Management System - CMS",
+	"FOOTER" : "©2016 - Golden Hearts JSC",
+	"BTN_SEARCH":"Search",
+	"SEARCH_PLACE_HOLDER":"Input information to search...",
+	"BTN_ADD":"Add",
+	"BTN_LOGOUT":"Logout",
+	"BTN_EDIT":"Edit",
+	"BTN_RESET":"Reset",
+	"BTN_SAVE":"Save",
+	"BTN_CANCEL":"Cancel",
+	"BTN_DELETE":"Delete",
+	"BTN_UPLOAD":"Upload",
+	"INVALID_MIN_LEN":"Invalid min length",
+	"CONTENT":"Content",
+	"BROWSE":"Browse",
+	"INVALID_MAX_LEN":"Invalid max length",
+	"PREVIEW":"Preview"
+},
+"loginPage": {
+ 	"HEADER": "LOGIN",
+ 	"LOGIN_NAME": "User name",
+ 	"MSG_LOGIN_NAME_REQUIRED":"User name is required",
+ 	"PASSWORD":"Password",
+ 	"MSG_PASSWORD_REQUIRED":"Password is required",
+ 	"BTN_LOGIN":"Login"
+ },
+  "category" : {
+ 	"HEADER" : "CATEGORY LIST",
+ 	"WELCOME":"Welcome",
+ 	"LOGOUT" : "Logout",
+ 	"NAME_TITLE": "Category Name",
+ 	"DESCRIPTION":"Description",
+ 	"ACTION":"Action", 	
+ 	"DETAIL_HEADER":"CATEGORY DETAIL INFORMATION",
+ 	"UPDATE_DETAIL_INFO": "Update category information",
+ 	"CREATE_NEW":"Create new category",
+ 	"CATEGORY":"Category"
+ },
+ "course":{
+ 	"COURSE_LIST":"COURSE LIST",
+ 	"FOR_CATEGORY":"For category",
+ 	"CHOOSE_CATEGORY":"Choose category",
+ 	"BACK_TO_CATEGORY_LIST":"Back to category list",
+ 	
+    "VIDEO_URL":"Video URL",
+    "TOTAL_VIEW":"Total views",
+    "TITLE":"Title",
+    "RATING":"Rating",
+    "PUBLISH_DATE":"Publish Date",
+    "IMAGE_URL":"Image URL",
+    "CONTENT":"Content",
+ 	"AUTHOR":"Author",
+ 	"CREATE_CHAPTER":"Create Chapter",
+ 	"CREATE_LESSON":"Create Lesson",
+ 	"COURSE_DETAIL":"COURSE DETAIL INFORMATION",
+ 	"TAB":{
+ 		"BASIC_INFO":"Overview",
+ 		"LESSON_DETAIL_VIDEO":"Video", 		
+ 		"LESSON_DETAIL_DOCUMENT":"Attachment Files",
+ 		"LESSON_DETAIL_RECORD":"Voice",
+ 		"LESSON_DETAIL_PICTURE":"Image",
+ 		"COURSE_DETAIL_INFO":"Course Detail"
+ 		
+ 	}, 	
+ 	"lesson":{
+ 		"LESSON":"Lesson ",
+ 		"PREVIEW":"Preview",
+ 		"ADD_VIDEO":"Add video",
+ 		"LIST_VIDEO":"Lesson list video",
+ 		"TITLE":"Title",
+ 		"LINK":"Link URL",
+ 		
+ 		"ADD_DOCUMENT":"Add files",
+ 		"LIST_DOCUMENT":"Lesson list attach files",
+ 		
+ 		"ADD_VOICE":"Add voice",
+ 		"LIST_VOICE":"Lesson list voice",
+ 		
+ 		"ADD_PICTURE":"Add picture",
+ 		"LIST_PICTURE":"Lesson list picture"
+ 	},
+ 	"chapter":{
+ 		"CHAPTER":"Chapter ",
+ 		"CHAPTER_NAME":"Chapter name",
+ 		"LESSON_NAME":"Lesson name",
+ 		"CONFIRM_DELETE":"Do you really want to delete this chapter "
+ 		
+ 	},
+ 	"IMAGE_URL_SPACE_HOLDER":"Illustration image URL"
+ }
+}

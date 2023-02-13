@@ -1,0 +1,9 @@
+﻿Bổ sung lại cấu trúc khóa học (phần CMS Admin)
+Các hạng mục sau bố trí thành các TAB trong phần quản lý bài giảng của CMS Admin.
+1. Video giới thiệu
+2. Text giới thiệu nội dung khóa học 
+3. META data (tóm lược các thông tin co bản về khóa học)
+4. Giới thiệu tổng quan khóa học 
+5. Nội dung các bài học (video, PDF, vvv theo từng bài học)
+6. Thông tin giảng viên
+7. Thông tin khác.

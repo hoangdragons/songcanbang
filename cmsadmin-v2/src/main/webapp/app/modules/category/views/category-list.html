@@ -1,0 +1,40 @@
+
+<div ng-controller="CategoryListController" class="animated fadeInUpBig">
+	<div style="text-align:center;padding-bottom:10px;"  ng-if="checkPrivilege('CAT_FUNC_001')">
+		<button ng-click="create()" class="btn btn-green btn-radius">
+			<i class="ion-plus"></i>
+			{{'common.BTN_ADD_CAT' | translate}}
+		</button>
+	</div>
+	<div ng-repeat="cat in categories track by $index" class="col-md-3 col-xs-12 col-sm-6" 
+	style="margin-top: 2px; margin-right: 0px; margin-bottom: 5px; margin-left: 0px;">
+		<div class="info-category-bg-out">		    
+			 <div class="info-control">
+	    	 	<span>
+                    <a ng-if="checkPrivilege('CAT_FUNC_002')" href="javascript:void(0)" ng-click="edit(cat)" class="ion-ios-compose-outline" style="color:blue"></a>
+                    <a ng-if="checkPrivilege('CAT_FUNC_003')" href="javascript:void(0)" ng-click="deleteCat(cat)" class="ion-ios-trash-outline" style="color:red"></a>
+	        	</span>
+	    	</div>
+			<div class="info-category primarybg-info" >
+		        <div class="logo"  ng-if="cat.image == null">
+		        	<i class="ti-list"></i>
+		        	
+		    	</div>
+		    	<p style="float:top" ng-if="cat.image != null">
+	        		<img name="categoryImage" id="categoryImage" ng-src="{{cat.image}}" class="category-image" placeholder="150x200"/>
+	        	</p>
+		        {{cat.description}}
+		        <p ng-if="checkPrivilege('COURSE_FUNC_000')">
+		        	<a href="javascript:void(0)" ng-click="loadCoursesDetail(cat)">
+		        	{{cat.categoryName}}
+		        	</a>
+		        </p>
+		        <p ng-if="!checkPrivilege('COURSE_FUNC_000')">
+		        	{{cat.categoryName}}
+		        </p>
+		    </div>
+		   
+		</div>
+	</div>
+</div>
+			    			

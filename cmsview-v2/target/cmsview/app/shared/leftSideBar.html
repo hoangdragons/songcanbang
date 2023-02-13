@@ -1,0 +1,24 @@
+<div class="left-bar">
+        <div class="admin-logo">
+            <div class="logo-holder pull-left" style="vertical-align:middle !important;padding:2px !important">
+                <img class="logo" ng-src="assets/images/yoga-logo.png" style="width:auto" alt="logo">   
+            </div>
+            <!-- logo-holder -->            
+            <a ng-click="$storage.miniSidebar = $storage.miniSidebar ? false : true" class="menu-bar  pull-right"><i class="ti-menu"></i></a>
+        </div>
+        <!-- admin-logo -->
+        <ul class="list-unstyled menu-parent" id="mainMenu">
+            <li ng-repeat="cat in lsCategory track by $index">
+                <a ng-href="#/app/courseList/{{cat.categoryId}}">
+                    <i class="ion-ios-home" style="font-size:20pt"></i>
+                    <span class="text">{{cat.categoryName}}</span>
+                </a>
+            </li>
+            <li>
+                <a ui-sref="app.magazineList">
+                    <i class="ion-ios-home" style="font-size:20pt"></i>
+                    <span class="text" translate>common.MAGAZINE_CATOGORY</span>
+                </a>
+            </li>
+        </ul>
+    </div>
